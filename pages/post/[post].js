@@ -1,8 +1,7 @@
 const Post = ({ post }) => {
-  console.log(post);
   return (
     <>
-      <h1>POST（投稿）</h1>
+      <h1 className="text-3xl text-center">POST（投稿）</h1>
       <h2>{post.title}</h2>
       <p>{post.body}</p>
     </>

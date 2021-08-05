@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 const index = ({ posts }) => {
   return (
     <>
