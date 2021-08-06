@@ -1,30 +1,16 @@
-import Link from 'next/link';
 import Head from 'next/head';
-const products = [{ name: 'bag' }, { name: 'shoes' }, { name: 'socks' }];
+import Navi from '../components/layout/navi';
 
 const Home = () => (
   <>
     <Head>
       <title>トップページ</title>
-      <meta name="description" content="これはトップページです" />
-      <meta property="og:title" content="トップページ" />
-      <meta property="og:description" content="これはトップページ" />
+      <meta name="description" content="トップページのdescription" />
+      <meta property="og:title" content="トップページのタイトル" />
+      <meta property="og:description" content="トップページのdescription" />
     </Head>
-    <ul>
-      {products.map((product) => (
-        <li key={product.name}>
-          <Link href={`/products/${product.name}`}>
-            <a>{product.name}</a>
-          </Link>
-        </li>
-      ))}
-      <li>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </li>
-    </ul>
-    <h1>Hello world</h1>
+    <h1>トップページ</h1>
+    <Navi />
   </>
 );
 
