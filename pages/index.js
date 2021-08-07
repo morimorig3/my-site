@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Navi from '../components/layout/navi';
+import Navi from '../components/Navi';
 
 const Home = () => (
   <>
@@ -9,8 +9,10 @@ const Home = () => (
       <meta property="og:title" content="トップページのタイトル" />
       <meta property="og:description" content="トップページのdescription" />
     </Head>
-    <h1>トップページ</h1>
-    <Navi />
+    <div className="container mx-auto">
+      <h1>トップページ</h1>
+      <Navi />
+    </div>
   </>
 );
 

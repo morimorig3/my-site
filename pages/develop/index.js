@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Navi from '../components/layout/navi';
+import Navi from '../../components/Navi';
 
 const Develop = () => (
   <>
