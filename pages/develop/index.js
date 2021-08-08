@@ -1,16 +1,23 @@
 import Head from 'next/head';
-import Navi from '../../components/Navi';
+import Layout from '../../components/Layout';
 
 const Develop = () => (
   <>
     <Head>
-      <title>Develop</title>
-      <meta name="description" content="Developのdescription" />
-      <meta property="og:title" content="Developのタイトル" />
-      <meta property="og:description" content="Developのdescription" />
+      <title>Develop | morimorig3.com</title>
+      <meta
+        name="description"
+        content="morimorig3の制作物を紹介するページです。"
+      />
+      <meta property="og:title" content="Develop | morimorig3.com" />
+      <meta
+        property="og:description"
+        content="morimorig3の制作物を紹介するページです。"
+      />
     </Head>
-    <h1>Develop</h1>
-    <Navi />
+    <Layout>
+      <p>develop</p>
+    </Layout>
   </>
 );
 

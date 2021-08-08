@@ -1,16 +1,23 @@
 import Head from 'next/head';
-import Navi from '../../components/Navi';
+import Layout from '../../components/Layout';
 
 const About = () => (
   <>
     <Head>
-      <title>About</title>
-      <meta name="description" content="Aboutのdescription" />
-      <meta property="og:title" content="Aboutのタイトル" />
-      <meta property="og:description" content="Aboutのdescription" />
+      <title>About me | morimorig3.com</title>
+      <meta
+        name="description"
+        content="morimorig3本人について紹介するページです。"
+      />
+      <meta property="og:title" content="About me | morimorig3.com" />
+      <meta
+        property="og:description"
+        content="morimorig3本人について紹介するページです。"
+      />
     </Head>
-    <h1>About</h1>
-    <Navi />
+    <Layout>
+      <p>about</p>
+    </Layout>
   </>
 );
 
