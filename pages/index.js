@@ -55,6 +55,38 @@ const Home = () => (
           </Link>
         </div>
       </Board>
+      <Board title="books" ReactIcon={IoBookOutline}>
+        <p>books</p>
+        <div className="text-right">
+          <Link href="/books">
+            <a className="inline-block text-sm hover:underline">もっとみる</a>
+          </Link>
+        </div>
+      </Board>
+      <Board title="about me" ReactIcon={IoPersonOutline}>
+        <p>content about</p>
+        <div className="text-right">
+          <Link href="/about">
+            <a className="inline-block text-sm hover:underline">もっとみる</a>
+          </Link>
+        </div>
+      </Board>
+      <Board title="books" ReactIcon={IoBookOutline}>
+        <p>books</p>
+        <div className="text-right">
+          <Link href="/books">
+            <a className="inline-block text-sm hover:underline">もっとみる</a>
+          </Link>
+        </div>
+      </Board>
+      <Board title="about me" ReactIcon={IoPersonOutline}>
+        <p>content about</p>
+        <div className="text-right">
+          <Link href="/about">
+            <a className="inline-block text-sm hover:underline">もっとみる</a>
+          </Link>
+        </div>
+      </Board>
     </Layout>
   </>
 );

@@ -1,3 +1,4 @@
+import useNaviToggle from '../hooks/use-NaviToggle';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -14,8 +15,13 @@ import {
 const Navi = () => {
   const router = useRouter();
   const path = router.pathname;
+  const isScrolled = useNaviToggle();
   return (
-    <ul className="w-full fixed bottom-0 left-0 flex justify-around z-10 bg-blue-500">
+    <ul
+      className={`transform ${
+        isScrolled ? 'translate-y-0' : 'translate-y-full'
+      } transition-transform duration-500 w-full fixed bottom-0 left-0 flex justify-around z-10 bg-blue-500`}
+    >
       <li className="flex-1">
         <Link href="/">
           <a className="block p-4 text-gray-100">
