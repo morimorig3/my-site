@@ -1,4 +1,4 @@
-import useNaviToggle from '../hooks/use-NaviToggle';
+// import useNaviToggle from '../hooks/use-NaviToggle';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -12,61 +12,66 @@ import {
   IoConstruct,
 } from 'react-icons/io5';
 
+const naviStyle = {
+  paddingBottom: 'env(safe-area-inset-bottom)',
+};
+
 const Navi = () => {
   const router = useRouter();
   const path = router.pathname;
-  const isScrolled = useNaviToggle();
+  // const isScrolled = useNaviToggle();
   return (
-    <ul
-      className={`transform ${
-        isScrolled ? 'translate-y-0' : 'translate-y-full'
-      } transition-transform duration-500 w-full fixed bottom-0 left-0 flex justify-around z-10 bg-blue-500`}
-    >
-      <li className="flex-1">
-        <Link href="/">
-          <a className="block p-4 text-gray-100">
-            {path === '/' ? (
-              <IoHome size="1.8em" className="mx-auto" />
-            ) : (
-              <IoHomeOutline size="1.8em" className="mx-auto" />
-            )}{' '}
-          </a>
-        </Link>
-      </li>
-      <li className="flex-1">
-        <Link href="/develop">
-          <a className="block p-4 text-gray-100">
-            {path === '/develop' ? (
-              <IoConstruct size="1.8em" className="mx-auto" />
-            ) : (
-              <IoConstructOutline size="1.8em" className="mx-auto" />
-            )}
-          </a>
-        </Link>
-      </li>
-      <li className="flex-1">
-        <Link href="/books">
-          <a className="block p-4 text-gray-100">
-            {path === '/books' ? (
-              <IoBook size="1.8em" className="mx-auto" />
-            ) : (
-              <IoBookOutline size="1.8em" className="mx-auto" />
-            )}
-          </a>
-        </Link>
-      </li>
-      <li className="flex-1">
-        <Link href="/about">
-          <a className="block p-4 text-gray-100">
-            {path === '/about' ? (
-              <IoPerson size="1.8em" className="mx-auto" />
-            ) : (
-              <IoPersonOutline size="1.8em" className="mx-auto" />
-            )}
-          </a>
-        </Link>
-      </li>
-    </ul>
+    <nav>
+      <ul
+        style={naviStyle}
+        className={`w-full fixed bottom-0 left-0 flex justify-around z-10 bg-blue-500`}
+      >
+        <li className="flex-1">
+          <Link href="/">
+            <a className="p-2 flex justify-center items-center h-full text-gray-100">
+              {path === '/' ? (
+                <IoHome size="1.6em" className="mx-auto" />
+              ) : (
+                <IoHomeOutline size="1.6em" className="mx-auto" />
+              )}{' '}
+            </a>
+          </Link>
+        </li>
+        <li className="flex-1">
+          <Link href="/develop">
+            <a className="p-2 flex justify-center items-center h-full text-gray-100">
+              {path === '/develop' ? (
+                <IoConstruct size="1.6em" className="mx-auto" />
+              ) : (
+                <IoConstructOutline size="1.6em" className="mx-auto" />
+              )}
+            </a>
+          </Link>
+        </li>
+        <li className="flex-1">
+          <Link href="/books">
+            <a className="p-2 flex justify-center items-center h-full text-gray-100">
+              {path === '/books' ? (
+                <IoBook size="1.6em" className="mx-auto" />
+              ) : (
+                <IoBookOutline size="1.6em" className="mx-auto" />
+              )}
+            </a>
+          </Link>
+        </li>
+        <li className="flex-1">
+          <Link href="/about">
+            <a className="p-2 flex justify-center items-center h-full text-gray-100">
+              {path === '/about' ? (
+                <IoPerson size="1.6em" className="mx-auto" />
+              ) : (
+                <IoPersonOutline size="1.6em" className="mx-auto" />
+              )}
+            </a>
+          </Link>
+        </li>
+      </ul>
+    </nav>
   );
 };
 

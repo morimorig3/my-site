@@ -22,6 +22,10 @@ const Home = () => (
         property="og:description"
         content="morimorig3の制作物や戯言をまとめて紹介するページです。"
       />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover"
+      />
     </Head>
     <Layout>
       <Board title="news" ReactIcon={IoNewspaperOutline}>
@@ -35,38 +39,6 @@ const Home = () => (
         <p>develop</p>
         <div className="text-right">
           <Link href="/develop">
-            <a className="inline-block text-sm hover:underline">もっとみる</a>
-          </Link>
-        </div>
-      </Board>
-      <Board title="books" ReactIcon={IoBookOutline}>
-        <p>books</p>
-        <div className="text-right">
-          <Link href="/books">
-            <a className="inline-block text-sm hover:underline">もっとみる</a>
-          </Link>
-        </div>
-      </Board>
-      <Board title="about me" ReactIcon={IoPersonOutline}>
-        <p>content about</p>
-        <div className="text-right">
-          <Link href="/about">
-            <a className="inline-block text-sm hover:underline">もっとみる</a>
-          </Link>
-        </div>
-      </Board>
-      <Board title="books" ReactIcon={IoBookOutline}>
-        <p>books</p>
-        <div className="text-right">
-          <Link href="/books">
-            <a className="inline-block text-sm hover:underline">もっとみる</a>
-          </Link>
-        </div>
-      </Board>
-      <Board title="about me" ReactIcon={IoPersonOutline}>
-        <p>content about</p>
-        <div className="text-right">
-          <Link href="/about">
             <a className="inline-block text-sm hover:underline">もっとみる</a>
           </Link>
         </div>

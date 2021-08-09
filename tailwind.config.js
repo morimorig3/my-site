@@ -5,6 +5,7 @@ module.exports = {
     extend: {},
   },
   variants: {
+    margin: ['last'],
     extend: {},
   },
   plugins: [],

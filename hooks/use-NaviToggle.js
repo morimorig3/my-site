@@ -6,14 +6,13 @@ const useNaviToggle = () => {
   const beforeScrollTop = useRef(null);
 
   const BUFFER_TIME = 500;
-
   const isCoolTime = useRef(false);
-  const setCoolTime = () => {
+  const setCoolTime = useCallback(() => {
     isCoolTime.current = true;
     setTimeout(() => {
       isCoolTime.current = false;
     }, BUFFER_TIME);
-  };
+  }, []);
 
   const handleScroll = () => {
     if (isCoolTime.current) return;
