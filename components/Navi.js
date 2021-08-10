@@ -12,20 +12,13 @@ import {
   IoConstruct,
 } from 'react-icons/io5';
 
-const naviStyle = {
-  paddingBottom: 'env(safe-area-inset-bottom)',
-};
-
 const Navi = () => {
   const router = useRouter();
   const path = router.pathname;
   // const isScrolled = useNaviToggle();
   return (
     <nav>
-      <ul
-        style={naviStyle}
-        className={`w-full fixed bottom-0 left-0 flex justify-around z-10 bg-blue-500`}
-      >
+      <ul className="gNav w-full fixed bottom-0 left-0 flex justify-around z-10 bg-blue-500">
         <li className="flex-1">
           <Link href="/">
             <a className="p-2 flex justify-center items-center h-full text-gray-100">
