@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '../components/Layout';
-import Board from '../components/Board';
+import SEO from 'components/SEO';
+import Layout from 'components/Layout';
+import Board from 'components/Board';
 import {
   IoNewspaperOutline,
   IoPersonOutline,
@@ -9,24 +9,14 @@ import {
   IoConstructOutline,
 } from 'react-icons/io5';
 
+const pageMeta = {
+  title: 'morimorig3.com',
+  description: 'morimorig3の制作物や戯言をまとめて紹介するページです。',
+};
+
 const Home = () => (
   <>
-    <Head>
-      <title>morimorig3.com</title>
-      <meta
-        name="description"
-        content="morimorig3の制作物や戯言をまとめて紹介するページです。"
-      />
-      <meta property="og:title" content="morimorig3.com" />
-      <meta
-        property="og:description"
-        content="morimorig3の制作物や戯言をまとめて紹介するページです。"
-      />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover"
-      />
-    </Head>
+    <SEO meta={pageMeta} />
     <Layout>
       <Board title="news" ReactIcon={IoNewspaperOutline}>
         <ul>
