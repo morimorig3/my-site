@@ -11,6 +11,9 @@ module.exports = {
         github: '#24292e',
         qiita: '#55c500',
       },
+      fontFamily: {
+        righteous: ['Righteous', 'cursive'],
+      },
     },
   },
   variants: {

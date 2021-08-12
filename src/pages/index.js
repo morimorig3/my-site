@@ -27,7 +27,9 @@ const Home = () => (
         </ul>
       </Board>
       <Board title="develop" ReactIcon={IoConstructOutline}>
-        <p>develop</p>
+        <div className="py-4">
+          <p>develop</p>
+        </div>
         <div className="text-right">
           <Link href="/develop">
             <a className="inline-block text-sm hover:underline">もっとみる</a>
@@ -35,7 +37,9 @@ const Home = () => (
         </div>
       </Board>
       <Board title="books" ReactIcon={IoBookOutline}>
-        <p>books</p>
+        <div className="py-4">
+          <p>books</p>
+        </div>
         <div className="text-right">
           <Link href="/books">
             <a className="inline-block text-sm hover:underline">もっとみる</a>
