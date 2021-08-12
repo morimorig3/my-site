@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import SEO from 'components/SEO';
-import Layout from 'components/Layout';
-import Board from 'components/Board';
+import SEO from 'components/seo';
+import Layout from 'components/layout';
+import Board from 'components/board';
 import {
   IoNewspaperOutline,
   IoPersonOutline,

@@ -1,4 +1,4 @@
-import Navi from 'components/Navi';
+import Navi from 'components/navi';
 import Link from 'next/link';
 
 const fontRighteous = {
