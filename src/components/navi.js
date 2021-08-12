@@ -16,6 +16,7 @@ const Navi = () => {
   const router = useRouter();
   const path = router.pathname;
   // const isScrolled = useNaviToggle();
+
   return (
     <nav>
       <ul className="gNav w-full fixed bottom-0 left-0 flex justify-around z-10 bg-blue-500">
@@ -33,7 +34,7 @@ const Navi = () => {
         <li className="flex-1">
           <Link href="/develop">
             <a className="p-2 flex justify-center items-center h-full text-gray-100">
-              {path === '/develop' ? (
+              {/^\/develop/.test(path) ? (
                 <IoConstruct size="1.6em" className="mx-auto" />
               ) : (
                 <IoConstructOutline size="1.6em" className="mx-auto" />
@@ -44,7 +45,7 @@ const Navi = () => {
         <li className="flex-1">
           <Link href="/books">
             <a className="p-2 flex justify-center items-center h-full text-gray-100">
-              {path === '/books' ? (
+              {/^\/books/.test(path) ? (
                 <IoBook size="1.6em" className="mx-auto" />
               ) : (
                 <IoBookOutline size="1.6em" className="mx-auto" />
@@ -55,7 +56,7 @@ const Navi = () => {
         <li className="flex-1">
           <Link href="/about">
             <a className="p-2 flex justify-center items-center h-full text-gray-100">
-              {path === '/about' ? (
+              {/^\/about/.test(path) ? (
                 <IoPerson size="1.6em" className="mx-auto" />
               ) : (
                 <IoPersonOutline size="1.6em" className="mx-auto" />
