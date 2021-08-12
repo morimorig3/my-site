@@ -2,6 +2,7 @@ import Link from 'next/link';
 import SEO from 'components/seo';
 import Layout from 'components/layout';
 import Board from 'components/board';
+import Bio from 'components/bio';
 import {
   IoNewspaperOutline,
   IoPersonOutline,
@@ -42,7 +43,9 @@ const Home = () => (
         </div>
       </Board>
       <Board title="about me" ReactIcon={IoPersonOutline}>
-        <p>content about</p>
+        <div className="py-4">
+          <Bio />
+        </div>
         <div className="text-right">
           <Link href="/about">
             <a className="inline-block text-sm hover:underline">もっとみる</a>
