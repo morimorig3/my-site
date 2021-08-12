@@ -1,5 +1,8 @@
 import SEO from 'components/seo';
 import Layout from 'components/layout';
+import Board from 'components/board';
+import Bio from 'components/bio';
+import { IoPersonOutline } from 'react-icons/io5';
 
 const pageMeta = {
   title: 'About me | morimorig3.com',
@@ -10,7 +13,11 @@ const About = () => (
   <>
     <SEO meta={pageMeta} />
     <Layout>
-      <p>about</p>
+      <Board title="about me" ReactIcon={IoPersonOutline}>
+        <div className="py-4">
+          <Bio />
+        </div>
+      </Board>
     </Layout>
   </>
 );

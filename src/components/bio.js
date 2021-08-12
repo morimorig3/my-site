@@ -25,17 +25,17 @@ const Bio = () => {
           JavaScriptが得意です。犬と読書と新しいものが好き。
         </p>
         <div className="flex gap-x-4">
-          <Link href={URL.github} passHref>
+          <Link href={URL.github}>
             <a className="text-gray-500 hover:text-github">
               <SiGithub size="1.8em" />
             </a>
           </Link>
-          <Link href={URL.twitter} passHref>
+          <Link href={URL.twitter}>
             <a className="text-gray-500 hover:text-twitter">
               <SiTwitter size="1.8em" />
             </a>
           </Link>
-          <Link href={URL.qiita} passHref>
+          <Link href={URL.qiita}>
             <a className="text-gray-500 hover:text-qiita">
               <SiQiita size="1.8em" />
             </a>
