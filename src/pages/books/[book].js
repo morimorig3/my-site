@@ -17,7 +17,7 @@ const Book = ({ book }) => {
       <Layout>
         <Board title="recommend" ReactIcon={IoBookOutline}>
           <div className="py-4">
-            <BookCard key={book.id} title={book.title} id={book.id} />
+            <BookCard title={book.title} id={book.id} />
           </div>
         </Board>
       </Layout>
@@ -27,9 +27,19 @@ const Book = ({ book }) => {
 
 export default Book;
 
-export function getServerSideProps({ params }) {
+export function getStaticProps({ params }) {
+  const data = bookData;
   const id = params.book;
-  const book = bookData[id];
+  const book = data[id];
 
   return { props: { book } };
+}
+
+export function getStaticPaths() {
+  const data = bookData;
+  const paths = data.map((book, index) => `/books/${index}`);
+  return {
+    paths,
+    fallback: false,
+  };
 }
