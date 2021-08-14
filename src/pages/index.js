@@ -4,6 +4,7 @@ import Layout from 'components/layout';
 import Board from 'components/board';
 import Bio from 'components/bio';
 import BookList from 'components/bookList';
+import DevelopList from 'components/developList';
 import {
   IoNewspaperOutline,
   IoPersonOutline,
@@ -29,7 +30,7 @@ const Home = () => (
       </Board>
       <Board title="develop" ReactIcon={IoConstructOutline}>
         <div className="py-4">
-          <p>develop</p>
+          <DevelopList />
         </div>
         <div className="text-right">
           <Link href="/develop">

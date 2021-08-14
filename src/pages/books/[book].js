@@ -18,6 +18,7 @@ const Book = ({ book }) => {
         <Board title="recommend" ReactIcon={IoBookOutline}>
           <div className="py-4">
             <BookCard title={book.title} id={book.id} />
+            <p>準備中…</p>
           </div>
         </Board>
       </Layout>

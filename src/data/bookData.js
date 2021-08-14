@@ -1,4 +1,4 @@
-const booklist = [
+const bookData = [
   {
     title: 'SOFT SKILLS ソフトウェア開発者の人生マニュアル',
     id: '4822251551',
@@ -29,4 +29,4 @@ const booklist = [
   },
 ];
 
-export default booklist;
+export default bookData;
