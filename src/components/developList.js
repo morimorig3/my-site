@@ -8,10 +8,13 @@ const DevelopList = () => {
         <div key={develop.url}>
           <Link href={develop.url}>
             <a target="_blank" rel="noreferrer">
-              <figure className="grid place-items-center bg-green-500 h-40 rounded-lg mb-2">
-                <develop.icon size="3em" className="text-gray-100" />
+              <figure
+                className={`grid place-items-center bg-${develop.style.bg}-500 h-40 rounded-lg mb-2`}
+              >
+                <develop.style.icon size="3em" className="text-gray-100" />
               </figure>
               <p className="font-bold">{develop.title}</p>
+              <p className="text-sm text-gray-500">{develop.date}</p>
             </a>
           </Link>
         </div>

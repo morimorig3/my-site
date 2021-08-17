@@ -22,6 +22,7 @@ const Home = () => (
     <SEO meta={pageMeta} />
     <Layout>
       <Board title="news" ReactIcon={IoNewspaperOutline}>
+        <p>準備中…</p>
         <ul>
           <li>○○の記事を公開しました。</li>
           <li>○○を作ってみました。</li>
