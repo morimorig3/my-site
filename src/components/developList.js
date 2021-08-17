@@ -9,7 +9,7 @@ const DevelopList = () => {
           <Link href={develop.url}>
             <a target="_blank" rel="noreferrer">
               <figure
-                className={`grid place-items-center bg-${develop.style.bg}-500 h-40 rounded-lg mb-2`}
+                className={`grid place-items-center ${develop.style.bg} h-40 rounded-lg mb-2`}
               >
                 <develop.style.icon size="3em" className="text-gray-100" />
               </figure>

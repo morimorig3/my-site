@@ -8,7 +8,7 @@ const developData = [
     date: '2021-08-17',
     style: {
       icon: RiTodoLine,
-      bg: 'blue',
+      bg: 'bg-blue-500',
     },
   },
   {
@@ -17,7 +17,7 @@ const developData = [
     date: '2021-08-14',
     style: {
       icon: BsImageAlt,
-      bg: 'green',
+      bg: 'bg-green-500',
     },
   },
 ];
