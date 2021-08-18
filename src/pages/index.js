@@ -5,6 +5,7 @@ import Board from 'components/board';
 import Bio from 'components/bio';
 import BookList from 'components/bookList';
 import DevelopList from 'components/developList';
+import NewsList from 'components/newsList';
 import {
   IoNewspaperOutline,
   IoPersonOutline,
@@ -22,12 +23,9 @@ const Home = () => (
     <SEO meta={pageMeta} />
     <Layout>
       <Board title="news" ReactIcon={IoNewspaperOutline}>
-        <p>準備中…</p>
-        <ul>
-          <li>○○の記事を公開しました。</li>
-          <li>○○を作ってみました。</li>
-          <li>このページを作りました。</li>
-        </ul>
+        <div className="py-4">
+          <NewsList />
+        </div>
       </Board>
       <Board title="develop" ReactIcon={IoConstructOutline}>
         <div className="py-4">
