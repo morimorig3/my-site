@@ -16,7 +16,7 @@ const BookList = () => {
     <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
       {data.map((book, index) => (
         <div key={book.id}>
-          <Link href={`/books/${index}`}>
+          <Link href={`/books/${book.id}`}>
             <a>
               <BookCard title={book.title} id={book.id} />
             </a>
