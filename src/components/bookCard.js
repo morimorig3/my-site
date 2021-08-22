@@ -6,14 +6,14 @@ const BookCard = ({ title, id }) => {
   const [image, setImage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    async function fetchData() {
+    async function fetchData(query) {
       const response =
-        await `https://images-na.ssl-images-amazon.com/images/P/${id}.09.LZZZZZZZ`;
+        await `https://images-na.ssl-images-amazon.com/images/P/${query}.09.LZZZZZZZ`;
       setImage(response);
       setIsLoading(false);
     }
-    fetchData();
-  }, []);
+    fetchData(id);
+  }, [id]);
   //   const link = `https://www.amazon.co.jp/dp/${id}`;
   return (
     <figure>

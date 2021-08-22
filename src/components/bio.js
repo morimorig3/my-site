@@ -23,6 +23,10 @@ const Bio = () => {
         <p className="font-bold mb-1">morimorig3</p>
         <p className="text-sm mb-2">
           JavaScriptが得意です。犬と読書と新しいものが好き。
+          <Link href="https://blog.morimorig3.com/">
+            <a className="underline">ブログ</a>
+          </Link>
+          作りました。
         </p>
         <div className="flex gap-x-4">
           <Link href={URL.github}>
