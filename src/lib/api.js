@@ -1,16 +1,8 @@
-import fs from 'fs';
-import remark from 'remark';
-import html from 'remark-html';
+const toDoubleDigit = (number) => ('0' + number).slice(-2);
 
-const markdownToHtml = async (markdown) => {
-  const result = await remark().use(html).process(markdown);
-  return result.toString();
-};
-
-export const getBookPostHtml = async (id) => {
-  const markdown = await fs.readFileSync(
-    process.cwd() + `/src/data/books/${id}.md`,
-    'utf8'
-  );
-  return markdownToHtml(markdown);
+export const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return `${date.getFullYear()}-${toDoubleDigit(
+    date.getMonth() + 1
+  )}-${toDoubleDigit(date.getDate())}`;
 };
