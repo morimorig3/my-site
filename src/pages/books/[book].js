@@ -2,14 +2,14 @@ import SEO from 'components/seo';
 import Layout from 'components/layout';
 import Board from 'components/board';
 import BookCard from 'components/bookCard';
+import * as contentful from 'contentful';
 
-import bookData from 'data/bookData';
 import { IoBookOutline } from 'react-icons/io5';
 
-const Book = ({ book }) => {
+const Book = ({ data }) => {
   const pageMeta = {
-    title: `${book.title} | Books | morimorig3.com`,
-    description: `${book.title}の感想を紹介しています。`,
+    title: `${data.title} | Books | morimorig3.com`,
+    description: `${data.title}の感想を紹介しています。`,
   };
   return (
     <>
@@ -17,7 +17,12 @@ const Book = ({ book }) => {
       <Layout>
         <Board title="recommend" ReactIcon={IoBookOutline}>
           <div className="py-4">
-            <BookCard title={book.title} id={book.id} />
+            <BookCard
+              src={`https:${data.image.fields.file.url}`}
+              title={data.title}
+              width={data.image.fields.file.details.image.width}
+              height={data.image.fields.file.details.image.height}
+            />
             <p>準備中…</p>
           </div>
         </Board>
@@ -27,10 +32,20 @@ const Book = ({ book }) => {
 };
 
 export async function getStaticPaths() {
-  const data = bookData;
-  const paths = data.map((book) => ({
+  const client = await contentful.createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    environment: process.env.CONTENTFUL_ENVIRONMENT_ID,
+    accessToken: process.env.CONTENT_DELIVERY_API_KEY,
+  });
+  const bookData = await client
+    .getEntries({ content_type: 'bookPost' })
+    .then((response) => response.items)
+    .catch(console.error);
+
+  // const data = bookData;
+  const paths = bookData.map(({ fields }) => ({
     params: {
-      book: book.id,
+      book: fields.id,
     },
   }));
   return {
@@ -40,11 +55,22 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const data = bookData;
-  const id = params.book;
-  const book = data.find((book) => book.id === id);
+  const client = await contentful.createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    environment: process.env.CONTENTFUL_ENVIRONMENT_ID,
+    accessToken: process.env.CONTENT_DELIVERY_API_KEY,
+  });
+  console.log('!!!!!!!!!-----------!!!!!!!!!');
+  const data = await client
+    .getEntries({
+      content_type: 'bookPost',
+      'fields.id[in]': params.book,
+    })
+    .then((response) => response.items)
+    .catch(console.error);
+  console.log(data, '---!!!!!!!!!!!!!');
 
-  return { props: { book } };
+  return { props: { data: data[0].fields } };
 }
 
 export default Book;

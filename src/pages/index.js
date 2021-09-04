@@ -26,6 +26,7 @@ const Home = ({ data }) => {
     extractContentType(data, 'developPost'),
     'DESC'
   );
+  const bookData = extractContentType(data, 'bookPost');
   return (
     <>
       <SEO meta={pageMeta} />
@@ -52,7 +53,7 @@ const Home = ({ data }) => {
         </Board>
         <Board title="recommend" ReactIcon={IoBookOutline}>
           <div className="py-4">
-            <BookList />
+            <BookList bookData={bookData} limit={6} />
           </div>
           <div className="text-right">
             <Link href="/books">
