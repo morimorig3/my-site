@@ -17,7 +17,7 @@ const News = ({ data }) => (
     <Layout>
       <Board title="news" ReactIcon={IoNewspaperOutline}>
         <div className="py-4">
-          <NewsList newsData={sortByDate(data)} />
+          <NewsList newsData={sortByDate(data, 'DESC')} />
         </div>
       </Board>
     </Layout>
