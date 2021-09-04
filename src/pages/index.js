@@ -32,7 +32,12 @@ const Home = ({ data }) => {
       <Layout>
         <Board title="news" ReactIcon={IoNewspaperOutline}>
           <div className="py-4">
-            <NewsList newsData={newsData} />
+            <NewsList newsData={newsData} limit={3} />
+          </div>
+          <div className="text-right">
+            <Link href="/news">
+              <a className="inline-block text-sm hover:underline">もっとみる</a>
+            </Link>
           </div>
         </Board>
         <Board title="develop" ReactIcon={IoConstructOutline}>
