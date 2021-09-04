@@ -13,6 +13,7 @@ import {
   IoConstructOutline,
 } from 'react-icons/io5';
 import * as contentful from 'contentful';
+import { sortByDate, extractContentType } from 'lib/api';
 
 const pageMeta = {
   title: 'morimorig3.com',
@@ -20,8 +21,10 @@ const pageMeta = {
 };
 
 const Home = ({ data }) => {
-  const newsData = data.sort(
-    (a, b) => new Date(b.fields.date) - new Date(a.fields.date)
+  const newsData = sortByDate(extractContentType(data, 'newsPost'), 'DESC');
+  const developData = sortByDate(
+    extractContentType(data, 'developPost'),
+    'DESC'
   );
   return (
     <>
@@ -34,7 +37,7 @@ const Home = ({ data }) => {
         </Board>
         <Board title="develop" ReactIcon={IoConstructOutline}>
           <div className="py-4">
-            <DevelopList />
+            <DevelopList developData={developData} />
           </div>
           <div className="text-right">
             <Link href="/develop">
@@ -76,7 +79,7 @@ export async function getStaticProps() {
     accessToken: process.env.CONTENT_DELIVERY_API_KEY,
   });
   const data = await client
-    .getEntries({ content_type: 'newsPost' })
+    .getEntries()
     .then((response) => response)
     .catch(console.error);
   if (!data) {

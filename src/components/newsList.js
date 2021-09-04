@@ -6,12 +6,12 @@ const NewsList = ({ newsData }) => {
     <ul>
       {newsData.map(({ fields }) => {
         return (
-          <li key={fields.newsTitle} className="mb-1">
+          <li key={fields.title} className="mb-1">
             {fields.url ? (
               <>
                 <Link href={fields.url}>
                   <a>
-                    <div>{fields.newsTitle}</div>
+                    <div>{fields.title}</div>
                   </a>
                 </Link>
                 <div className="text-gray-500 text-sm">
@@ -20,7 +20,7 @@ const NewsList = ({ newsData }) => {
               </>
             ) : (
               <>
-                <div>{fields.newsTitle}</div>
+                <div>{fields.title}</div>
                 <div className="text-gray-500 text-sm">
                   {formatDate(fields.date)}
                 </div>
