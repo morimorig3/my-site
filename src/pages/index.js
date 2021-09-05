@@ -12,21 +12,22 @@ import {
   IoBookOutline,
   IoConstructOutline,
 } from 'react-icons/io5';
-import * as contentful from 'contentful';
-import { sortByDate, extractContentType } from 'lib/api';
+import { sortByDate, extractContentType, getAllPost } from 'lib/api';
 
 const pageMeta = {
   title: 'morimorig3.com',
-  description: 'morimorig3の制作物や戯言をまとめて紹介するページです。',
+  description: 'morimorig3の制作物や考えをまとめて紹介するページです。',
 };
 
 const Home = ({ data }) => {
-  const newsData = sortByDate(extractContentType(data, 'newsPost'), 'DESC');
+  const allData = data.items;
+  const newsData = sortByDate(extractContentType(allData, 'newsPost'), 'DESC');
   const developData = sortByDate(
-    extractContentType(data, 'developPost'),
+    extractContentType(allData, 'developPost'),
     'DESC'
   );
-  const bookData = extractContentType(data, 'bookPost');
+  const bookData = extractContentType(allData, 'bookPost');
+
   return (
     <>
       <SEO meta={pageMeta} />
@@ -79,20 +80,12 @@ const Home = ({ data }) => {
 export default Home;
 
 export async function getStaticProps() {
-  const client = await contentful.createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    environment: process.env.CONTENTFUL_ENVIRONMENT_ID,
-    accessToken: process.env.CONTENT_DELIVERY_API_KEY,
-  });
-  const data = await client
-    .getEntries()
-    .then((response) => response)
-    .catch(console.error);
+  const data = await getAllPost();
+
   if (!data) {
     return {
       notFound: true,
     };
   }
-
-  return { props: { data: data.items } };
+  return { props: { data } };
 }

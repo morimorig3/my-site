@@ -1,3 +1,7 @@
+import remark from 'remark';
+import html from 'remark-html';
+import * as contentful from 'contentful';
+
 // 一桁の数字をゼロ埋めする
 const toDoubleDigit = (number) => ('0' + number).slice(-2);
 
@@ -20,5 +24,24 @@ export const sortByDate = (data, orderBy) => {
   } else {
     data.sort((a, b) => new Date(a.fields.date) - new Date(b.fields.date));
   }
+  return data;
+};
+
+export async function markdownToHtml(markdown) {
+  const result = await remark().use(html).process(markdown);
+  return result.toString();
+}
+
+export const getAllPost = async (options = {}) => {
+  const client = await contentful.createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    environment: process.env.CONTENTFUL_ENVIRONMENT_ID,
+    accessToken: process.env.CONTENT_DELIVERY_API_KEY,
+  });
+  const data = await client
+    .getEntries(options)
+    .then((res) => res)
+    .catch(console.error);
+
   return data;
 };

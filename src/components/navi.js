@@ -1,4 +1,3 @@
-// import useNaviToggle from '../hooks/use-NaviToggle';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -15,7 +14,6 @@ import {
 const Navi = () => {
   const router = useRouter();
   const path = router.pathname;
-  // const isScrolled = useNaviToggle();
 
   return (
     <nav>

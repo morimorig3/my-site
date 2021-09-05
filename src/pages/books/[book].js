@@ -2,28 +2,38 @@ import SEO from 'components/seo';
 import Layout from 'components/layout';
 import Board from 'components/board';
 import BookCard from 'components/bookCard';
-import * as contentful from 'contentful';
-
 import { IoBookOutline } from 'react-icons/io5';
+import * as contentful from 'contentful';
+import { markdownToHtml, getAllPost } from 'lib/api';
 
-const Book = ({ data }) => {
+const Book = ({ fields, markdown }) => {
   const pageMeta = {
-    title: `${data.title} | Books | morimorig3.com`,
-    description: `${data.title}の感想を紹介しています。`,
+    title: `${fields.title} | Books | morimorig3.com`,
+    description: `${fields.title}の感想を紹介しています。`,
   };
   return (
     <>
       <SEO meta={pageMeta} />
       <Layout>
         <Board title="recommend" ReactIcon={IoBookOutline}>
-          <div className="py-4">
-            <BookCard
-              src={`https:${data.image.fields.file.url}`}
-              title={data.title}
-              width={data.image.fields.file.details.image.width}
-              height={data.image.fields.file.details.image.height}
-            />
-            <p>準備中…</p>
+          <div className="py-4 gap-4 grid grid-cols-1">
+            <figure className="w-1/2 justify-self-center">
+              <BookCard
+                src={`https:${fields.image.fields.file.url}`}
+                title={fields.title}
+                width={fields.image.fields.file.details.image.width}
+                height={fields.image.fields.file.details.image.height}
+                layout="responsive"
+              />
+            </figure>
+            <div>
+              <h1 className="text-center font-bold">{fields.title}</h1>
+              {markdown ? (
+                <div dangerouslySetInnerHTML={{ __html: markdown }}></div>
+              ) : (
+                <p>コンテンツ準備中…</p>
+              )}
+            </div>
           </div>
         </Board>
       </Layout>
@@ -31,18 +41,22 @@ const Book = ({ data }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const client = await contentful.createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    environment: process.env.CONTENTFUL_ENVIRONMENT_ID,
-    accessToken: process.env.CONTENT_DELIVERY_API_KEY,
-  });
-  const bookData = await client
-    .getEntries({ content_type: 'bookPost' })
-    .then((response) => response.items)
-    .catch(console.error);
+export default Book;
 
-  // const data = bookData;
+export async function getStaticProps({ params }) {
+  const data = await getAllPost({
+    content_type: 'bookPost',
+    'fields.id[in]': params.book,
+  });
+  const bookData = data.items[0];
+  const markdown = await markdownToHtml(bookData.fields.content || '');
+  return { props: { fields: bookData.fields, markdown } };
+}
+
+export async function getStaticPaths() {
+  const data = await getAllPost({ content_type: 'bookPost' });
+  const bookData = data.items;
+
   const paths = bookData.map(({ fields }) => ({
     params: {
       book: fields.id,
@@ -53,24 +67,3 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-
-export async function getStaticProps({ params }) {
-  const client = await contentful.createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    environment: process.env.CONTENTFUL_ENVIRONMENT_ID,
-    accessToken: process.env.CONTENT_DELIVERY_API_KEY,
-  });
-  console.log('!!!!!!!!!-----------!!!!!!!!!');
-  const data = await client
-    .getEntries({
-      content_type: 'bookPost',
-      'fields.id[in]': params.book,
-    })
-    .then((response) => response.items)
-    .catch(console.error);
-  console.log(data, '---!!!!!!!!!!!!!');
-
-  return { props: { data: data[0].fields } };
-}
-
-export default Book;

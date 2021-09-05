@@ -17,7 +17,6 @@ const Layout = ({ children }) => {
           </a>
         </Link>
       </header>
-
       <main className="pb-32">{children}</main>
       <Navi />
     </div>
