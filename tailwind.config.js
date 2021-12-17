@@ -1,10 +1,9 @@
 module.exports = {
-  purge: [
+  content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
     './src/data/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
@@ -16,10 +15,6 @@ module.exports = {
         righteous: ['Righteous', 'cursive'],
       },
     },
-  },
-  variants: {
-    margin: ['last'],
-    extend: {},
   },
   plugins: [],
 };
