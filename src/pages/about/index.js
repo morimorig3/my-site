@@ -1,5 +1,5 @@
 import SEO from 'components/seo';
-import Layout from 'components/layout';
+import Layout from 'components/layout/Layout';
 import Board from 'components/board';
 import Bio from 'components/bio';
 import { IoPersonOutline } from 'react-icons/io5';

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import SEO from 'components/seo';
-import Layout from 'components/layout';
+import Layout from 'components/layout/Layout';
 import Board from 'components/board';
 import Bio from 'components/bio';
 import BookList from 'components/bookList';
