@@ -13,6 +13,7 @@ module.exports = {
       },
       fontFamily: {
         righteous: ['Righteous', 'cursive'],
+        Rubik: ['Rubik', 'sans-serif'],
       },
     },
   },
