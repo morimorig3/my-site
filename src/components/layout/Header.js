@@ -1,13 +1,23 @@
+import Navi from 'components/layout/Navi';
 import Link from 'next/link';
 
 const Header = () => {
+  const logo = {
+    width: 'calc(100% / 6)',
+  };
   return (
-    <header className="h-20 flex justify-between items-center">
-      <Link href="/">
-        <a className="font-righteous block text-center text-xl leading-none font-bold text-gray-100">
-          morimorig3.com
-        </a>
-      </Link>
+    <header className="bg-blue-600">
+      <div className="lg:container px-8 lg:px-0 h-14 mx-auto flex justify-between">
+        <Link href="/">
+          <a
+            style={logo}
+            className="self-center font-Rubik block text-xl font-light text-gray-100"
+          >
+            morimorig3.com
+          </a>
+        </Link>
+        <Navi />
+      </div>
     </header>
   );
 };

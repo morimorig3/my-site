@@ -1,14 +1,14 @@
 import Header from 'components/layout/Header';
-import Navi from 'components/navi';
+import Footer from 'components/layout/Footer';
 
-const Layout = ({ children }) => {
-  return (
-    <div className="container mx-auto px-4">
-      <Header />
-      <main className="pb-32">{children}</main>
-      <Navi />
-    </div>
-  );
-};
+const Layout = ({ children }) => (
+  <div className="flex flex-col	min-h-screen">
+    <Header />
+    <main className="lg:container px-8 lg:px-0 py-8 flex-1 overflow-x-hidden mx-auto">
+      {children}
+    </main>
+    <Footer />
+  </div>
+);
 
 export default Layout;
