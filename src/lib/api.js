@@ -3,14 +3,14 @@ import html from 'remark-html';
 import * as contentful from 'contentful';
 
 // 一桁の数字をゼロ埋めする
-const toDoubleDigit = (number) => ('0' + number).slice(-2);
+const zeroPadding = (number) => ('0' + number).slice(-2);
 
 // 日付のフォーマットを変換する（2021-08-11T00:00+09:00 => 2021-08-11）
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return `${date.getFullYear()}-${toDoubleDigit(
+  return `${date.getFullYear()}-${zeroPadding(
     date.getMonth() + 1
-  )}-${toDoubleDigit(date.getDate())}`;
+  )}-${zeroPadding(date.getDate())}`;
 };
 
 // ContentfulからgetEntries()したデータをContentTypeでフィルタリングする
