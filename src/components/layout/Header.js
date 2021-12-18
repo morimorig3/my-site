@@ -7,11 +7,11 @@ const Header = () => {
   };
   return (
     <header className="bg-blue-600">
-      <div className="lg:container px-8 lg:px-0 h-14 mx-auto flex justify-between">
+      <div className="lg:container px-8 lg:px-0 h-10 md:h-14 mx-auto flex justify-between">
         <Link href="/">
           <a
             style={logo}
-            className="self-center font-Rubik block text-xl font-light text-gray-100"
+            className="self-center font-Rubik block text-md md:text-xl font-light text-gray-100"
           >
             morimorig3.com
           </a>
