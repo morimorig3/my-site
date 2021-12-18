@@ -3,16 +3,10 @@ import SEO from 'components/seo';
 import Layout from 'components/layout/Layout';
 import Board from 'components/board';
 import Bio from 'components/bio';
-import BookList from 'components/bookList';
 import DevelopList from 'components/developList';
-import NewsList from 'components/newsList';
-import {
-  IoNewspaperOutline,
-  IoPersonOutline,
-  IoBookOutline,
-  IoConstructOutline,
-} from 'react-icons/io5';
+import { IoPersonOutline, IoConstructOutline } from 'react-icons/io5';
 import { sortByDate, extractContentType, getAllPost } from 'lib/api';
+import Card from 'components/Card';
 
 const pageMeta = {
   title: 'morimorig3.com',
@@ -21,43 +15,27 @@ const pageMeta = {
 
 const Home = ({ data }) => {
   const allData = data.items;
-  const newsData = sortByDate(extractContentType(allData, 'newsPost'), 'DESC');
   const developData = sortByDate(
     extractContentType(allData, 'developPost'),
     'DESC'
   );
-  const bookData = extractContentType(allData, 'bookPost');
 
   return (
     <>
       <SEO meta={pageMeta} />
       <Layout>
-        <Board title="news" ReactIcon={IoNewspaperOutline}>
-          <div className="py-4">
-            <NewsList newsData={newsData} limit={3} />
-          </div>
-          <div className="text-right">
-            <Link href="/news">
-              <a className="inline-block text-sm hover:underline">もっとみる</a>
-            </Link>
-          </div>
-        </Board>
+        <section className="py-10 max-w-4xl mx-auto">
+          <h2 className="text-center font-bold text-lg mb-4">つくったもの</h2>
+          <ul className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            {developData.map(Card)}
+          </ul>
+        </section>
         <Board title="develop" ReactIcon={IoConstructOutline}>
           <div className="py-4">
             <DevelopList developData={developData} />
           </div>
           <div className="text-right">
             <Link href="/develop">
-              <a className="inline-block text-sm hover:underline">もっとみる</a>
-            </Link>
-          </div>
-        </Board>
-        <Board title="recommend" ReactIcon={IoBookOutline}>
-          <div className="py-4">
-            <BookList bookData={bookData} limit={6} />
-          </div>
-          <div className="text-right">
-            <Link href="/books">
               <a className="inline-block text-sm hover:underline">もっとみる</a>
             </Link>
           </div>
