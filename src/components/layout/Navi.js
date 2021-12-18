@@ -11,9 +11,9 @@ const Navi = () => {
         <Link href="/develop" passHref>
           <NaviButton isActive={/^\/develop/.test(pathname)}>制作物</NaviButton>
         </Link>
-        <Link href="/blog" passHref>
+        {/* <Link href="/blog" passHref>
           <NaviButton isActive={/^\/blog/.test(pathname)}>ブログ</NaviButton>
-        </Link>
+        </Link> */}
         <Link href="/about" passHref>
           <NaviButton isActive={/^\/about/.test(pathname)}>
             私について
