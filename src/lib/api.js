@@ -13,6 +13,20 @@ export const formatDate = (dateString) => {
   )}-${zeroPadding(date.getDate())}`;
 };
 
+export const getExperienceYears = (date) => {
+  function getYearAndMonth(Date) {
+    return {
+      year: Date.getFullYear(),
+      month: Date.getMonth() + 1,
+    };
+  }
+  const fromData = getYearAndMonth(new Date(date));
+  const nowData = getYearAndMonth(new Date());
+  const expYear = nowData.year - fromData.year;
+  const expMonth = nowData.month - fromData.month;
+  return `${expYear ? expYear + '年' : ''}${expMonth ? expMonth + 'ヶ月' : ''}`;
+};
+
 // ContentfulからgetEntries()したデータをContentTypeでフィルタリングする
 export const extractContentType = (data, contentType) =>
   data.filter((data) => data.sys.contentType.sys.id === contentType);
