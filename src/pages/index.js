@@ -7,6 +7,8 @@ import DevelopList from 'components/developList';
 import { IoPersonOutline, IoConstructOutline } from 'react-icons/io5';
 import { sortByDate, extractContentType, getAllPost } from 'lib/api';
 import Card from 'components/Card';
+import Container from 'components/layout/Container';
+import TechnologyStack from 'components/TechnologyStack';
 
 const pageMeta = {
   title: 'morimorig3.com',
@@ -24,12 +26,16 @@ const Home = ({ data }) => {
     <>
       <SEO meta={pageMeta} />
       <Layout>
-        <section className="py-10 max-w-4xl mx-auto">
+        <Container className="py-10">
           <h2 className="text-center font-bold text-lg mb-4">つくったもの</h2>
-          <ul className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <ul className="max-w-4xl mx-auto grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             {developData.map(Card)}
           </ul>
-        </section>
+        </Container>
+        <Container className="bg-slate-50">
+          <h2 className="text-center font-bold text-lg mb-4">好きな技術</h2>
+          <TechnologyStack />
+        </Container>
         <Board title="develop" ReactIcon={IoConstructOutline}>
           <div className="py-4">
             <DevelopList developData={developData} />
