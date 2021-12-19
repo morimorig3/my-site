@@ -17,7 +17,7 @@ const Card = (data) => {
   return (
     <li key={id}>
       <a
-        className="p-4 transition-colors border hover:border-transparent border-gray-200 rounded duration-200 hover:shadow-all flex flex-col gap-4"
+        className="p-4 transition-colors border hover:border-transparent border-gray-200 rounded duration-200 hover:shadow-all flex flex-col gap-4 h-full"
         href={url}
         target="_blank"
         rel="noopener noreferrer"
