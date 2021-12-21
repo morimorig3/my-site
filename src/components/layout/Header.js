@@ -1,4 +1,3 @@
-import Navi from 'components/layout/Navi';
 import Link from 'next/link';
 
 const Header = () => {
@@ -11,12 +10,11 @@ const Header = () => {
         <Link href="/">
           <a
             style={logo}
-            className="self-center font-Rubik block text-md md:text-xl font-light text-gray-100"
+            className="self-center font-Rubik block md:text-xl font-light text-gray-100"
           >
             morimorig3.com
           </a>
         </Link>
-        <Navi />
       </div>
     </header>
   );
