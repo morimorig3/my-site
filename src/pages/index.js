@@ -5,6 +5,7 @@ import Card from 'components/Card';
 import Container from 'components/layout/Container';
 import TechnologyStack from 'components/TechnologyStack';
 import Bio from 'components/Bio';
+import BlogCard from 'components/BlogCard';
 
 const pageMeta = {
   title: 'morimorig3.com',
@@ -17,6 +18,7 @@ const Home = ({ data }) => {
     extractContentType(allData, 'developPost'),
     'DESC'
   );
+  const blogData = sortByDate(extractContentType(allData, 'blogPost'), 'DESC');
 
   return (
     <>
@@ -52,6 +54,29 @@ const Home = ({ data }) => {
           </h2>
           <TechnologyStack />
         </Container>
+        <Container className="py-10">
+          <h2 className="text-center font-bold text-lg text-slate-800 mb-4">
+            ブログ
+          </h2>
+          <ul className="max-w-4xl mx-auto flex flex-col gap-6">
+            {blogData.map((data) => {
+              const id = data.sys.id;
+              const { title, publishDate, slug } = data.fields;
+              const { category, categorySlug } = data.fields.category.fields;
+              return (
+                <BlogCard
+                  key={id}
+                  title={title}
+                  publishDate={publishDate}
+                  slug={slug}
+                  category={category}
+                  categorySlug={categorySlug}
+                />
+              );
+            })}
+          </ul>
+        </Container>
+        <hr />
         <Container className="py-10">
           <Bio />
         </Container>
