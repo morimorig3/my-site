@@ -10,8 +10,8 @@ const BlogCard = ({ title, publishDate, slug, category, categorySlug }) => (
         <Image
           src={`https://og-image.morimorig3.com/${encodeURIComponent(
             title
-          )}.png?md=1&fontSize=75px`}
-          alt="サムネ"
+          )}.png?md=1&fontSize=75px&v=1`}
+          alt={title}
           width="1200"
           height="630"
           layout="responsive"
@@ -22,13 +22,13 @@ const BlogCard = ({ title, publishDate, slug, category, categorySlug }) => (
           {formatDate(publishDate)}
         </p>
         <h3 className="mb-4 sm:mb-auto text-sm sm:text-xl font-bold">
-          <Link href={`/${slug}`}>
+          <Link href={`/blog/post/${slug}`}>
             <a>{title}</a>
           </Link>
         </h3>
         <p className="text-xs sm:text-sm text-gray-400 flex gap-1 items-center">
           <FaFolder />
-          <Link href={`/${categorySlug}`}>
+          <Link href={`/blog/category/${categorySlug}`}>
             <a>{category}</a>
           </Link>
         </p>

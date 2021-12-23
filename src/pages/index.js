@@ -1,6 +1,6 @@
 import SEO from 'components/seo';
 import Layout from 'components/layout/Layout';
-import { sortByDate, extractContentType, getAllPost } from 'lib/api';
+import { getDataForHome } from 'lib/api';
 import Card from 'components/Card';
 import Container from 'components/layout/Container';
 import TechnologyStack from 'components/TechnologyStack';
@@ -12,13 +12,8 @@ const pageMeta = {
   description: 'morimorig3の制作物や考えをまとめて紹介するページです。',
 };
 
-const Home = ({ data }) => {
-  const allData = data.items;
-  const developData = sortByDate(
-    extractContentType(allData, 'developPost'),
-    'DESC'
-  );
-  const blogData = sortByDate(extractContentType(allData, 'blogPost'), 'DESC');
+const Home = ({ preview, allHomeData }) => {
+  const { develop, blogPost, category } = allHomeData;
 
   return (
     <>
@@ -32,9 +27,9 @@ const Home = ({ data }) => {
             サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
           </p>
           <ul className="max-w-4xl mx-auto grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {developData.map((data) => {
+            {develop.map((data) => {
               const id = data.sys.id;
-              const { title, summary, date, url, stacks } = data.fields;
+              const { title, summary, date, url, stacks } = data;
               return (
                 <Card
                   key={id}
@@ -59,17 +54,20 @@ const Home = ({ data }) => {
             ブログ
           </h2>
           <ul className="max-w-4xl mx-auto flex flex-col gap-6">
-            {blogData.map((data) => {
+            {blogPost.map((data) => {
               const id = data.sys.id;
-              const { title, publishDate, slug } = data.fields;
-              const { category, categorySlug } = data.fields.category.fields;
+              const categoryId = data.category.sys.id;
+              const { title, publishDate, slug } = data;
+              const { name: categoryName, slug: categorySlug } = category.find(
+                (data) => data.sys.id === categoryId
+              );
               return (
                 <BlogCard
                   key={id}
                   title={title}
                   publishDate={publishDate}
                   slug={slug}
-                  category={category}
+                  category={categoryName}
                   categorySlug={categorySlug}
                 />
               );
@@ -87,13 +85,14 @@ const Home = ({ data }) => {
 
 export default Home;
 
-export async function getStaticProps() {
-  const data = await getAllPost();
-
-  if (!data) {
+export async function getStaticProps({ preview = false }) {
+  const allHomeData = (await getDataForHome(preview)) ?? [];
+  if (!allHomeData) {
     return {
       notFound: true,
     };
   }
-  return { props: { data } };
+  return {
+    props: { preview, allHomeData },
+  };
 }

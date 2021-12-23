@@ -59,3 +59,100 @@ export const getAllPost = async (options = {}) => {
 
   return data;
 };
+
+function extractDevelop(fetchResponse) {
+  return fetchResponse?.data?.developPostCollection?.items;
+}
+function extractBlogPost(fetchResponse) {
+  return fetchResponse?.data?.blogPostCollection?.items;
+}
+function extractCategory(fetchResponse) {
+  return fetchResponse?.data?.categoryCollection?.items;
+}
+
+export const fetchGraphQL = async (query, preview = false) =>
+  fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${
+          preview
+            ? process.env.CONTENT_PREVIEW_API_KEY
+            : process.env.CONTENT_DELIVERY_API_KEY
+        }`,
+      },
+      body: JSON.stringify({ query }),
+    }
+  ).then((response) => response.json());
+
+export const getDataForHome = async (preview) => {
+  const entries = await fetchGraphQL(
+    `query {
+      developPostCollection(order:date_DESC, preview: ${
+        preview ? 'true' : 'false'
+      }) {
+        items {
+          title
+          url
+          date
+          summary
+          stacks
+          sys {
+            id
+          }
+        }
+      }
+      blogPostCollection(order:publishDate_DESC, preview: ${
+        preview ? 'true' : 'false'
+      }) {
+        items {
+          sys {
+            id
+          }
+          title
+          slug
+          publishDate
+          category{
+            sys {
+              id
+            }
+          }
+        }
+      }
+      categoryCollection(preview: ${preview ? 'true' : 'false'}) {
+        items {
+          sys {
+            id
+          }
+          name
+          slug
+        }
+      }
+    }`,
+    preview
+  );
+
+  return {
+    develop: extractDevelop(entries),
+    blogPost: extractBlogPost(entries),
+    category: extractCategory(entries),
+  };
+};
+
+export async function getAllPostsForHome(preview) {
+  const entries = await fetchGraphQL(
+    `query {
+        postCollection(order: date_DESC, preview: ${
+          preview ? 'true' : 'false'
+        }) {
+          items {
+            ${POST_GRAPHQL_FIELDS}
+          }
+        }
+      }`,
+    preview
+  );
+  return extractPostEntries(entries);
+}
