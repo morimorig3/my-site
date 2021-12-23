@@ -1,6 +1,6 @@
 import SEO from 'components/seo';
 import Layout from 'components/layout/Layout';
-import { getDataForHome } from 'lib/api';
+import { getDataForHome, extractMatchCategory } from 'lib/api';
 import Card from 'components/Card';
 import Container from 'components/layout/Container';
 import TechnologyStack from 'components/TechnologyStack';
@@ -58,9 +58,8 @@ const Home = ({ preview, allHomeData }) => {
               const id = data.sys.id;
               const categoryId = data.category.sys.id;
               const { title, publishDate, slug } = data;
-              const { name: categoryName, slug: categorySlug } = category.find(
-                (data) => data.sys.id === categoryId
-              );
+              const { name: categoryName, slug: categorySlug } =
+                extractMatchCategory(categoryId, category);
               return (
                 <BlogCard
                   key={id}
