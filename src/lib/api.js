@@ -1,6 +1,34 @@
-import remark from 'remark';
-import html from 'remark-html';
-import * as contentful from 'contentful';
+const DEVELOP_GRAPHQL_FIELDS = `
+title
+url
+date
+summary
+stacks
+sys {
+  id
+}
+`;
+const BLOGPOST_GRAPHQL_FIELDS = `
+sys {
+  id
+}
+title
+slug
+publishDate
+content
+category{
+  sys {
+    id
+  }
+}
+`;
+const CATEGORY_GRAPHQL_FIELDS = `
+sys {
+  id
+}
+name
+slug
+`;
 
 // 一桁の数字をゼロ埋めする
 const zeroPadding = (number) => ('0' + number).slice(-2);
@@ -27,47 +55,20 @@ export const getExperienceYears = (date) => {
   return `${expYear ? expYear + '年' : ''}${expMonth ? expMonth + 'ヶ月' : ''}`;
 };
 
-// ContentfulからgetEntries()したデータをContentTypeでフィルタリングする
-export const extractContentType = (data, contentType) =>
-  data.filter((data) => data.sys.contentType.sys.id === contentType);
-
-// Contentfulから取得したデータを日付でソートする
-export const sortByDate = (data, orderBy) => {
-  if (orderBy === 'DESC') {
-    data.sort((a, b) => new Date(b.fields.date) - new Date(a.fields.date));
-  } else {
-    data.sort((a, b) => new Date(a.fields.date) - new Date(b.fields.date));
-  }
-  return data;
-};
-
-export async function markdownToHtml(markdown) {
-  const result = await remark().use(html).process(markdown);
-  return result.toString();
-}
-
-export const getAllPost = async (options = {}) => {
-  const client = await contentful.createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    environment: process.env.CONTENTFUL_ENVIRONMENT_ID,
-    accessToken: process.env.CONTENT_DELIVERY_API_KEY,
-  });
-  const data = await client
-    .getEntries(options)
-    .then((res) => res)
-    .catch(console.error);
-
-  return data;
-};
-
 function extractDevelop(fetchResponse) {
   return fetchResponse?.data?.developPostCollection?.items;
 }
 function extractBlogPost(fetchResponse) {
+  return fetchResponse?.data?.blogPostCollection?.items?.[0];
+}
+function extractBlogPostEntries(fetchResponse) {
   return fetchResponse?.data?.blogPostCollection?.items;
 }
 function extractCategory(fetchResponse) {
   return fetchResponse?.data?.categoryCollection?.items;
+}
+export function extractMatchCategory(categoryID, categories) {
+  return categories.find((data) => data.sys.id === categoryID);
 }
 
 export const fetchGraphQL = async (query, preview = false) =>
@@ -94,40 +95,19 @@ export const getDataForHome = async (preview) => {
         preview ? 'true' : 'false'
       }) {
         items {
-          title
-          url
-          date
-          summary
-          stacks
-          sys {
-            id
-          }
+          ${DEVELOP_GRAPHQL_FIELDS}
         }
       }
       blogPostCollection(order:publishDate_DESC, preview: ${
         preview ? 'true' : 'false'
       }) {
         items {
-          sys {
-            id
-          }
-          title
-          slug
-          publishDate
-          category{
-            sys {
-              id
-            }
-          }
+          ${BLOGPOST_GRAPHQL_FIELDS}
         }
       }
       categoryCollection(preview: ${preview ? 'true' : 'false'}) {
         items {
-          sys {
-            id
-          }
-          name
-          slug
+          ${CATEGORY_GRAPHQL_FIELDS}
         }
       }
     }`,
@@ -136,23 +116,52 @@ export const getDataForHome = async (preview) => {
 
   return {
     develop: extractDevelop(entries),
-    blogPost: extractBlogPost(entries),
+    blogPost: extractBlogPostEntries(entries),
     category: extractCategory(entries),
   };
 };
-
-export async function getAllPostsForHome(preview) {
+export const getBlogPostSlug = async (preview) => {
   const entries = await fetchGraphQL(
     `query {
-        postCollection(order: date_DESC, preview: ${
-          preview ? 'true' : 'false'
-        }) {
-          items {
-            ${POST_GRAPHQL_FIELDS}
-          }
+      blogPostCollection(order:publishDate_DESC, preview: ${
+        preview ? 'true' : 'false'
+      }) {
+        items {
+          ${BLOGPOST_GRAPHQL_FIELDS}
         }
-      }`,
+      }
+    }`,
     preview
   );
-  return extractPostEntries(entries);
-}
+
+  return extractBlogPostEntries(entries);
+};
+
+export const getBlogPostBySlug = async (slug, preview) => {
+  const entry = await fetchGraphQL(
+    `query {
+      blogPostCollection(where: { slug: "${slug}" }, preview: ${
+      preview ? 'true' : 'false'
+    }, limit: 1) {
+        items {
+          ${BLOGPOST_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview
+  );
+  const categories = await fetchGraphQL(
+    `query {
+      categoryCollection(preview: ${preview ? 'true' : 'false'}) {
+        items {
+          ${CATEGORY_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview
+  );
+  return {
+    post: extractBlogPost(entry),
+    categories: extractCategory(categories),
+  };
+};
