@@ -16,9 +16,11 @@ title
 slug
 publishDate
 content
-category{
-  sys {
-    id
+categoryCollection {
+  items {
+    sys {
+      id
+    }
   }
 }
 `;
@@ -28,6 +30,11 @@ sys {
 }
 name
 slug
+linkedFrom {
+  entryCollection {
+    total
+  }
+}
 `;
 
 // 一桁の数字をゼロ埋めする
@@ -65,7 +72,14 @@ function extractBlogPostEntries(fetchResponse) {
   return fetchResponse?.data?.blogPostCollection?.items;
 }
 function extractCategory(fetchResponse) {
+  return fetchResponse?.data?.categoryCollection?.items?.[0];
+}
+function extractCategories(fetchResponse) {
   return fetchResponse?.data?.categoryCollection?.items;
+}
+function extractCategoryBlogPostEntries(fetchResponse) {
+  return fetchResponse?.data?.categoryCollection?.items?.[0]?.linkedFrom
+    ?.entryCollection?.items;
 }
 export function extractMatchCategory(categoryID, categories) {
   return categories.find((data) => data.sys.id === categoryID);
@@ -89,7 +103,7 @@ export const fetchGraphQL = async (query, preview = false) =>
   ).then((response) => response.json());
 
 export const getDataForHome = async (preview) => {
-  const entries = await fetchGraphQL(
+  const develop = await fetchGraphQL(
     `query {
       developPostCollection(order:date_DESC, preview: ${
         preview ? 'true' : 'false'
@@ -98,6 +112,20 @@ export const getDataForHome = async (preview) => {
           ${DEVELOP_GRAPHQL_FIELDS}
         }
       }
+    }`
+  );
+  const category = await fetchGraphQL(
+    `query {
+      categoryCollection(preview: ${preview ? 'true' : 'false'}) {
+        items {
+          ${CATEGORY_GRAPHQL_FIELDS}
+        }
+      }
+    }`
+  );
+
+  const blogPost = await fetchGraphQL(
+    `query {
       blogPostCollection(order:publishDate_DESC, preview: ${
         preview ? 'true' : 'false'
       }) {
@@ -105,19 +133,14 @@ export const getDataForHome = async (preview) => {
           ${BLOGPOST_GRAPHQL_FIELDS}
         }
       }
-      categoryCollection(preview: ${preview ? 'true' : 'false'}) {
-        items {
-          ${CATEGORY_GRAPHQL_FIELDS}
-        }
-      }
+      
     }`,
     preview
   );
-
   return {
-    develop: extractDevelop(entries),
-    blogPost: extractBlogPostEntries(entries),
-    category: extractCategory(entries),
+    develop: extractDevelop(develop),
+    blogPost: extractBlogPostEntries(blogPost),
+    category: extractCategories(category),
   };
 };
 export const getBlogPostSlug = async (preview) => {
@@ -135,6 +158,20 @@ export const getBlogPostSlug = async (preview) => {
   );
 
   return extractBlogPostEntries(entries);
+};
+export const getBlogCategorySlug = async (preview) => {
+  const entries = await fetchGraphQL(
+    `query {
+      categoryCollection(preview: ${preview ? 'true' : 'false'}) {
+        items {
+          ${CATEGORY_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview
+  );
+
+  return extractCategories(entries);
 };
 
 export const getBlogPostBySlug = async (slug, preview) => {
@@ -162,6 +199,51 @@ export const getBlogPostBySlug = async (slug, preview) => {
   );
   return {
     post: extractBlogPost(entry),
-    categories: extractCategory(categories),
+    categories: extractCategories(categories),
+  };
+};
+
+export const getBlogPostByCategory = async (slug, preview) => {
+  const entries = await fetchGraphQL(
+    `query {
+      categoryCollection(where:{slug:"${slug}"}, preview: ${
+      preview ? 'true' : 'false'
+    }) {
+        items {
+          linkedFrom {
+            entryCollection{
+              items {
+                ... on BlogPost{
+                  slug
+                  title
+                  publishDate
+                  sys {
+                    id
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }`,
+    preview
+  );
+
+  const categories = await fetchGraphQL(
+    `query {
+      categoryCollection(where:{slug:"${slug}"}, preview: ${
+      preview ? 'true' : 'false'
+    }) {
+        items {
+          ${CATEGORY_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview
+  );
+  return {
+    posts: extractCategoryBlogPostEntries(entries),
+    category: extractCategory(categories),
   };
 };

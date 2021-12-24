@@ -56,7 +56,7 @@ const Home = ({ preview, allHomeData }) => {
           <ul className="max-w-4xl mx-auto flex flex-col gap-6">
             {blogPost.map((data) => {
               const id = data.sys.id;
-              const categoryId = data.category.sys.id;
+              const categoryId = data.categoryCollection.items[0].sys.id;
               const { title, publishDate, slug } = data;
               const { name: categoryName, slug: categorySlug } =
                 extractMatchCategory(categoryId, category);
