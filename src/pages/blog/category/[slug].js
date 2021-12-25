@@ -8,7 +8,7 @@ import { getBlogCategorySlug, getBlogPostByCategory } from 'lib/api';
 const Category = ({ posts, category, preview }) => {
   const { name: categoryName, slug: categorySlug } = category;
   const pageMeta = {
-    title: `${categoryName} | Category | morimorig3.com`,
+    title: `${categoryName} | カテゴリー | morimorig3.com`,
     description: `${categoryName}カテゴリーの記事一覧`,
   };
   return (
@@ -17,9 +17,9 @@ const Category = ({ posts, category, preview }) => {
       <Layout>
         <Container className="max-w-3xl mx-auto">
           <CategoryHeader className="mb-10">{categoryName}</CategoryHeader>
-          <div className="py-5">
+          <div className="py-5 max-w-4xl mx-auto">
             {posts.length ? (
-              <ul className="max-w-4xl mx-auto flex flex-col gap-6">
+              <ul className="flex flex-col gap-6">
                 {posts.map((data) => {
                   const id = data.sys.id;
                   const { title, publishDate, slug } = data;

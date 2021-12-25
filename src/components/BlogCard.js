@@ -10,7 +10,7 @@ const BlogCard = ({ title, publishDate, slug, category, categorySlug }) => (
         <Image
           src={`https://og-image.morimorig3.com/${encodeURIComponent(
             title
-          )}.png?md=1&fontSize=75px&v=1`}
+          )}.png?md=1&fontSize=75px`}
           alt={title}
           width="1200"
           height="630"
