@@ -48,6 +48,7 @@ export const formatDate = (dateString) => {
   )}-${zeroPadding(date.getDate())}`;
 };
 
+// 渡されたDateオブジェクトと現在日時を比較してX年Xヶ月のフォーマットで返す
 export const getExperienceYears = (date) => {
   function getYearAndMonth(Date) {
     return {
@@ -62,25 +63,33 @@ export const getExperienceYears = (date) => {
   return `${expYear ? expYear + '年' : ''}${expMonth ? expMonth + 'ヶ月' : ''}`;
 };
 
+// GraphQLのレスポンスから抽出
+// developPostCollectionのitemsを抽出する
 function extractDevelop(fetchResponse) {
   return fetchResponse?.data?.developPostCollection?.items;
 }
+// blogPostCollectionのitemsから一つだけ抽出する
 function extractBlogPost(fetchResponse) {
   return fetchResponse?.data?.blogPostCollection?.items?.[0];
 }
+// blogPostCollectionのitemsを抽出する
 function extractBlogPostEntries(fetchResponse) {
   return fetchResponse?.data?.blogPostCollection?.items;
 }
+// categoryCollectionのitemsから一つだけ抽出する
 function extractCategory(fetchResponse) {
   return fetchResponse?.data?.categoryCollection?.items?.[0];
 }
+// categoryCollectionのitemsを抽出する
 function extractCategories(fetchResponse) {
   return fetchResponse?.data?.categoryCollection?.items;
 }
-function extractCategoryBlogPostEntries(fetchResponse) {
+// category別に返されたBlogPostのitemsを抽出する
+function extractBlogPostByCategoryEntries(fetchResponse) {
   return fetchResponse?.data?.categoryCollection?.items?.[0]?.linkedFrom
     ?.entryCollection?.items;
 }
+// categoryIDに一致するcategoryを返す
 export function extractMatchCategory(categoryID, categories) {
   return categories.find((data) => data.sys.id === categoryID);
 }
@@ -102,6 +111,7 @@ export const fetchGraphQL = async (query, preview = false) =>
     }
   ).then((response) => response.json());
 
+//
 export const getDataForHome = async (preview) => {
   const develop = await fetchGraphQL(
     `query {
@@ -114,7 +124,7 @@ export const getDataForHome = async (preview) => {
       }
     }`
   );
-  const category = await fetchGraphQL(
+  const categories = await fetchGraphQL(
     `query {
       categoryCollection(preview: ${preview ? 'true' : 'false'}) {
         items {
@@ -123,8 +133,7 @@ export const getDataForHome = async (preview) => {
       }
     }`
   );
-
-  const blogPost = await fetchGraphQL(
+  const entries = await fetchGraphQL(
     `query {
       blogPostCollection(order:publishDate_DESC, preview: ${
         preview ? 'true' : 'false'
@@ -133,16 +142,17 @@ export const getDataForHome = async (preview) => {
           ${BLOGPOST_GRAPHQL_FIELDS}
         }
       }
-      
     }`,
     preview
   );
   return {
     develop: extractDevelop(develop),
-    blogPost: extractBlogPostEntries(blogPost),
-    category: extractCategories(category),
+    blogPost: extractBlogPostEntries(entries),
+    category: extractCategories(categories),
   };
 };
+
+// Blog記事のslug取得
 export const getBlogPostSlug = async (preview) => {
   const entries = await fetchGraphQL(
     `query {
@@ -150,7 +160,7 @@ export const getBlogPostSlug = async (preview) => {
         preview ? 'true' : 'false'
       }) {
         items {
-          ${BLOGPOST_GRAPHQL_FIELDS}
+          slug
         }
       }
     }`,
@@ -159,12 +169,13 @@ export const getBlogPostSlug = async (preview) => {
 
   return extractBlogPostEntries(entries);
 };
+// Categoryページのslug取得
 export const getBlogCategorySlug = async (preview) => {
   const entries = await fetchGraphQL(
     `query {
       categoryCollection(preview: ${preview ? 'true' : 'false'}) {
         items {
-          ${CATEGORY_GRAPHQL_FIELDS}
+          slug
         }
       }
     }`,
@@ -243,7 +254,7 @@ export const getBlogPostByCategory = async (slug, preview) => {
     preview
   );
   return {
-    posts: extractCategoryBlogPostEntries(entries),
+    posts: extractBlogPostByCategoryEntries(entries),
     category: extractCategory(categories),
   };
 };
