@@ -40,12 +40,15 @@ linkedFrom {
 // 一桁の数字をゼロ埋めする
 const zeroPadding = (number) => ('0' + number).slice(-2);
 
-// 日付のフォーマットを変換する（2021-08-11T00:00+09:00 => 2021-08-11）
+// 日付のフォーマットを変換する（2021-08-11T00:00+09:00 => 2021/08/11）
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return `${date.getFullYear()}-${zeroPadding(
-    date.getMonth() + 1
-  )}-${zeroPadding(date.getDate())}`;
+
+  return [
+    date.getFullYear(),
+    zeroPadding(date.getMonth() + 1),
+    zeroPadding(date.getDate()),
+  ].join('/');
 };
 
 // 渡されたDateオブジェクトと現在日時を比較してX年Xヶ月のフォーマットで返す
