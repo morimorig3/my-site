@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatDate } from 'lib/api';
-import { FaFolder } from 'react-icons/fa';
+import { FaListUl } from 'react-icons/fa';
 
 const BlogCard = ({ title, publishDate, slug, category, categorySlug }) => (
   <li className="p-4 md:p-6 transition-colors border hover:border-transparent border-gray-200 rounded duration-200 hover:shadow-all">
@@ -27,7 +27,7 @@ const BlogCard = ({ title, publishDate, slug, category, categorySlug }) => (
           </Link>
         </h3>
         <p className="text-xs sm:text-sm text-gray-400 flex gap-1 items-center">
-          <FaFolder />
+          <FaListUl />
           <Link href={`/blog/category/${categorySlug}`}>
             <a>{category}</a>
           </Link>
