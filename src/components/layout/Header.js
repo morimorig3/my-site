@@ -6,7 +6,7 @@ const Header = () => {
   };
   return (
     <header className="bg-blue-600">
-      <div className="lg:container px-8 lg:px-0 h-10 md:h-14 mx-auto flex justify-between">
+      <div className="lg:container px-4 sm:px-8 lg:px-0 h-10 md:h-14 mx-auto flex justify-between">
         <Link href="/">
           <a
             style={logo}
