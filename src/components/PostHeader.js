@@ -5,7 +5,7 @@ import { FaListUl } from 'react-icons/fa';
 const PostHeader = ({ title, publishDate, categories }) => (
   <header>
     <p className="text-base text-gray-400 mb-2">{formatDate(publishDate)}</p>
-    <h1 className="font-bold text-3xl text-slate-800 leading-normal">
+    <h1 className="font-bold text-xl sm:text-3xl text-slate-800 leading-normal mb-2">
       {title}
     </h1>
     <ul className="flex gap-2">
@@ -13,7 +13,7 @@ const PostHeader = ({ title, publishDate, categories }) => (
         ({ name: categoryName, slug: categorySlug, sys: { id } }) => (
           <li
             key={id}
-            className="text-xs sm:text-sm text-gray-400 flex gap-1 items-center"
+            className="text-sm sm:text-base text-gray-400 hover:text-slate-800 flex gap-1 items-center"
           >
             <FaListUl />
             <Link href={`/blog/category/${categorySlug}`}>

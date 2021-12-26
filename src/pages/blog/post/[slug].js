@@ -26,7 +26,7 @@ const BlogPost = ({ post, allCategories, html, preview }) => {
               publishDate={publishDate}
               categories={categories}
             />
-            <div className="py-10 znc">
+            <div className="py-5 znc">
               {html ? (
                 <div dangerouslySetInnerHTML={{ __html: html }}></div>
               ) : (
