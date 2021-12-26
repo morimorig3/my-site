@@ -5,8 +5,8 @@ import CategoryHeader from 'components/CategoryHeader';
 import BlogCard from 'components/BlogCard';
 import { getBlogCategorySlug, getBlogPostByCategory } from 'lib/api';
 
-const Category = ({ posts, category, preview }) => {
-  const { name: categoryName, slug: categorySlug } = category;
+const Category = ({ posts, categories, preview }) => {
+  const { name: categoryName } = categories[0];
   const pageMeta = {
     title: `${categoryName} | カテゴリー | morimorig3.com`,
     description: `${categoryName}カテゴリーの記事一覧`,
@@ -20,20 +20,15 @@ const Category = ({ posts, category, preview }) => {
           <div className="py-5 max-w-4xl mx-auto">
             {posts.length ? (
               <ul className="flex flex-col gap-6">
-                {posts.map((data) => {
-                  const id = data.sys.id;
-                  const { title, publishDate, slug } = data;
-                  return (
-                    <BlogCard
-                      key={id}
-                      title={title}
-                      publishDate={publishDate}
-                      slug={slug}
-                      category={categoryName}
-                      categorySlug={categorySlug}
-                    />
-                  );
-                })}
+                {posts.map(({ title, publishDate, slug, sys: { id } }) => (
+                  <BlogCard
+                    key={id}
+                    title={title}
+                    publishDate={publishDate}
+                    slug={slug}
+                    categories={categories}
+                  />
+                ))}
               </ul>
             ) : (
               <p className="text-center">表示する記事がありません。</p>
@@ -48,12 +43,15 @@ const Category = ({ posts, category, preview }) => {
 export default Category;
 
 export async function getStaticProps({ params, preview = false }) {
-  const { posts, category } = await getBlogPostByCategory(params.slug, preview);
+  const { posts, categories } = await getBlogPostByCategory(
+    params.slug,
+    preview
+  );
   return {
     props: {
       preview,
       posts,
-      category,
+      categories,
     },
   };
 }

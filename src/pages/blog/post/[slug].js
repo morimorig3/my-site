@@ -2,16 +2,15 @@ import SEO from 'components/seo';
 import Layout from 'components/layout/Layout';
 import Container from 'components/layout/Container';
 import PostHeader from 'components/PostHeader';
-import {
-  getBlogPostSlug,
-  getBlogPostBySlug,
-  extractMatchCategory,
-} from 'lib/api';
-import markdownToHtml from 'lib/markdownToHtml';
+import { getBlogPostSlug, getBlogPostBySlug } from 'lib/api';
+import { matchCategories, getCategoryIDs } from 'lib/utils';
+import markdownToHtml from 'zenn-markdown-html';
+import 'zenn-content-css';
 
-const BlogPost = ({ post, category, markdown, preview }) => {
+const BlogPost = ({ post, allCategories, html, preview }) => {
   const { title, publishDate } = post;
-  const { name: categoryName, slug: categorySlug } = category;
+  const categoryIDs = getCategoryIDs(post);
+  const categories = matchCategories(categoryIDs, allCategories);
   const pageMeta = {
     title: `${title} | ブログ | morimorig3.com`,
     description: `${title}`,
@@ -20,17 +19,16 @@ const BlogPost = ({ post, category, markdown, preview }) => {
     <>
       <SEO meta={pageMeta} />
       <Layout>
-        <Container className="max-w-3xl mx-auto">
+        <Container className="max-w-2xl mx-auto">
           <article>
             <PostHeader
               title={title}
               publishDate={publishDate}
-              categoryName={categoryName}
-              categorySlug={categorySlug}
+              categories={categories}
             />
-            <div className="py-10 markdown">
-              {markdown ? (
-                <div dangerouslySetInnerHTML={{ __html: markdown }}></div>
+            <div className="py-10 znc">
+              {html ? (
+                <div dangerouslySetInnerHTML={{ __html: html }}></div>
               ) : (
                 <p>コンテンツ準備中…</p>
               )}
@@ -45,18 +43,15 @@ const BlogPost = ({ post, category, markdown, preview }) => {
 export default BlogPost;
 
 export async function getStaticProps({ params, preview = false }) {
-  const { post, categories } = await getBlogPostBySlug(params.slug, preview);
-  const category = extractMatchCategory(
-    post.categoryCollection.items[0].sys.id,
-    categories
-  );
-  const markdown = await markdownToHtml(post.content);
+  const { post, allCategories } = await getBlogPostBySlug(params.slug, preview);
+  const html = await markdownToHtml(post.content);
+
   return {
     props: {
       preview,
       post,
-      category,
-      markdown,
+      allCategories,
+      html,
     },
   };
 }
