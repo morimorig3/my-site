@@ -21,8 +21,8 @@ const Home = ({
   <>
     <SEO meta={pageMeta} />
     <Layout>
-      <Container className="py-10">
-        <SectionHeader>つくったもの</SectionHeader>
+      <Container>
+        <SectionHeader>制作物</SectionHeader>
         <ul className="max-w-4xl mx-auto grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {developments.map(
             ({ title, summary, date, url, stacks, sys: { id } }) => (
@@ -38,11 +38,11 @@ const Home = ({
           )}
         </ul>
       </Container>
-      <Container className="bg-slate-50 py-10">
-        <SectionHeader>好きな技術</SectionHeader>
+      <Container className="bg-slate-50">
+        <SectionHeader>技術</SectionHeader>
         <TechnologyStack />
       </Container>
-      <Container className="py-10">
+      <Container>
         <SectionHeader>ブログ</SectionHeader>
         <ul className="max-w-4xl mx-auto flex flex-col gap-6">
           {posts.map(({ title, publishDate, slug, sys: { id }, ...post }) => {
@@ -61,7 +61,7 @@ const Home = ({
         </ul>
       </Container>
       <hr />
-      <Container className="py-10">
+      <Container>
         <Bio />
       </Container>
     </Layout>

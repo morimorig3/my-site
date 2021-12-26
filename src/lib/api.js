@@ -77,7 +77,7 @@ export const fetchGraphQL = async (query, preview = false) =>
     }
   ).then((response) => response.json());
 
-// ホーム画面のデータ取得
+// ホームページのデータ取得
 export const getDataForHome = async (preview) => {
   const developments = await fetchGraphQL(
     `query {
@@ -113,6 +113,34 @@ export const getDataForHome = async (preview) => {
   );
   return {
     developments: extractDevelop(developments),
+    posts: extractBlogPostEntries(entries),
+    allCategories: extractCategories(categories),
+  };
+};
+// ブログページのデータ取得
+export const getBlogPost = async (preview) => {
+  const entries = await fetchGraphQL(
+    `query {
+      blogPostCollection(order:publishDate_DESC, preview: ${
+        preview ? 'true' : 'false'
+      }) {
+        items {
+          ${BLOGPOST_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview
+  );
+  const categories = await fetchGraphQL(
+    `query {
+      categoryCollection(preview: ${preview ? 'true' : 'false'}) {
+        items {
+          ${CATEGORY_GRAPHQL_FIELDS}
+        }
+      }
+    }`
+  );
+  return {
     posts: extractBlogPostEntries(entries),
     allCategories: extractCategories(categories),
   };
