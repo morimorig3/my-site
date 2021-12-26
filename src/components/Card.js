@@ -1,4 +1,4 @@
-import { formatDate } from 'lib/api';
+import { formatDate } from 'lib/utils';
 import { SiReact, SiTypescript } from 'react-icons/si';
 
 const reactIcons = {
