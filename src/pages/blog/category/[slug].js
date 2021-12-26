@@ -16,7 +16,9 @@ const Category = ({ posts, categories, preview }) => {
       <SEO meta={pageMeta} />
       <Layout>
         <Container className="max-w-3xl mx-auto">
-          <CategoryHeader className="mb-10">{categoryName}</CategoryHeader>
+          <CategoryHeader className="mb-5 md:mb-10">
+            {categoryName}
+          </CategoryHeader>
           <div className="py-5 max-w-4xl mx-auto">
             {posts.length ? (
               <ul className="flex flex-col gap-6">
