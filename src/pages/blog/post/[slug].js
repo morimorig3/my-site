@@ -1,6 +1,7 @@
 import SEO from 'components/seo';
 import Layout from 'components/layout/Layout';
 import Container from 'components/layout/Container';
+import Bio from 'components/Bio';
 import PostHeader from 'components/PostHeader';
 import { getBlogPostSlug, getBlogPostBySlug } from 'lib/api';
 import { matchCategories, getCategoryIDs } from 'lib/utils';
@@ -34,6 +35,10 @@ const BlogPost = ({ post, allCategories, html, preview }) => {
               )}
             </div>
           </article>
+        </Container>
+        <hr />
+        <Container>
+          <Bio />
         </Container>
       </Layout>
     </>
