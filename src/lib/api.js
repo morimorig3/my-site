@@ -47,7 +47,7 @@ function extractBlogPost(fetchResponse) {
   return fetchResponse?.data?.blogPostCollection?.items?.[0];
 }
 // blogPostCollectionのitemsを抽出する
-function extractBlogPostEntries(fetchResponse) {
+function extractBlogPosts(fetchResponse) {
   return fetchResponse?.data?.blogPostCollection?.items;
 }
 // categoryCollectionのitemsを抽出する
@@ -60,8 +60,8 @@ function extractBlogPostByCategoryEntries(fetchResponse) {
     ?.entryCollection?.items;
 }
 
-export const fetchGraphQL = async (query, preview = false) =>
-  fetch(
+function fetchGraphQL(query, preview = false) {
+  return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
     {
       method: 'POST',
@@ -76,9 +76,10 @@ export const fetchGraphQL = async (query, preview = false) =>
       body: JSON.stringify({ query }),
     }
   ).then((response) => response.json());
+}
 
-// ホームページのデータ取得
-export const getDataForHome = async (preview) => {
+// 全ての開発アイテムを返す
+export const getDevlopments = async (preview) => {
   const developments = await fetchGraphQL(
     `query {
       developPostCollection(order:date_DESC, preview: ${
@@ -90,6 +91,12 @@ export const getDataForHome = async (preview) => {
       }
     }`
   );
+
+  return extractDevelop(developments);
+};
+
+// 全てのカテゴリーアイテムを返す
+export const getCategories = async (preview) => {
   const categories = await fetchGraphQL(
     `query {
       categoryCollection(preview: ${preview ? 'true' : 'false'}) {
@@ -99,92 +106,16 @@ export const getDataForHome = async (preview) => {
       }
     }`
   );
-  const entries = await fetchGraphQL(
-    `query {
-      blogPostCollection(order:publishDate_DESC, preview: ${
-        preview ? 'true' : 'false'
-      }) {
-        items {
-          ${BLOGPOST_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    preview
-  );
-  return {
-    developments: extractDevelop(developments),
-    posts: extractBlogPostEntries(entries),
-    allCategories: extractCategories(categories),
-  };
-};
-// ブログページのデータ取得
-export const getBlogPost = async (preview) => {
-  const entries = await fetchGraphQL(
-    `query {
-      blogPostCollection(order:publishDate_DESC, preview: ${
-        preview ? 'true' : 'false'
-      }) {
-        items {
-          ${BLOGPOST_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    preview
-  );
-  const categories = await fetchGraphQL(
-    `query {
-      categoryCollection(preview: ${preview ? 'true' : 'false'}) {
-        items {
-          ${CATEGORY_GRAPHQL_FIELDS}
-        }
-      }
-    }`
-  );
-  return {
-    posts: extractBlogPostEntries(entries),
-    allCategories: extractCategories(categories),
-  };
-};
-
-// Blog記事のslug取得
-export const getBlogPostSlug = async (preview) => {
-  const entries = await fetchGraphQL(
-    `query {
-      blogPostCollection(order:publishDate_DESC, preview: ${
-        preview ? 'true' : 'false'
-      }) {
-        items {
-          slug
-        }
-      }
-    }`,
-    preview
-  );
-
-  return extractBlogPostEntries(entries);
-};
-// Categoryページのslug取得
-export const getBlogCategorySlug = async (preview) => {
-  const categories = await fetchGraphQL(
-    `query {
-      categoryCollection(preview: ${preview ? 'true' : 'false'}) {
-        items {
-          slug
-        }
-      }
-    }`,
-    preview
-  );
-
   return extractCategories(categories);
 };
 
-export const getBlogPostBySlug = async (slug, preview) => {
-  const entry = await fetchGraphQL(
+// 全てのブログポストを返す
+export const getBlogPosts = async (preview) => {
+  const blogPosts = await fetchGraphQL(
     `query {
-      blogPostCollection(where: { slug: "${slug}" }, preview: ${
-      preview ? 'true' : 'false'
-    }, limit: 1) {
+      blogPostCollection(order:publishDate_DESC, preview: ${
+        preview ? 'true' : 'false'
+      }) {
         items {
           ${BLOGPOST_GRAPHQL_FIELDS}
         }
@@ -192,24 +123,13 @@ export const getBlogPostBySlug = async (slug, preview) => {
     }`,
     preview
   );
-  const categories = await fetchGraphQL(
-    `query {
-      categoryCollection(preview: ${preview ? 'true' : 'false'}) {
-        items {
-          ${CATEGORY_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    preview
-  );
-  return {
-    post: extractBlogPost(entry),
-    allCategories: extractCategories(categories),
-  };
+
+  return extractBlogPosts(blogPosts);
 };
 
+// カテゴリーのスラッグをキーに記事一覧を取得
 export const getBlogPostByCategory = async (slug, preview) => {
-  const entries = await fetchGraphQL(
+  const BlogPosts = await fetchGraphQL(
     `query {
       categoryCollection(where:{slug:"${slug}"}, preview: ${
       preview ? 'true' : 'false'
@@ -234,8 +154,12 @@ export const getBlogPostByCategory = async (slug, preview) => {
     }`,
     preview
   );
+  return extractBlogPostByCategoryEntries(BlogPosts);
+};
 
-  const categories = await fetchGraphQL(
+// カテゴリーのスラッグをキーにカテゴリーを1件取得
+export const getCategory = async (slug, preview) => {
+  const category = await fetchGraphQL(
     `query {
       categoryCollection(where:{slug:"${slug}"}, preview: ${
       preview ? 'true' : 'false'
@@ -247,8 +171,100 @@ export const getBlogPostByCategory = async (slug, preview) => {
     }`,
     preview
   );
+  return extractCategories(category);
+};
+
+// slugをキーに記事を1件取得
+export const getBlogPostBySlug = async (slug, preview) => {
+  const blogPost = await fetchGraphQL(
+    `query {
+      blogPostCollection(where: { slug: "${slug}" }, preview: ${
+      preview ? 'true' : 'false'
+    }, limit: 1) {
+        items {
+          ${BLOGPOST_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview
+  );
+  return extractBlogPost(blogPost);
+};
+
+// Blog記事のslug取得
+export const getBlogPostSlug = async (preview) => {
+  const entries = await fetchGraphQL(
+    `query {
+      blogPostCollection(order:publishDate_DESC, preview: ${
+        preview ? 'true' : 'false'
+      }) {
+        items {
+          slug
+        }
+      }
+    }`,
+    preview
+  );
+
+  return extractBlogPosts(entries);
+};
+
+// Categoryページのslug取得
+export const getBlogCategorySlug = async (preview) => {
+  const categories = await fetchGraphQL(
+    `query {
+      categoryCollection(preview: ${preview ? 'true' : 'false'}) {
+        items {
+          slug
+        }
+      }
+    }`,
+    preview
+  );
+
+  return extractCategories(categories);
+};
+
+// ホームページのデータ取得
+export const getDataForHome = async (preview) => {
+  const developments = await getDevlopments(preview);
+  const blogPosts = await getBlogPosts(preview);
+  const categories = await getCategories(preview);
   return {
-    posts: extractBlogPostByCategoryEntries(entries),
-    categories: extractCategories(categories),
+    developments,
+    blogPosts,
+    categories,
+  };
+};
+
+// ブログ全記事一覧ページのデータ取得
+export const getDataForBlogHome = async (preview) => {
+  const blogPosts = await getBlogPosts(preview);
+  const categories = await getCategories(preview);
+  return {
+    blogPosts,
+    categories,
+  };
+};
+
+// ブログ記事ページのデータ取得
+export const getDataForBlogPost = async (slug, preview) => {
+  const blogPost = await getBlogPostBySlug(slug, preview);
+  const categories = await getCategories(preview);
+  return {
+    blogPost,
+    categories,
+  };
+};
+
+// カテゴリーごとの記事一覧ページのデータ取得
+export const getDataForCategory = async (slug, preview) => {
+  const blogPosts = await getBlogPostByCategory(slug, preview);
+  const category = await getCategory(slug, preview);
+  const categories = await getCategories(preview);
+  return {
+    blogPosts,
+    category,
+    categories,
   };
 };

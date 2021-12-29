@@ -16,7 +16,7 @@ const pageMeta = {
 
 const Home = ({
   preview,
-  allHomeData: { developments, posts, allCategories },
+  allHomeData: { developments, blogPosts, categories },
 }) => (
   <>
     <SEO meta={pageMeta} />
@@ -45,19 +45,24 @@ const Home = ({
       <Container>
         <SectionHeader>Blog</SectionHeader>
         <ul className="max-w-4xl mx-auto flex flex-col gap-6">
-          {posts.map(({ title, publishDate, slug, sys: { id }, ...post }) => {
-            const categoryIDs = getCategoryIDs(post);
-            const categories = matchCategories(categoryIDs, allCategories);
-            return (
-              <BlogCard
-                key={id}
-                title={title}
-                publishDate={publishDate}
-                slug={slug}
-                categories={categories}
-              />
-            );
-          })}
+          {blogPosts.map(
+            ({ title, publishDate, slug, sys: { id }, ...post }) => {
+              const categoryIDs = getCategoryIDs(post);
+              const matchedCategories = matchCategories(
+                categoryIDs,
+                categories
+              );
+              return (
+                <BlogCard
+                  key={id}
+                  title={title}
+                  publishDate={publishDate}
+                  slug={slug}
+                  categories={matchedCategories}
+                />
+              );
+            }
+          )}
         </ul>
       </Container>
       <hr />
