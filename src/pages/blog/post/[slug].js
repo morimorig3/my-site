@@ -3,43 +3,63 @@ import Layout from 'components/layout/Layout';
 import Container from 'components/layout/Container';
 import Bio from 'components/Bio';
 import PostHeader from 'components/PostHeader';
-import { getBlogPostSlug, getBlogPostBySlug } from 'lib/api';
+import CategoryList from 'components/CategoryList';
+import MenuButton from 'components/layout/MenuButton';
+import useToggleMenu from 'hooks/useToggleMenu';
+import { getBlogPostSlug, getDataForBlogPost } from 'lib/api';
 import { matchCategories, getCategoryIDs } from 'lib/utils';
 import markdownToHtml from 'zenn-markdown-html';
 import 'zenn-content-css';
 
-const BlogPost = ({ post, allCategories, html, preview }) => {
-  const { title, publishDate } = post;
-  const categoryIDs = getCategoryIDs(post);
-  const categories = matchCategories(categoryIDs, allCategories);
+const BlogPost = ({
+  blogPost: { title, publishDate, ...blogPost },
+  categories,
+  html,
+  preview,
+}) => {
+  const [isMenuOpen, toggleMenu] = useToggleMenu(false);
+  const categoryIDs = getCategoryIDs(blogPost);
+  const matchedCategories = matchCategories(categoryIDs, categories);
   const pageMeta = {
-    title: `${title} | ブログ | morimorig3.com`,
+    title: `${title} - morimorig3.com`,
     description: `${title}`,
   };
   return (
     <>
       <SEO meta={pageMeta} />
       <Layout>
-        <Container className="max-w-2xl mx-auto">
-          <article>
-            <PostHeader
-              title={title}
-              publishDate={publishDate}
-              categories={categories}
-            />
-            <div className="py-5 znc">
-              {html ? (
-                <div dangerouslySetInnerHTML={{ __html: html }}></div>
-              ) : (
-                <p>コンテンツ準備中…</p>
-              )}
-            </div>
-          </article>
+        <Container>
+          <div className="md:flex gap-10">
+            <article className="grow">
+              <PostHeader
+                title={title}
+                publishDate={publishDate}
+                categories={matchedCategories}
+              />
+              <div className="py-5 znc break-all">
+                {html ? (
+                  <div dangerouslySetInnerHTML={{ __html: html }}></div>
+                ) : (
+                  <p>コンテンツ準備中…</p>
+                )}
+              </div>
+            </article>
+            {isMenuOpen ? (
+              <aside className="duration-300 transition-all translate-y-0 opacity-1 py-10 px-4 md:p-0 bg-white w-screen md:w-full h-screen md:h-full pointer-events-none md:pointer-events-auto fixed top-0 left-0 md:static md:opacity-100 basis-60 lg:basis-72 shrink-0">
+                <CategoryList categories={categories} />
+              </aside>
+            ) : (
+              <aside className="duration-300 transition-all translate-y-5 py-10 px-4 md:p-0 bg-white w-screen md:w-full h-screen md:h-full pointer-events-none md:pointer-events-auto fixed top-0 left-0 opacity-0 md:static md:opacity-100 basis-60 lg:basis-72 shrink-0">
+                <CategoryList categories={categories} />
+              </aside>
+            )}
+          </div>
         </Container>
         <hr />
         <Container>
           <Bio />
         </Container>
+        <MenuButton toggleMenu={toggleMenu} />
       </Layout>
     </>
   );
@@ -48,14 +68,17 @@ const BlogPost = ({ post, allCategories, html, preview }) => {
 export default BlogPost;
 
 export async function getStaticProps({ params, preview = false }) {
-  const { post, allCategories } = await getBlogPostBySlug(params.slug, preview);
-  const html = await markdownToHtml(post.content);
+  const { blogPost, categories } = await getDataForBlogPost(
+    params.slug,
+    preview
+  );
+  const html = await markdownToHtml(blogPost.content);
 
   return {
     props: {
       preview,
-      post,
-      allCategories,
+      blogPost,
+      categories,
       html,
     },
   };

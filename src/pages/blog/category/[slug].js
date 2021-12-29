@@ -2,41 +2,60 @@ import SEO from 'components/seo';
 import Layout from 'components/layout/Layout';
 import Container from 'components/layout/Container';
 import CategoryHeader from 'components/CategoryHeader';
+import CategoryList from 'components/CategoryList';
 import BlogCard from 'components/BlogCard';
-import { getBlogCategorySlug, getBlogPostByCategory } from 'lib/api';
+import MenuButton from 'components/layout/MenuButton';
+import useToggleMenu from 'hooks/useToggleMenu';
 
-const Category = ({ posts, categories, preview }) => {
-  const { name: categoryName } = categories[0];
+import { getBlogCategorySlug, getDataForCategory } from 'lib/api';
+
+const Category = ({ blogPosts, category, categories, preview }) => {
+  const [isMenuOpen, toggleMenu] = useToggleMenu(false);
+  const { name: categoryName } = category[0];
   const pageMeta = {
-    title: `${categoryName} | カテゴリー | morimorig3.com`,
+    title: `${categoryName} - morimorig3.com`,
     description: `${categoryName}カテゴリーの記事一覧`,
   };
   return (
     <>
       <SEO meta={pageMeta} />
       <Layout>
-        <Container className="max-w-3xl mx-auto">
+        <Container>
           <CategoryHeader className="mb-5 md:mb-10">
             {categoryName}
           </CategoryHeader>
-          <div className="py-5 max-w-4xl mx-auto">
-            {posts.length ? (
-              <ul className="flex flex-col gap-6">
-                {posts.map(({ title, publishDate, slug, sys: { id } }) => (
-                  <BlogCard
-                    key={id}
-                    title={title}
-                    publishDate={publishDate}
-                    slug={slug}
-                    categories={categories}
-                  />
-                ))}
-              </ul>
+          <div className="flex gap-10">
+            <div className="grow py-5 mx-auto">
+              {blogPosts.length ? (
+                <ul className="flex flex-col gap-6">
+                  {blogPosts.map(
+                    ({ title, publishDate, slug, sys: { id } }) => (
+                      <BlogCard
+                        key={id}
+                        title={title}
+                        publishDate={publishDate}
+                        slug={slug}
+                        categories={category}
+                      />
+                    )
+                  )}
+                </ul>
+              ) : (
+                <p className="text-center">表示する記事がありません。</p>
+              )}
+            </div>
+            {isMenuOpen ? (
+              <aside className="duration-300 transition-all translate-y-0 opacity-1 py-10 px-4 md:p-0 bg-white w-screen md:w-full h-screen md:h-full pointer-events-none md:pointer-events-auto fixed top-0 left-0 md:static md:opacity-100 basis-60 lg:basis-72 shrink-0">
+                <CategoryList categories={categories} />
+              </aside>
             ) : (
-              <p className="text-center">表示する記事がありません。</p>
+              <aside className="duration-300 transition-all translate-y-5 py-10 px-4 md:p-0 bg-white w-screen md:w-full h-screen md:h-full pointer-events-none md:pointer-events-auto fixed top-0 left-0 opacity-0 md:static md:opacity-100 basis-60 lg:basis-72 shrink-0">
+                <CategoryList categories={categories} />
+              </aside>
             )}
           </div>
         </Container>
+        <MenuButton toggleMenu={toggleMenu} />
       </Layout>
     </>
   );
@@ -45,14 +64,15 @@ const Category = ({ posts, categories, preview }) => {
 export default Category;
 
 export async function getStaticProps({ params, preview = false }) {
-  const { posts, categories } = await getBlogPostByCategory(
+  const { blogPosts, category, categories } = await getDataForCategory(
     params.slug,
     preview
   );
   return {
     props: {
       preview,
-      posts,
+      blogPosts,
+      category,
       categories,
     },
   };

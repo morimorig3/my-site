@@ -3,49 +3,64 @@ import Layout from 'components/layout/Layout';
 import Container from 'components/layout/Container';
 import CategoryHeader from 'components/CategoryHeader';
 import BlogCard from 'components/BlogCard';
-import { getBlogPost } from 'lib/api';
+import MenuButton from 'components/layout/MenuButton';
+import CategoryList from 'components/CategoryList';
+import useToggleMenu from 'hooks/useToggleMenu';
+import { getDataForBlogHome } from 'lib/api';
 import { getCategoryIDs, matchCategories } from 'lib/utils';
 
 const pageMeta = {
-  title: `ブログ | morimorig3.com`,
+  title: `ブログ - morimorig3.com`,
   description: `ブログの全記事一覧`,
 };
 
-const Blog = ({ preview, allBlogData: { posts, allCategories } }) => {
-  const pageMeta = {};
+const Blog = ({ preview, allBlogHomeData: { blogPosts, categories } }) => {
+  const [isMenuOpen, toggleMenu] = useToggleMenu(false);
   return (
     <>
       <SEO meta={pageMeta} />
       <Layout>
-        <Container className="max-w-3xl mx-auto">
+        <Container>
           <CategoryHeader className="mb-5 md:mb-10">ブログ</CategoryHeader>
-          <div className="py-5 max-w-4xl mx-auto">
-            {posts.length ? (
-              <ul className="flex flex-col gap-6">
-                {posts.map(
-                  ({ title, publishDate, slug, sys: { id }, ...post }) => {
-                    const categoryIDs = getCategoryIDs(post);
-                    const categories = matchCategories(
-                      categoryIDs,
-                      allCategories
-                    );
-                    return (
-                      <BlogCard
-                        key={id}
-                        title={title}
-                        publishDate={publishDate}
-                        slug={slug}
-                        categories={categories}
-                      />
-                    );
-                  }
-                )}
-              </ul>
+          <div className="md:flex gap-10">
+            <div className="grow py-5 mx-auto">
+              {blogPosts.length ? (
+                <ul className="flex flex-col gap-6">
+                  {blogPosts.map(
+                    ({ title, publishDate, slug, sys: { id }, ...post }) => {
+                      const categoryIDs = getCategoryIDs(post);
+                      const matchedCategories = matchCategories(
+                        categoryIDs,
+                        categories
+                      );
+                      return (
+                        <BlogCard
+                          key={id}
+                          title={title}
+                          publishDate={publishDate}
+                          slug={slug}
+                          categories={matchedCategories}
+                        />
+                      );
+                    }
+                  )}
+                </ul>
+              ) : (
+                <p className="text-center">表示する記事がありません。</p>
+              )}
+            </div>
+            {isMenuOpen ? (
+              <aside className="duration-300 transition-all translate-y-0 opacity-1 py-10 px-4 md:p-0 bg-white w-screen md:w-full h-screen md:h-full pointer-events-none md:pointer-events-auto fixed top-0 left-0 md:static md:opacity-100 basis-60 lg:basis-72 shrink-0">
+                <CategoryList categories={categories} />
+              </aside>
             ) : (
-              <p className="text-center">表示する記事がありません。</p>
+              <aside className="duration-300 transition-all translate-y-5 py-10 px-4 md:p-0 bg-white w-screen md:w-full h-screen md:h-full pointer-events-none md:pointer-events-auto fixed top-0 left-0 opacity-0 md:static md:opacity-100 basis-60 lg:basis-72 shrink-0">
+                <CategoryList categories={categories} />
+              </aside>
             )}
           </div>
         </Container>
+        <MenuButton toggleMenu={toggleMenu} />
       </Layout>
     </>
   );
@@ -54,13 +69,13 @@ const Blog = ({ preview, allBlogData: { posts, allCategories } }) => {
 export default Blog;
 
 export async function getStaticProps({ preview = false }) {
-  const allBlogData = (await getBlogPost(preview)) ?? [];
-  if (!allBlogData) {
+  const allBlogHomeData = (await getDataForBlogHome(preview)) ?? [];
+  if (!allBlogHomeData) {
     return {
       notFound: true,
     };
   }
   return {
-    props: { preview, allBlogData },
+    props: { preview, allBlogHomeData },
   };
 }
