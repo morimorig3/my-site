@@ -3,7 +3,7 @@ import SEO from '@/components/seo';
 import Layout from '@/components/layout/Layout';
 import Container from '@/components/layout/Container';
 import SectionHeader from '@/components/SectionHeader';
-import Bio from '@/components/Bio';
+import Bio from '@/components/bio';
 import Details from '@/components/Details';
 import 'zenn-content-css';
 import jobPic from '../../../public/images/img_job_01.jpg';

@@ -4,7 +4,7 @@ import Card from '@/components/Card';
 import Container from '@/components/layout/Container';
 import SectionHeader from '@/components/SectionHeader';
 import TechnologyStack from '@/components/TechnologyStack';
-import Bio from '@/components/Bio';
+import Bio from '@/components/bio';
 import BlogCard from '@/components/BlogCard';
 import { getCategoryIDs, matchCategories } from '@/lib/utils';
 import { getDataForHome } from '@/lib/api';
