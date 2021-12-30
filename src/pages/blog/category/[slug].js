@@ -9,12 +9,13 @@ import useToggleMenu from 'hooks/useToggleMenu';
 
 import { getBlogCategorySlug, getDataForCategory } from 'lib/api';
 
-const Category = ({ blogPosts, category, categories, preview }) => {
+const Category = ({ blogPosts, category, categories, slug, preview }) => {
   const [isMenuOpen, toggleMenu] = useToggleMenu(false);
   const { name: categoryName } = category[0];
   const pageMeta = {
-    title: `${categoryName} - morimorig3.com`,
+    title: `${categoryName}カテゴリー記事一覧`,
     description: `${categoryName}カテゴリーの記事一覧`,
+    path: `/blog/category/${slug}`,
   };
   return (
     <>
@@ -64,8 +65,9 @@ const Category = ({ blogPosts, category, categories, preview }) => {
 export default Category;
 
 export async function getStaticProps({ params, preview = false }) {
+  const slug = params.slug;
   const { blogPosts, category, categories } = await getDataForCategory(
-    params.slug,
+    slug,
     preview
   );
   return {
@@ -74,6 +76,7 @@ export async function getStaticProps({ params, preview = false }) {
       blogPosts,
       category,
       categories,
+      slug,
     },
   };
 }

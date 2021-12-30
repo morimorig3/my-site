@@ -10,8 +10,9 @@ import { getDataForBlogHome } from 'lib/api';
 import { getCategoryIDs, matchCategories } from 'lib/utils';
 
 const pageMeta = {
-  title: `ブログ - morimorig3.com`,
+  title: `Blog`,
   description: `ブログの全記事一覧`,
+  path: '/blog',
 };
 
 const Blog = ({ preview, allBlogHomeData: { blogPosts, categories } }) => {

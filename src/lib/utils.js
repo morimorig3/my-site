@@ -36,3 +36,8 @@ export const matchCategories = (targetIDs, categories) =>
   categories.filter(({ sys: { id } }) =>
     targetIDs.some((targetID) => targetID === id)
   );
+
+export const getOgpUrl = (title) =>
+  `https://og-image.morimorig3.com/${encodeURIComponent(
+    title
+  )}.png?md=1&fontSize=75px`;

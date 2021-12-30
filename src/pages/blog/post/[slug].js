@@ -15,14 +15,16 @@ const BlogPost = ({
   blogPost: { title, publishDate, ...blogPost },
   categories,
   html,
+  slug,
   preview,
 }) => {
   const [isMenuOpen, toggleMenu] = useToggleMenu(false);
   const categoryIDs = getCategoryIDs(blogPost);
   const matchedCategories = matchCategories(categoryIDs, categories);
   const pageMeta = {
-    title: `${title} - morimorig3.com`,
-    description: `${title}`,
+    title: title,
+    description: title,
+    path: `/blog/post/${slug}`,
   };
   return (
     <>
@@ -68,18 +70,16 @@ const BlogPost = ({
 export default BlogPost;
 
 export async function getStaticProps({ params, preview = false }) {
-  const { blogPost, categories } = await getDataForBlogPost(
-    params.slug,
-    preview
-  );
+  const slug = params.slug;
+  const { blogPost, categories } = await getDataForBlogPost(slug, preview);
   const html = await markdownToHtml(blogPost.content);
-
   return {
     props: {
       preview,
       blogPost,
       categories,
       html,
+      slug,
     },
   };
 }

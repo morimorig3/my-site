@@ -12,8 +12,9 @@ import AAgairu from '../../../public/images/AA_gairu.png';
 import AAkaiji from '../../../public/images/AA_kaiji.png';
 
 const pageMeta = {
-  title: 'About | morimorig3.com',
-  description: 'morimorig3本人について紹介するページです。',
+  title: 'About',
+  description: 'morimorig3の自己紹介ページです。',
+  path: '/about',
 };
 
 const About = () => (

@@ -10,8 +10,10 @@ import { getCategoryIDs, matchCategories } from 'lib/utils';
 import { getDataForHome } from 'lib/api';
 
 const pageMeta = {
-  title: 'morimorig3.com',
-  description: 'morimorig3の制作物や考えをまとめて紹介するページです。',
+  title: 'TOP',
+  description:
+    'morimorig3のポートフォリオサイトです。製作物の紹介やブログでの知見共有・情報発信を行っています。',
+  path: '/',
 };
 
 const Home = ({

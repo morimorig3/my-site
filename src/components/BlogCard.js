@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { formatDate } from 'lib/utils';
+import { formatDate, getOgpUrl } from 'lib/utils';
 import { FaListUl } from 'react-icons/fa';
 
 const BlogCard = ({ title, publishDate, slug, categories }) => (
@@ -9,9 +9,7 @@ const BlogCard = ({ title, publishDate, slug, categories }) => (
       <a className="p-4 md:p-6 flex sm:items-center flex-col sm:flex-row gap-4">
         <figure className="w-full sm:w-48 flex-shrink-0">
           <Image
-            src={`https://og-image.morimorig3.com/${encodeURIComponent(
-              title
-            )}.png?md=1&fontSize=75px`}
+            src={getOgpUrl(title)}
             alt={title}
             width="1200"
             height="630"
