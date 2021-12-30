@@ -1,9 +1,20 @@
 import { formatDate } from 'lib/utils';
-import { SiReact, SiTypescript } from 'react-icons/si';
+import {
+  SiReact,
+  SiTypescript,
+  SiNetlify,
+  SiNextdotjs,
+  SiContentful,
+  SiVercel,
+} from 'react-icons/si';
 
 const reactIcons = {
   React: SiReact,
   TypeScript: SiTypescript,
+  Netlify: SiNetlify,
+  Nextjs: SiNextdotjs,
+  Contentful: SiContentful,
+  Vercel: SiVercel,
 };
 
 const Card = ({ title, summary, date, url, stacks }) => {
