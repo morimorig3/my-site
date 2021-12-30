@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Navi from 'components/layout/Navi';
+import Navi from '@/components/layout/Navi';
 const Header = () => {
   const logo = {
     width: 'calc(100% / 6)',

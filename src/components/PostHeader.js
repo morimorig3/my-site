@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { formatDate } from 'lib/utils';
+import { formatDate } from '@/lib/utils';
 import { FaListUl } from 'react-icons/fa';
 
 const PostHeader = ({ title, publishDate, categories }) => (

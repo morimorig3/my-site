@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { formatDate } from 'lib/api';
+import { formatDate } from '@/lib/api';
 
 const NewsList = ({ newsData, limit = 9999 }) => {
   return (

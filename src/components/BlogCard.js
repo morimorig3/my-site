@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { formatDate, getOgpUrl } from 'lib/utils';
+import { formatDate, getOgpUrl } from '@/lib/utils';
 import { FaListUl } from 'react-icons/fa';
 
 const BlogCard = ({ title, publishDate, slug, categories }) => (

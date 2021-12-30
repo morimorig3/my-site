@@ -1,13 +1,13 @@
-import SEO from 'components/seo';
-import Layout from 'components/layout/Layout';
-import Container from 'components/layout/Container';
-import CategoryHeader from 'components/CategoryHeader';
-import BlogCard from 'components/BlogCard';
-import MenuButton from 'components/layout/MenuButton';
-import CategoryList from 'components/CategoryList';
-import useToggleMenu from 'hooks/useToggleMenu';
-import { getDataForBlogHome } from 'lib/api';
-import { getCategoryIDs, matchCategories } from 'lib/utils';
+import SEO from '@/components/seo';
+import Layout from '@/components/layout/Layout';
+import Container from '@/components/layout/Container';
+import CategoryHeader from '@/components/CategoryHeader';
+import BlogCard from '@/components/BlogCard';
+import MenuButton from '@/components/layout/MenuButton';
+import CategoryList from '@/components/CategoryList';
+import useToggleMenu from '@/hooks/useToggleMenu';
+import { getDataForBlogHome } from '@/lib/api';
+import { getCategoryIDs, matchCategories } from '@/lib/utils';
 
 const pageMeta = {
   title: `Blog`,

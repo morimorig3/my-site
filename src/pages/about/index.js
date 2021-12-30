@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import SEO from 'components/seo';
-import Layout from 'components/layout/Layout';
-import Container from 'components/layout/Container';
-import SectionHeader from 'components/SectionHeader';
-import Bio from 'components/Bio';
-import Details from 'components/Details';
+import SEO from '@/components/seo';
+import Layout from '@/components/layout/Layout';
+import Container from '@/components/layout/Container';
+import SectionHeader from '@/components/SectionHeader';
+import Bio from '@/components/Bio';
+import Details from '@/components/Details';
 import 'zenn-content-css';
 import jobPic from '../../../public/images/img_job_01.jpg';
 import AAryu from '../../../public/images/AA_ryu.png';

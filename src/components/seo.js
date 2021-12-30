@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { getOgpUrl } from 'lib/utils';
+import { getOgpUrl } from '@/lib/utils';
 
 const homePage = 'https://www.morimorig3.com';
 

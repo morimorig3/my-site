@@ -6,7 +6,7 @@ import {
   SiTypescript,
   SiReact,
 } from 'react-icons/si';
-import { getExperienceYears } from 'lib/utils';
+import { getExperienceYears } from '@/lib/utils';
 
 const TechnologyStack = () => (
   <>

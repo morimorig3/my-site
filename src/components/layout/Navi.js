@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import NaviButton from 'components/layout/NaviButton';
+import NaviButton from '@/components/layout/NaviButton';
 import { useRouter } from 'next/router';
 
 const Navi = () => {

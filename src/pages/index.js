@@ -1,13 +1,13 @@
-import SEO from 'components/seo';
-import Layout from 'components/layout/Layout';
-import Card from 'components/Card';
-import Container from 'components/layout/Container';
-import SectionHeader from 'components/SectionHeader';
-import TechnologyStack from 'components/TechnologyStack';
-import Bio from 'components/Bio';
-import BlogCard from 'components/BlogCard';
-import { getCategoryIDs, matchCategories } from 'lib/utils';
-import { getDataForHome } from 'lib/api';
+import SEO from '@/components/seo';
+import Layout from '@/components/layout/Layout';
+import Card from '@/components/Card';
+import Container from '@/components/layout/Container';
+import SectionHeader from '@/components/SectionHeader';
+import TechnologyStack from '@/components/TechnologyStack';
+import Bio from '@/components/Bio';
+import BlogCard from '@/components/BlogCard';
+import { getCategoryIDs, matchCategories } from '@/lib/utils';
+import { getDataForHome } from '@/lib/api';
 
 const pageMeta = {
   title: 'TOP',
