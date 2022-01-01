@@ -1,4 +1,4 @@
-import SEO from '@/components/seo';
+import SEO from '@/components/Seo';
 import Layout from '@/components/layout/Layout';
 import Container from '@/components/layout/Container';
 import CategoryHeader from '@/components/CategoryHeader';
