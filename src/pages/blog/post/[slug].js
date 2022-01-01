@@ -32,7 +32,7 @@ const BlogPost = ({
       <Layout>
         <Container>
           <div className="md:flex gap-10">
-            <article className="grow">
+            <article className="grow min-w-0">
               <PostHeader
                 title={title}
                 publishDate={publishDate}
