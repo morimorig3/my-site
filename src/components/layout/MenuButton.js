@@ -14,7 +14,7 @@ const MenuButton = ({ toggleMenu }) => {
     <div
       onClick={toggleButton}
       role="button"
-      className="block md:hidden fixed bottom-14 right-5 w-16 h-16 rounded-full bg-slate-800 shadow-md shadow-gray-400"
+      className="block md:hidden fixed bottom-14 right-5 w-16 h-16 rounded-full bg-slate-800 shadow-md shadow-gray-400 z-50"
     >
       <div className="flex flex-col justify-center items-center h-full">
         <MdOutlineKeyboardArrowUp

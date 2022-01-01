@@ -13,7 +13,12 @@ const Bio = ({ children }) => (
   <section className="flex flex-col	gap-1 items-center">
     <figure className="w-24 h-24 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 grid place-items-center">
       <div className="w-11/12 rounded-full overflow-hidden border-4 border-white">
-        <Image src={profilePic} layout="responsive" alt="プロフィール画像" />
+        <Image
+          src={profilePic}
+          className="rounded-full"
+          layout="responsive"
+          alt="プロフィール画像"
+        />
       </div>
     </figure>
     <h3 className="text-sm">Naoto Morishita</h3>
