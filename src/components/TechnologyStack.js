@@ -6,7 +6,7 @@ import {
   SiTypescript,
   SiReact,
 } from 'react-icons/si';
-import { getExperienceYears } from '@/lib/utils';
+import { expTimes } from '@/lib/utils';
 
 const TechnologyStack = () => (
   <>
@@ -14,37 +14,37 @@ const TechnologyStack = () => (
       <li>
         <SiReact size="3.5em" className="text-react" />
         <p className="mt-1 text-center text-gray-400 text-xs">
-          {getExperienceYears('2021/06/01')}
+          {expTimes('2021/06/01')}
         </p>
       </li>
       <li>
         <SiJavascript size="3.5em" className="text-javascript" />
         <p className="mt-1 text-center text-gray-400 text-xs font-bold">
-          {getExperienceYears('2019/10/01')}
+          {expTimes('2019/10/01')}
         </p>
       </li>
       <li>
         <SiTypescript size="3.5em" className="text-typescript" />
         <p className="mt-1 text-center text-gray-400 text-xs">
-          {getExperienceYears('2021/06/01')}
+          {expTimes('2021/06/01')}
         </p>
       </li>
       <li>
         <SiSass size="3.5em" className="text-sass" />
         <p className="mt-1 text-center text-gray-400 text-xs font-bold">
-          {getExperienceYears('2020/04/01')}
+          {expTimes('2020/04/01')}
         </p>
       </li>
       <li>
         <SiHtml5 size="3.5em" className="text-html" />
         <p className="mt-1 text-center text-gray-400 text-xs font-bold">
-          {getExperienceYears('2019/01/01')}
+          {expTimes('2019/01/01')}
         </p>
       </li>
       <li>
         <SiNodedotjs size="3.5em" className="text-node" />
         <p className="mt-1 text-center text-gray-400 text-xs">
-          {getExperienceYears('2021/12/01')}
+          {expTimes('2022/01/01')}
         </p>
       </li>
     </ul>

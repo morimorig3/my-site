@@ -13,18 +13,25 @@ export const formatDate = (dateString) => {
 };
 
 // 渡されたDateオブジェクトと現在日時を比較してX年Xヶ月のフォーマットで返す
-export const getExperienceYears = (date) => {
-  function getYearAndMonth(Date) {
-    return {
-      year: Date.getFullYear(),
-      month: Date.getMonth() + 1,
-    };
+export const expTimes = (date) => {
+  const ONE_YEAR = 365;
+  const ONE_MONTH = ONE_YEAR / 12;
+
+  const elapsedMilliseconds = new Date(Date.now() - new Date(date).getTime());
+  const elapsedDays = Math.floor(elapsedMilliseconds / 1000 / 60 / 60 / 24);
+
+  const elapsedYears = Math.floor(elapsedDays / ONE_YEAR);
+  const elapsedMonths = Math.floor(elapsedDays / ONE_MONTH);
+
+  function viewYear() {
+    return elapsedYears ? `${elapsedYears}年` : '';
   }
-  const fromData = getYearAndMonth(new Date(date));
-  const nowData = getYearAndMonth(new Date());
-  const expYear = nowData.year - fromData.year;
-  const expMonth = nowData.month - fromData.month;
-  return `${expYear ? expYear + '年' : ''}${expMonth ? expMonth + 'ヶ月' : ''}`;
+  function viewMonth() {
+    const remainedMonth = elapsedMonths - elapsedYears * 12;
+    return remainedMonth ? `${remainedMonth}ヶ月` : '';
+  }
+
+  return `${viewYear()}${viewMonth()}`;
 };
 
 // 記事オブジェクトからカテゴリーIDの配列を抽出する
