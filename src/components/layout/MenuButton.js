@@ -4,7 +4,7 @@ import {
   MdOutlineKeyboardArrowDown,
 } from 'react-icons/md';
 
-const MenuButton = ({ toggleMenu }) => {
+export const MenuButton = ({ toggleMenu }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleButton = () => {
     setIsOpen(!isOpen);
@@ -46,5 +46,3 @@ const MenuButton = ({ toggleMenu }) => {
     </div>
   );
 };
-
-export default MenuButton;

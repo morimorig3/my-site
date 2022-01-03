@@ -1,4 +1,4 @@
-const Details = ({ title, className = '', isOpen = false, children }) =>
+export const Details = ({ title, className = '', isOpen = false, children }) =>
   isOpen ? (
     <details className={className} open>
       <summary className="text-slate-800 font-bold">{title}</summary>
@@ -10,5 +10,3 @@ const Details = ({ title, className = '', isOpen = false, children }) =>
       <div className="details-content">{children}</div>
     </details>
   );
-
-export default Details;

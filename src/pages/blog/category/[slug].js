@@ -1,11 +1,11 @@
-import SEO from '@/components/Seo';
-import Layout from '@/components/layout/Layout';
-import Container from '@/components/layout/Container';
-import CategoryHeader from '@/components/CategoryHeader';
-import CategoryList from '@/components/CategoryList';
-import BlogCard from '@/components/BlogCard';
-import MenuButton from '@/components/layout/MenuButton';
-import useToggleMenu from '@/hooks/useToggleMenu';
+import { SEO } from '@/components/Seo';
+import { Layout } from '@/components/layout/Layout';
+import { Container } from '@/components/layout/Container';
+import { CategoryHeader } from '@/components/CategoryHeader';
+import { CategoryList } from '@/components/CategoryList';
+import { BlogCard } from '@/components/BlogCard';
+import { MenuButton } from '@/components/layout/MenuButton';
+import { useToggleMenu } from '@/hooks/useToggleMenu';
 
 import { getBlogCategorySlug, getDataForCategory } from '@/lib/api';
 

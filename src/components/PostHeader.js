@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 import { FaListUl } from 'react-icons/fa';
 
-const PostHeader = ({ title, publishDate, categories }) => (
+export const PostHeader = ({ title, publishDate, categories }) => (
   <header>
     <p className="text-base text-gray-400 mb-2">{formatDate(publishDate)}</p>
     <h1 className="font-bold text-xl sm:text-3xl text-slate-800 leading-normal mb-2">
@@ -25,4 +25,3 @@ const PostHeader = ({ title, publishDate, categories }) => (
     </ul>
   </header>
 );
-export default PostHeader;

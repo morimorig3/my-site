@@ -3,7 +3,7 @@ import { getOgpUrl } from '@/lib/utils';
 
 const homePage = 'https://www.morimorig3.com';
 
-const SEO = ({ meta: { title, description, path } }) => (
+export const SEO = ({ meta: { title, description, path } }) => (
   <Head>
     <meta
       name="viewport"
@@ -20,5 +20,3 @@ const SEO = ({ meta: { title, description, path } }) => (
     <meta property="og:image" content={getOgpUrl(title)} />
   </Head>
 );
-
-export default SEO;

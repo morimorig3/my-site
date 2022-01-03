@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import * as gtag from '@/lib/gtag';
 
-export default function usePageView() {
+export function usePageView() {
   const router = useRouter();
   useEffect(() => {
     if (!gtag.existsGaId) {
