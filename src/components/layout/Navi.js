@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import NaviButton from '@/components/layout/NaviButton';
+import { NaviButton } from '@/components/layout/NaviButton';
 import { useRouter } from 'next/router';
 
-const Navi = () => {
+export const Navi = () => {
   const { pathname } = useRouter();
 
   return (
@@ -21,5 +21,3 @@ const Navi = () => {
     </>
   );
 };
-
-export default Navi;

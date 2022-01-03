@@ -8,7 +8,7 @@ import {
 } from 'react-icons/si';
 import { expTimes } from '@/lib/utils';
 
-const TechnologyStack = () => (
+export const TechnologyStack = () => (
   <>
     <ul className="flex flex-wrap gap-8 justify-center">
       <li>
@@ -51,4 +51,3 @@ const TechnologyStack = () => (
     <p className="text-xs text-gray-400 font-bold text-right">※実務経験</p>
   </>
 );
-export default TechnologyStack;

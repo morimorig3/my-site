@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FaListUl } from 'react-icons/fa';
 
-const CategoryList = ({ categories }) => (
+export const CategoryList = ({ categories }) => (
   <>
     <h3 className="text-lg font-bold mb-3">カテゴリー</h3>
     <nav>
@@ -31,5 +31,3 @@ const CategoryList = ({ categories }) => (
     </nav>
   </>
 );
-
-export default CategoryList;

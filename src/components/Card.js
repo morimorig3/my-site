@@ -17,7 +17,7 @@ const reactIcons = {
   Vercel: SiVercel,
 };
 
-const Card = ({ title, summary, date, url, stacks }) => {
+export const Card = ({ title, summary, date, url, stacks }) => {
   const icons = stacks.map((stackName) => ({
     title: stackName,
     Icon: reactIcons[stackName],
@@ -46,5 +46,3 @@ const Card = ({ title, summary, date, url, stacks }) => {
     </li>
   );
 };
-
-export default Card;

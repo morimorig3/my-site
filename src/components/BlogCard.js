@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { formatDate, getOgpUrl } from '@/lib/utils';
 import { FaListUl } from 'react-icons/fa';
 
-const BlogCard = ({ title, publishDate, slug, categories }) => (
+export const BlogCard = ({ title, publishDate, slug, categories }) => (
   <li className="transition-colors border hover:border-transparent border-gray-200 rounded duration-200 hover:shadow-all">
     <Link href="/blog/post/[slug]" as={`/blog/post/${slug}`}>
       <a className="p-4 md:p-6 flex sm:items-center flex-col sm:flex-row gap-4">
@@ -46,5 +46,3 @@ const BlogCard = ({ title, publishDate, slug, categories }) => (
     </Link>
   </li>
 );
-
-export default BlogCard;

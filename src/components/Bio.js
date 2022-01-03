@@ -9,7 +9,7 @@ const URL = {
   qiita: 'https://qiita.com/morimorig3',
 };
 
-const Bio = ({ children }) => (
+export const Bio = ({ children }) => (
   <section className="flex flex-col	gap-1 items-center">
     <figure className="w-24 h-24 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 grid place-items-center">
       <div className="w-11/12 rounded-full overflow-hidden border-4 border-white">
@@ -40,5 +40,3 @@ const Bio = ({ children }) => (
     </div>
   </section>
 );
-
-export default Bio;
