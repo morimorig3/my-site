@@ -16,7 +16,7 @@ export const Bio = ({ children }) => (
         <Image src={profilePic} layout="responsive" alt="プロフィール画像" />
       </div>
     </figure>
-    <h3 className="text-sm">Naoto Morishita</h3>
+    <h3 className="text-sm">morimorig3</h3>
     <p className="text-sm text-gray-400">Webエンジニア</p>
     {children && (
       <p className="text-sm text-gray-400 text-center">{children}</p>
