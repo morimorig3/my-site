@@ -127,6 +127,24 @@ export const getBlogPosts = async (preview) => {
   return extractBlogPosts(blogPosts);
 };
 
+// トップに表示するブログは3件まで
+export const getBlogPostsForHome = async (preview) => {
+  const blogPosts = await fetchGraphQL(
+    `query {
+      blogPostCollection(order:publishDate_DESC, preview: ${
+        preview ? 'true' : 'false'
+      }, limit: 3) {
+        items {
+          ${BLOGPOST_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview
+  );
+
+  return extractBlogPosts(blogPosts);
+};
+
 // カテゴリーのスラッグをキーに記事一覧を取得
 export const getBlogPostByCategory = async (slug, preview) => {
   const BlogPosts = await fetchGraphQL(
@@ -228,7 +246,7 @@ export const getBlogCategorySlug = async (preview) => {
 // ホームページのデータ取得
 export const getDataForHome = async (preview) => {
   const developments = await getDevlopments(preview);
-  const blogPosts = await getBlogPosts(preview);
+  const blogPosts = await getBlogPostsForHome(preview);
   const categories = await getCategories(preview);
   return {
     developments,

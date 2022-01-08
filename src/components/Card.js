@@ -6,6 +6,8 @@ import {
   SiNextdotjs,
   SiContentful,
   SiVercel,
+  SiTailwindcss,
+  SiChakraui,
 } from 'react-icons/si';
 
 const reactIcons = {
@@ -15,6 +17,8 @@ const reactIcons = {
   Nextjs: SiNextdotjs,
   Contentful: SiContentful,
   Vercel: SiVercel,
+  tailwindcss: SiTailwindcss,
+  chakra: SiChakraui,
 };
 
 export const Card = ({ title, summary, date, url, stacks }) => {
