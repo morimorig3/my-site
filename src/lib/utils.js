@@ -47,4 +47,4 @@ export const matchCategories = (targetIDs, categories) =>
 export const getOgpUrl = (title) =>
   `https://og-image.morimorig3.com/${encodeURIComponent(
     title
-  )}.png?md=1&fontSize=75px`;
+  )}.png?md=1&fontSize=75px&52741a767a43a18865d31902de14df55`;
