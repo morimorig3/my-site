@@ -1,3 +1,4 @@
+import { VFC, ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import profilePic from '../../public/images/profile.jpg';
@@ -7,9 +8,13 @@ const URL = {
   twitter: 'https://twitter.com/morimorig3',
   github: 'https://github.com/morimorig3',
   qiita: 'https://qiita.com/morimorig3',
+} as const;
+
+type Props = {
+  children: ReactNode;
 };
 
-export const Bio = ({ children }) => (
+export const Bio: VFC<Props> = ({ children }) => (
   <section className="flex flex-col	gap-1 items-center">
     <figure className="w-24 h-24 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 grid place-items-center">
       <div className="w-11/12 rounded-full overflow-hidden border-4 border-white">

@@ -1,9 +1,22 @@
+import { VFC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatDate, getOgpUrl } from '@/lib/utils';
 import { FaListUl } from 'react-icons/fa';
 
-export const BlogCard = ({ title, publishDate, slug, categories }) => (
+type Props = {
+  title: string;
+  publishDate: string;
+  slug: string;
+  categories: any;
+};
+
+export const BlogCard: VFC<Props> = ({
+  title,
+  publishDate,
+  slug,
+  categories,
+}) => (
   <li className="transition-colors border hover:border-transparent border-gray-200 rounded duration-200 hover:shadow-all">
     <Link href="/blog/post/[slug]" as={`/blog/post/${slug}`}>
       <a className="p-4 md:p-6 flex sm:items-center flex-col sm:flex-row gap-4">
