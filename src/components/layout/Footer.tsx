@@ -1,5 +1,7 @@
+import { VFC } from 'react';
 import Link from 'next/link';
-export const Footer = () => (
+
+export const Footer: VFC = () => (
   <footer className="text-gray-400 text-xs">
     <div className="flex justify-center py-2 gap-x-4">
       <Link href="/privacy">プライバシーポリシー</Link>

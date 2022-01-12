@@ -1,3 +1,4 @@
+import { VFC } from 'react';
 import { formatDate } from '@/lib/utils';
 import {
   SiReact,
@@ -10,7 +11,7 @@ import {
   SiChakraui,
 } from 'react-icons/si';
 
-const reactIcons = {
+const stackIconMap = {
   React: SiReact,
   TypeScript: SiTypescript,
   Netlify: SiNetlify,
@@ -19,12 +20,22 @@ const reactIcons = {
   Vercel: SiVercel,
   tailwindcss: SiTailwindcss,
   chakra: SiChakraui,
+} as const;
+
+type Stacks = keyof typeof stackIconMap;
+
+type Props = {
+  title: string;
+  summary: string;
+  date: string;
+  url: string;
+  stacks: Stacks[];
 };
 
-export const Card = ({ title, summary, date, url, stacks }) => {
+export const Card: VFC<Props> = ({ title, summary, date, url, stacks }) => {
   const icons = stacks.map((stackName) => ({
     title: stackName,
-    Icon: reactIcons[stackName],
+    Icon: stackIconMap[stackName],
   }));
   return (
     <li>

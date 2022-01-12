@@ -1,6 +1,8 @@
+import { VFC } from 'react';
 import Link from 'next/link';
 import { Navi } from '@/components/layout/Navi';
-export const Header = () => {
+
+export const Header: VFC = () => {
   const logo = {
     width: 'calc(100% / 6)',
   };

@@ -1,9 +1,20 @@
+import { VFC } from 'react';
 import Head from 'next/head';
 import { getOgpUrl } from '@/lib/utils';
 
-const homePage = 'https://www.morimorig3.com';
+type Meta = {
+  title: string;
+  description: string;
+  path: string;
+};
 
-export const SEO = ({ meta: { title, description, path } }) => (
+type Props = {
+  meta: Meta;
+};
+
+const HOME_PAGE = 'https://www.morimorig3.com';
+
+export const SEO: VFC<Props> = ({ meta: { title, description, path } }) => (
   <Head>
     <meta
       name="viewport"
@@ -13,7 +24,7 @@ export const SEO = ({ meta: { title, description, path } }) => (
     <meta name="description" content={description} />
     <meta property="og:title" content={`${title} - morimorig3.com`} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={`${homePage}${path}`} />
+    <meta property="og:url" content={`${HOME_PAGE}${path}`} />
     <meta property="og:site_name" content={`${title} - morimorig3.com`} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />

@@ -1,7 +1,12 @@
+import { VFC } from 'react';
 import Link from 'next/link';
 import { FaListUl } from 'react-icons/fa';
 
-export const CategoryList = ({ categories }) => (
+type Props = {
+  categories: any,
+};
+
+export const CategoryList: VFC<Props> = ({ categories }) => (
   <>
     <h3 className="text-lg font-bold mb-3">カテゴリー</h3>
     <nav>
