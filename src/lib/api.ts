@@ -1,3 +1,5 @@
+import { Query } from '../graphql/generated/type';
+
 const DEVELOP_GRAPHQL_FIELDS = `
 title
 url
@@ -37,30 +39,34 @@ linkedFrom {
 }
 `;
 
+type ResponseQuery = {
+  data: Query;
+};
+
 // GraphQLのレスポンスから抽出
 // developPostCollectionのitemsを抽出する
-function extractDevelop(fetchResponse) {
+function extractDevelop(fetchResponse: ResponseQuery) {
   return fetchResponse?.data?.developPostCollection?.items;
 }
 // blogPostCollectionのitemsから一つだけ抽出する
-function extractBlogPost(fetchResponse) {
+function extractBlogPost(fetchResponse: ResponseQuery) {
   return fetchResponse?.data?.blogPostCollection?.items?.[0];
 }
 // blogPostCollectionのitemsを抽出する
-function extractBlogPosts(fetchResponse) {
+function extractBlogPosts(fetchResponse: ResponseQuery) {
   return fetchResponse?.data?.blogPostCollection?.items;
 }
 // categoryCollectionのitemsを抽出する
-function extractCategories(fetchResponse) {
+function extractCategories(fetchResponse: ResponseQuery) {
   return fetchResponse?.data?.categoryCollection?.items;
 }
 // category別に返されたBlogPostのitemsを抽出する
-function extractBlogPostByCategoryEntries(fetchResponse) {
+function extractBlogPostByCategoryEntries(fetchResponse: ResponseQuery) {
   return fetchResponse?.data?.categoryCollection?.items?.[0]?.linkedFrom
     ?.entryCollection?.items;
 }
 
-function fetchGraphQL(query, preview = false) {
+function fetchGraphQL(query: string, preview = false): Promise<ResponseQuery> {
   return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
     {
@@ -79,7 +85,7 @@ function fetchGraphQL(query, preview = false) {
 }
 
 // 全ての開発アイテムを返す
-export const getDevlopments = async (preview) => {
+export const getDevlopments = async (preview = false) => {
   const developments = await fetchGraphQL(
     `query {
       developPostCollection(order:date_DESC, preview: ${
@@ -96,7 +102,7 @@ export const getDevlopments = async (preview) => {
 };
 
 // 全てのカテゴリーアイテムを返す
-export const getCategories = async (preview) => {
+export const getCategories = async (preview = false) => {
   const categories = await fetchGraphQL(
     `query {
       categoryCollection(preview: ${preview ? 'true' : 'false'}) {
@@ -110,7 +116,7 @@ export const getCategories = async (preview) => {
 };
 
 // 全てのブログポストを返す
-export const getBlogPosts = async (preview) => {
+export const getBlogPosts = async (preview = false) => {
   const blogPosts = await fetchGraphQL(
     `query {
       blogPostCollection(order:publishDate_DESC, preview: ${
@@ -128,7 +134,7 @@ export const getBlogPosts = async (preview) => {
 };
 
 // トップに表示するブログは3件まで
-export const getBlogPostsForHome = async (preview) => {
+export const getBlogPostsForHome = async (preview = false) => {
   const blogPosts = await fetchGraphQL(
     `query {
       blogPostCollection(order:publishDate_DESC, preview: ${
@@ -146,7 +152,7 @@ export const getBlogPostsForHome = async (preview) => {
 };
 
 // カテゴリーのスラッグをキーに記事一覧を取得
-export const getBlogPostByCategory = async (slug, preview) => {
+export const getBlogPostByCategory = async (slug: string, preview = false) => {
   const BlogPosts = await fetchGraphQL(
     `query {
       categoryCollection(where:{slug:"${slug}"}, preview: ${
@@ -176,7 +182,7 @@ export const getBlogPostByCategory = async (slug, preview) => {
 };
 
 // カテゴリーのスラッグをキーにカテゴリーを1件取得
-export const getCategory = async (slug, preview) => {
+export const getCategory = async (slug: string, preview = false) => {
   const category = await fetchGraphQL(
     `query {
       categoryCollection(where:{slug:"${slug}"}, preview: ${
@@ -193,7 +199,7 @@ export const getCategory = async (slug, preview) => {
 };
 
 // slugをキーに記事を1件取得
-export const getBlogPostBySlug = async (slug, preview) => {
+export const getBlogPostBySlug = async (slug: string, preview = false) => {
   const blogPost = await fetchGraphQL(
     `query {
       blogPostCollection(where: { slug: "${slug}" }, preview: ${
@@ -210,7 +216,7 @@ export const getBlogPostBySlug = async (slug, preview) => {
 };
 
 // Blog記事のslug取得
-export const getBlogPostSlug = async (preview) => {
+export const getBlogPostSlug = async (preview = false) => {
   const entries = await fetchGraphQL(
     `query {
       blogPostCollection(order:publishDate_DESC, preview: ${
@@ -228,7 +234,7 @@ export const getBlogPostSlug = async (preview) => {
 };
 
 // Categoryページのslug取得
-export const getBlogCategorySlug = async (preview) => {
+export const getBlogCategorySlug = async (preview = false) => {
   const categories = await fetchGraphQL(
     `query {
       categoryCollection(preview: ${preview ? 'true' : 'false'}) {
@@ -244,7 +250,7 @@ export const getBlogCategorySlug = async (preview) => {
 };
 
 // ホームページのデータ取得
-export const getDataForHome = async (preview) => {
+export const getDataForHome = async (preview = false) => {
   const developments = await getDevlopments(preview);
   const blogPosts = await getBlogPostsForHome(preview);
   const categories = await getCategories(preview);
@@ -256,7 +262,7 @@ export const getDataForHome = async (preview) => {
 };
 
 // ブログ全記事一覧ページのデータ取得
-export const getDataForBlogHome = async (preview) => {
+export const getDataForBlogHome = async (preview = false) => {
   const blogPosts = await getBlogPosts(preview);
   const categories = await getCategories(preview);
   return {
@@ -266,7 +272,7 @@ export const getDataForBlogHome = async (preview) => {
 };
 
 // ブログ記事ページのデータ取得
-export const getDataForBlogPost = async (slug, preview) => {
+export const getDataForBlogPost = async (slug: string, preview = false) => {
   const blogPost = await getBlogPostBySlug(slug, preview);
   const categories = await getCategories(preview);
   return {
@@ -276,7 +282,7 @@ export const getDataForBlogPost = async (slug, preview) => {
 };
 
 // カテゴリーごとの記事一覧ページのデータ取得
-export const getDataForCategory = async (slug, preview) => {
+export const getDataForCategory = async (slug: string, preview = false) => {
   const blogPosts = await getBlogPostByCategory(slug, preview);
   const category = await getCategory(slug, preview);
   const categories = await getCategories(preview);
