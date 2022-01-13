@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generated": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "next": "^12.0.7",
@@ -17,12 +18,17 @@
     "zenn-content-css": "^0.1.100"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.3.1",
     "@types/react": "^17.0.38",
     "autoprefixer": "^10.4.0",
     "eslint": "7.32.0",
     "eslint-config-next": "11.0.1",
+    "graphql": "^16.2.0",
     "postcss": "^8.4.5",
     "tailwindcss": "^3.0.7",
-    "zenn-markdown-html": "^0.1.100"
+    "zenn-markdown-html": "^0.1.100",
+    "@graphql-codegen/typescript-operations": "2.2.2",
+    "@graphql-codegen/typescript": "2.4.2",
+    "@graphql-codegen/introspection": "2.1.1"
   }
 }
