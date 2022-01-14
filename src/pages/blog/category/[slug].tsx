@@ -1,49 +1,58 @@
+import {
+  GetStaticPaths,
+  InferGetStaticPropsType,
+  GetStaticPropsContext,
+  NextPage,
+} from 'next';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
 import { Container } from '@/components/layout/Container';
 import { CategoryHeader } from '@/components/CategoryHeader';
+import { CategoryList } from '@/components/CategoryList';
 import { BlogCard } from '@/components/BlogCard';
 import { MenuButton } from '@/components/layout/MenuButton';
-import { CategoryList } from '@/components/CategoryList';
 import { useToggleMenu } from '@/hooks/useToggleMenu';
-import { getDataForBlogHome } from '@/lib/api';
-import { getCategoryIDs, matchCategories } from '@/lib/utils';
 
-const pageMeta = {
-  title: `Blog`,
-  description: `ブログの全記事一覧`,
-  path: '/blog',
-};
+import { getBlogCategorySlug, getDataForCategory } from '@/lib/api';
 
-const Blog = ({ preview, allBlogHomeData: { blogPosts, categories } }) => {
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
+
+const Category: NextPage<Props> = ({
+  blogPosts,
+  category,
+  categories,
+  slug,
+  preview,
+}) => {
   const [isMenuOpen, toggleMenu] = useToggleMenu(false);
+  const { name: categoryName } = category[0];
+  const pageMeta = {
+    title: `${categoryName}カテゴリー記事一覧`,
+    description: `${categoryName}カテゴリーの記事一覧`,
+    path: `/blog/category/${slug}`,
+  };
   return (
     <>
       <SEO meta={pageMeta} />
       <Layout>
         <Container>
-          <CategoryHeader className="mb-5 md:mb-10">ブログ</CategoryHeader>
-          <div className="md:flex gap-10">
+          <CategoryHeader className="mb-5 md:mb-10">
+            {categoryName}
+          </CategoryHeader>
+          <div className="flex gap-10">
             <div className="grow py-5 mx-auto">
               {blogPosts.length ? (
                 <ul className="flex flex-col gap-6">
                   {blogPosts.map(
-                    ({ title, publishDate, slug, sys: { id }, ...post }) => {
-                      const categoryIDs = getCategoryIDs(post);
-                      const matchedCategories = matchCategories(
-                        categoryIDs,
-                        categories
-                      );
-                      return (
-                        <BlogCard
-                          key={id}
-                          title={title}
-                          publishDate={publishDate}
-                          slug={slug}
-                          categories={matchedCategories}
-                        />
-                      );
-                    }
+                    ({ title, publishDate, slug, sys: { id } }) => (
+                      <BlogCard
+                        key={id}
+                        title={title}
+                        publishDate={publishDate}
+                        slug={slug}
+                        categories={category}
+                      />
+                    )
                   )}
                 </ul>
               ) : (
@@ -67,16 +76,32 @@ const Blog = ({ preview, allBlogHomeData: { blogPosts, categories } }) => {
   );
 };
 
-export default Blog;
+export default Category;
 
-export async function getStaticProps({ preview = false }) {
-  const allBlogHomeData = (await getDataForBlogHome(preview)) ?? [];
-  if (!allBlogHomeData) {
-    return {
-      notFound: true,
-    };
-  }
+export const getStaticProps = async ({
+  params,
+  preview = false,
+}: GetStaticPropsContext) => {
+  const slug = params.slug as string;
+  const { blogPosts, category, categories } = await getDataForCategory(
+    slug,
+    preview
+  );
   return {
-    props: { preview, allBlogHomeData },
+    props: {
+      preview,
+      blogPosts,
+      category,
+      categories,
+      slug,
+    },
   };
-}
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allCategory = await getBlogCategorySlug();
+  return {
+    paths: allCategory?.map(({ slug }) => `/blog/category/${slug}`) ?? [],
+    fallback: false,
+  };
+};

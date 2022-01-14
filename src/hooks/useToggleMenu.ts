@@ -4,5 +4,5 @@ export const useToggleMenu = (boolean: boolean) => {
   const [isMenuOpen, setIsMenuOpen] = useState(boolean);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  return [isMenuOpen, toggleMenu];
+  return [isMenuOpen, toggleMenu] as const;
 };

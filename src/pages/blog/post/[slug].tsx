@@ -1,3 +1,9 @@
+import {
+  GetStaticPaths,
+  InferGetStaticPropsType,
+  GetStaticPropsContext,
+  NextPage,
+} from 'next';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
 import { Container } from '@/components/layout/Container';
@@ -11,7 +17,9 @@ import { matchCategories, getCategoryIDs } from '@/lib/utils';
 import markdownToHtml from 'zenn-markdown-html';
 import 'zenn-content-css';
 
-const BlogPost = ({
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
+
+const BlogPost: NextPage<Props> = ({
   blogPost: { title, publishDate, ...blogPost },
   categories,
   html,
@@ -69,8 +77,11 @@ const BlogPost = ({
 
 export default BlogPost;
 
-export async function getStaticProps({ params, preview = false }) {
-  const slug = params.slug;
+export const getStaticProps = async ({
+  params,
+  preview = false,
+}: GetStaticPropsContext) => {
+  const slug = params.slug as string;
   const { blogPost, categories } = await getDataForBlogPost(slug, preview);
   const html = await markdownToHtml(blogPost.content);
   return {
@@ -82,12 +93,12 @@ export async function getStaticProps({ params, preview = false }) {
       slug,
     },
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allPosts = await getBlogPostSlug();
   return {
     paths: allPosts?.map(({ slug }) => `/blog/post/${slug}`) ?? [],
     fallback: false,
   };
-}
+};

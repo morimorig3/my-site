@@ -1,4 +1,4 @@
-import { Query } from '../graphql/generated/type';
+import { Query, BlogPost } from '../graphql/generated/type';
 
 const DEVELOP_GRAPHQL_FIELDS = `
 title
@@ -61,7 +61,9 @@ function extractCategories(fetchResponse: ResponseQuery) {
   return fetchResponse?.data?.categoryCollection?.items;
 }
 // category別に返されたBlogPostのitemsを抽出する
-function extractBlogPostByCategoryEntries(fetchResponse: ResponseQuery) {
+function extractBlogPostByCategoryEntries(
+  fetchResponse: ResponseQuery
+): BlogPost[] {
   return fetchResponse?.data?.categoryCollection?.items?.[0]?.linkedFrom
     ?.entryCollection?.items;
 }
