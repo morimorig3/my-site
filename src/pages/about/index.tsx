@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import Image from 'next/image';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
@@ -17,7 +18,7 @@ const pageMeta = {
   path: '/about',
 };
 
-const About = () => (
+const About: NextPage = () => (
   <>
     <SEO meta={pageMeta} />
     <Layout>

@@ -11,7 +11,7 @@ const URL = {
 } as const;
 
 type Props = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export const Bio: VFC<Props> = ({ children }) => (

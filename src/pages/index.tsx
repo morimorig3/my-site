@@ -1,3 +1,4 @@
+import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
 import { Card } from '@/components/Card';
@@ -16,7 +17,9 @@ const pageMeta = {
   path: '/',
 };
 
-const Home = ({
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
+
+const Home: NextPage<Props> = ({
   preview,
   allHomeData: { developments, blogPosts, categories },
 }) => (
@@ -77,14 +80,10 @@ const Home = ({
 
 export default Home;
 
-export async function getStaticProps({ preview = false }) {
-  const allHomeData = (await getDataForHome(preview)) ?? [];
-  if (!allHomeData) {
-    return {
-      notFound: true,
-    };
-  }
+export const getStaticProps = async ({ preview = false }) => {
+  const allHomeData = await getDataForHome(preview);
+
   return {
     props: { preview, allHomeData },
   };
-}
+};

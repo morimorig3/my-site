@@ -22,14 +22,14 @@ const stackIconMap = {
   chakra: SiChakraui,
 } as const;
 
-type Stacks = keyof typeof stackIconMap;
+// export type Stacks = keyof typeof stackIconMap;
 
 type Props = {
   title: string;
   summary: string;
   date: string;
   url: string;
-  stacks: Stacks[];
+  stacks: string[];
 };
 
 export const Card: VFC<Props> = ({ title, summary, date, url, stacks }) => {

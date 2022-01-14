@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
 import { Container } from '@/components/layout/Container';
@@ -10,7 +11,7 @@ const pageMeta = {
   path: '/privacy',
 };
 
-const Privacy = () => (
+const Privacy: NextPage = () => (
   <>
     <SEO meta={pageMeta} />
     <Layout>
