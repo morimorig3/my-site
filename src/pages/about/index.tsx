@@ -32,6 +32,32 @@ const About: NextPage = () => (
       </Container>
       <hr />
       <Container className="max-w-2xl mx-auto">
+        <SectionHeader>開発環境</SectionHeader>
+        <div className="znc">
+          <h3>言語</h3>
+          <ul>
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+          </ul>
+          <h3>フレームワーク・ライブラリ</h3>
+          <ul>
+            <li>React</li>
+            <li>Next.js</li>
+            <li>Gatsby</li>
+            <li>jQuery</li>
+          </ul>
+          <h3>ツール・サービス</h3>
+          <ul>
+            <li>VSCode</li>
+            <li>Git</li>
+            <li>GitHub</li>
+            <li>SourceTree</li>
+            <li>Slack</li>
+          </ul>
+        </div>
+      </Container>
+      <hr />
+      <Container className="max-w-2xl mx-auto">
         <SectionHeader>やってきたこと</SectionHeader>
         <div className="znc">
           <div className="msg alert">
