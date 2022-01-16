@@ -8,6 +8,24 @@ type Query {
     where: AssetFilter
     order: [AssetOrder]
   ): AssetCollection
+  about(id: String!, preview: Boolean, locale: String): About
+  aboutCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: AboutFilter
+    order: [AboutOrder]
+  ): AboutCollection
+  privacy(id: String!, preview: Boolean, locale: String): Privacy
+  privacyCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: PrivacyFilter
+    order: [PrivacyOrder]
+  ): PrivacyCollection
   blogPost(id: String!, preview: Boolean, locale: String): BlogPost
   blogPostCollection(
     skip: Int = 0
@@ -49,14 +67,14 @@ type Query {
 type Asset {
   sys: Sys!
   contentfulMetadata: ContentfulMetadata!
-  title: String
-  description: String
-  contentType: String
-  fileName: String
-  size: Int
-  url(transform: ImageTransformOptions): String
-  width: Int
-  height: Int
+  title(locale: String): String
+  description(locale: String): String
+  contentType(locale: String): String
+  fileName(locale: String): String
+  size(locale: String): Int
+  url(transform: ImageTransformOptions, locale: String): String
+  width(locale: String): Int
+  height(locale: String): Int
   linkedFrom(allowedLocales: [String]): AssetLinkingCollections
 }
 
@@ -444,6 +462,124 @@ enum AssetOrder {
   width_DESC
   height_ASC
   height_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# [See type definition](https://app.contentful.com/spaces/ghidcgkz65pi/content_types/about)
+type About implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): AboutLinkingCollections
+  title(locale: String): String
+  content(locale: String): String
+}
+
+type AboutLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type AboutCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [About]!
+}
+
+input AboutFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  content_exists: Boolean
+  content: String
+  content_not: String
+  content_in: [String]
+  content_not_in: [String]
+  content_contains: String
+  content_not_contains: String
+  OR: [AboutFilter]
+  AND: [AboutFilter]
+}
+
+enum AboutOrder {
+  title_ASC
+  title_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# [See type definition](https://app.contentful.com/spaces/ghidcgkz65pi/content_types/privacy)
+type Privacy implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): PrivacyLinkingCollections
+  title(locale: String): String
+  content(locale: String): String
+}
+
+type PrivacyLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type PrivacyCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Privacy]!
+}
+
+input PrivacyFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  content_exists: Boolean
+  content: String
+  content_not: String
+  content_in: [String]
+  content_not_in: [String]
+  content_contains: String
+  content_not_contains: String
+  OR: [PrivacyFilter]
+  AND: [PrivacyFilter]
+}
+
+enum PrivacyOrder {
+  title_ASC
+  title_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC
