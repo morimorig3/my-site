@@ -16,6 +16,85 @@ export type Scalars = {
   Quality: any;
 };
 
+export type About = Entry & {
+  __typename?: 'About';
+  content?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<AboutLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+export type AboutContentArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type AboutLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type AboutTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type AboutCollection = {
+  __typename?: 'AboutCollection';
+  items: Array<Maybe<About>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type AboutFilter = {
+  AND?: InputMaybe<Array<InputMaybe<AboutFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<AboutFilter>>>;
+  content?: InputMaybe<Scalars['String']>;
+  content_contains?: InputMaybe<Scalars['String']>;
+  content_exists?: InputMaybe<Scalars['Boolean']>;
+  content_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  content_not?: InputMaybe<Scalars['String']>;
+  content_not_contains?: InputMaybe<Scalars['String']>;
+  content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type AboutLinkingCollections = {
+  __typename?: 'AboutLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type AboutLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum AboutOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 export type Asset = {
   __typename?: 'Asset';
   contentType?: Maybe<Scalars['String']>;
@@ -732,6 +811,8 @@ export enum PrivacyOrder {
 
 export type Query = {
   __typename?: 'Query';
+  about?: Maybe<About>;
+  aboutCollection?: Maybe<AboutCollection>;
   asset?: Maybe<Asset>;
   assetCollection?: Maybe<AssetCollection>;
   blogPost?: Maybe<BlogPost>;
@@ -743,6 +824,23 @@ export type Query = {
   entryCollection?: Maybe<EntryCollection>;
   privacy?: Maybe<Privacy>;
   privacyCollection?: Maybe<PrivacyCollection>;
+};
+
+
+export type QueryAboutArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryAboutCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<AboutOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AboutFilter>;
 };
 
 

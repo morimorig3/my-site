@@ -11,11 +11,11 @@ import { Bio } from '@/components/Bio';
 import { PostHeader } from '@/components/PostHeader';
 import { CategoryList } from '@/components/CategoryList';
 import { MenuButton } from '@/components/layout/MenuButton';
+import { MarkdownBody } from '@/components/MarkdownBody';
 import { useToggleMenu } from '@/hooks/useToggleMenu';
 import { getBlogPostSlug, getDataForBlogPost } from '@/lib/api';
 import { matchCategories, getCategoryIDs } from '@/lib/utils';
 import markdownToHtml from 'zenn-markdown-html';
-import 'zenn-content-css';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -46,13 +46,7 @@ const BlogPost: NextPage<Props> = ({
                 publishDate={publishDate}
                 categories={matchedCategories}
               />
-              <div className="py-5 znc break-all">
-                {html ? (
-                  <div dangerouslySetInnerHTML={{ __html: html }}></div>
-                ) : (
-                  <p>コンテンツ準備中…</p>
-                )}
-              </div>
+              {html && <MarkdownBody className="py-5 break-all" html={html} />}
             </article>
             {isMenuOpen ? (
               <aside className="z-10 duration-300 transition-all translate-y-0 opacity-1 py-10 px-4 md:p-0 bg-white w-screen md:w-full h-screen md:h-full pointer-events-auto md:pointer-events-auto fixed top-0 left-0 md:static md:opacity-100 basis-60 lg:basis-72 shrink-0">

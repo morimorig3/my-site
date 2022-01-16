@@ -48,6 +48,10 @@ type ResponseQuery = {
 function extractDevelop(fetchResponse: ResponseQuery) {
   return fetchResponse?.data?.developPostCollection?.items;
 }
+// aboutollectionのitemsを抽出する
+function extractAbout(fetchResponse: ResponseQuery) {
+  return fetchResponse?.data?.aboutCollection?.items;
+}
 // privacyollectionのitemsを抽出する
 function extractPrivacy(fetchResponse: ResponseQuery) {
   return fetchResponse?.data?.privacyCollection?.items;
@@ -107,7 +111,24 @@ export const getDevlopments = async (preview = false) => {
   return extractDevelop(developments);
 };
 
-// 全ての開発アイテムを返す
+// 全てのアバウトアイテムを返す
+export const getAbout = async (preview = false) => {
+  const about = await fetchGraphQL(
+    `query {
+      aboutCollection(order:sys_firstPublishedAt_ASC, preview: ${
+        preview ? 'true' : 'false'
+      }) {
+        items {
+          title
+          content
+        }
+      }
+    }`
+  );
+
+  return extractAbout(about);
+};
+// 全てのプライバシーアイテムを返す
 export const getPrivacy = async (preview = false) => {
   const privacy = await fetchGraphQL(
     `query {
