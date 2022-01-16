@@ -32,13 +32,49 @@ export type Asset = {
 };
 
 
+export type AssetContentTypeArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type AssetDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type AssetFileNameArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type AssetHeightArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
 export type AssetLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
+export type AssetSizeArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type AssetTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
 export type AssetUrlArgs = {
+  locale?: InputMaybe<Scalars['String']>;
   transform?: InputMaybe<ImageTransformOptions>;
+};
+
+
+export type AssetWidthArgs = {
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 export type AssetCollection = {
@@ -615,6 +651,85 @@ export type ImageTransformOptions = {
   width?: InputMaybe<Scalars['Dimension']>;
 };
 
+export type Privacy = Entry & {
+  __typename?: 'Privacy';
+  content?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<PrivacyLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+export type PrivacyContentArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type PrivacyLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type PrivacyTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type PrivacyCollection = {
+  __typename?: 'PrivacyCollection';
+  items: Array<Maybe<Privacy>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type PrivacyFilter = {
+  AND?: InputMaybe<Array<InputMaybe<PrivacyFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PrivacyFilter>>>;
+  content?: InputMaybe<Scalars['String']>;
+  content_contains?: InputMaybe<Scalars['String']>;
+  content_exists?: InputMaybe<Scalars['Boolean']>;
+  content_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  content_not?: InputMaybe<Scalars['String']>;
+  content_not_contains?: InputMaybe<Scalars['String']>;
+  content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type PrivacyLinkingCollections = {
+  __typename?: 'PrivacyLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type PrivacyLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum PrivacyOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 export type Query = {
   __typename?: 'Query';
   asset?: Maybe<Asset>;
@@ -626,6 +741,8 @@ export type Query = {
   developPost?: Maybe<DevelopPost>;
   developPostCollection?: Maybe<DevelopPostCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  privacy?: Maybe<Privacy>;
+  privacyCollection?: Maybe<PrivacyCollection>;
 };
 
 
@@ -704,6 +821,23 @@ export type QueryEntryCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<EntryFilter>;
+};
+
+
+export type QueryPrivacyArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryPrivacyCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PrivacyOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PrivacyFilter>;
 };
 
 export type Sys = {
