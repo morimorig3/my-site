@@ -20,10 +20,10 @@ const stackIconMap = {
   Nextjs: SiNextdotjs,
   Contentful: SiContentful,
   Vercel: SiVercel,
-  tailwindcss: SiTailwindcss,
-  chakra: SiChakraui,
-  vite: SiVite,
-  cloudflare: SiCloudflare,
+  Tailwindcss: SiTailwindcss,
+  Chakra: SiChakraui,
+  Vite: SiVite,
+  Cloudflare: SiCloudflare,
 } as const;
 
 // export type Stacks = keyof typeof stackIconMap;
@@ -41,6 +41,8 @@ export const Card: VFC<Props> = ({ title, summary, date, url, stacks }) => {
     title: stackName,
     Icon: stackIconMap[stackName],
   }));
+  console.log(icons);
+
   return (
     <li>
       <a
