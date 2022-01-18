@@ -9,6 +9,8 @@ import {
   SiVercel,
   SiTailwindcss,
   SiChakraui,
+  SiVite,
+  SiCloudflare,
 } from 'react-icons/si';
 
 const stackIconMap = {
@@ -20,6 +22,8 @@ const stackIconMap = {
   Vercel: SiVercel,
   tailwindcss: SiTailwindcss,
   chakra: SiChakraui,
+  vite: SiVite,
+  cloudflare: SiCloudflare,
 } as const;
 
 // export type Stacks = keyof typeof stackIconMap;
