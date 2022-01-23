@@ -41,7 +41,6 @@ export const Card: VFC<Props> = ({ title, summary, date, url, stacks }) => {
     title: stackName,
     Icon: stackIconMap[stackName],
   }));
-  console.log(icons);
 
   return (
     <li>
