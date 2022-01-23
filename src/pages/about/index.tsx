@@ -26,6 +26,15 @@ const About: NextPage<Props> = ({ about }) => (
           趣味はゲームとアニメとパワースポット巡り。狭く深くのめり込むタイプ。
           <br />
           アイコンはともだちが描いてくれました（ありがとう）
+          <br />
+          <a
+            className="underline"
+            href="https://oho-keywords.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            101のキーワード
+          </a>
         </Bio>
       </Container>
       <hr />
