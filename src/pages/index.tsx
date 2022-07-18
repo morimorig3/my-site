@@ -9,6 +9,8 @@ import { Bio } from '@/components/Bio';
 import { BlogCard } from '@/components/BlogCard';
 import { getCategoryIDs, matchCategories } from '@/lib/utils';
 import { getDataForHome } from '@/lib/api';
+import { isProductionEnv } from '@/functions/isProductionEnv';
+import { DevelopHeader } from '@/components/DevelopHeader';
 
 const pageMeta = {
   title: 'TOP',
@@ -25,6 +27,7 @@ const Home: NextPage<Props> = ({
 }) => (
   <>
     <SEO meta={pageMeta} />
+    {!isProductionEnv() && <DevelopHeader />}
     <Layout>
       <Container>
         <SectionHeader>Develop</SectionHeader>
