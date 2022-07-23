@@ -1,11 +1,15 @@
-// import 'modern-css-reset/dist/reset.min.css';
-import '@/styles/globals.css';
 import '@/styles/tailwind.css';
 import { usePageView } from '@/hooks/usePageView';
+import { CssBaseline } from '@mui/material';
 
 function MyApp({ Component, pageProps }) {
   usePageView();
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <CssBaseline />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default MyApp;
