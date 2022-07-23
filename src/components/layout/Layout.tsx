@@ -1,5 +1,5 @@
 import { VFC, ReactNode } from 'react';
-import { GlobalHeader } from '@/components/layout/Header';
+import { GlobalHeader } from '@/components/layout/GlobalHeader';
 import { Footer } from '@/components/layout/Footer';
 
 type Props = {

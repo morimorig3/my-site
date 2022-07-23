@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Navi } from '@/components/layout/Navi';
+import { GlobalNavigation } from '@/components/layout/GlobalNavigation';
 import { Container, Stack, Link as MuiLink } from '@mui/material';
 import { BACKGROUND_COLORS, TEXT_COLORS } from '@/const/color';
 import { SITE_TITLE } from '@/const';
@@ -43,7 +43,7 @@ export const GlobalHeader = () => {
             {SITE_TITLE}
           </MuiLink>
         </Link>
-        <Navi />
+        <GlobalNavigation />
       </Stack>
     </Container>
   );
