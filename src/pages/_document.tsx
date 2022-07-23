@@ -7,6 +7,14 @@ class MyDocument extends Document {
       <Html lang="ja">
         <Head>
           <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          />
+          <link
             rel="apple-touch-icon"
             sizes="180x180"
             href="/favicons/apple-touch-icon.png"
