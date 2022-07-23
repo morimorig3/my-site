@@ -1,24 +1,50 @@
-import { VFC } from 'react';
 import Link from 'next/link';
 import { Navi } from '@/components/layout/Navi';
+import { Container, Stack, Link as MuiLink } from '@mui/material';
+import { BACKGROUND_COLORS, TEXT_COLORS } from '@/const/color';
+import { SITE_TITLE } from '@/const';
 
-export const Header: VFC = () => {
-  const logo = {
-    width: 'calc(100% / 6)',
-  };
+export const GlobalHeader = () => {
   return (
-    <header className="bg-blue-600">
-      <div className="max-w-5xl px-4 sm:px-8 lg:px-0 h-10 md:h-14 mx-auto flex justify-between">
+    <Container
+      disableGutters={true}
+      maxWidth={false}
+      sx={{
+        bgcolor: BACKGROUND_COLORS.green,
+      }}
+    >
+      <Stack
+        component="header"
+        direction="row"
+        sx={{
+          justifyContent: 'space-between',
+          maxWidth: 1024,
+          height: 56,
+          mx: 'auto',
+          px: {
+            xs: 2,
+            sm: 4,
+            lg: 0,
+          },
+        }}
+      >
         <Link href="/">
-          <a
-            style={logo}
-            className="self-center font-Rubik block md:text-xl font-light text-gray-100"
+          <MuiLink
+            color={TEXT_COLORS.white}
+            underline="none"
+            sx={{
+              display: 'block',
+              fontSize: '22px',
+              alignSelf: 'center',
+              cursor: 'pointer',
+              fontWeight: 'light',
+            }}
           >
-            morimorig3.com
-          </a>
+            {SITE_TITLE}
+          </MuiLink>
         </Link>
         <Navi />
-      </div>
-    </header>
+      </Stack>
+    </Container>
   );
 };
