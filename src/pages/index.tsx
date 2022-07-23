@@ -2,7 +2,6 @@ import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
 import { Card } from '@/components/Card';
-import { Container } from '@/components/layout/Container';
 import { SectionHeader } from '@/components/SectionHeader';
 import { TechnologyStack } from '@/components/TechnologyStack';
 import { Bio } from '@/components/Bio';
@@ -11,6 +10,7 @@ import { getCategoryIDs, matchCategories } from '@/lib/utils';
 import { getDataForHome } from '@/lib/api';
 import { isProductionEnv } from '@/functions/isProductionEnv';
 import { DevelopHeader } from '@/components/DevelopHeader';
+import { SectionContainer } from '@/components/Common/SectionContainer';
 
 const pageMeta = {
   title: 'TOP',
@@ -29,7 +29,7 @@ const Home: NextPage<Props> = ({
     <SEO meta={pageMeta} />
     {!isProductionEnv() && <DevelopHeader />}
     <Layout>
-      <Container>
+      <SectionContainer>
         <SectionHeader>Develop</SectionHeader>
         <ul className="max-w-4xl mx-auto grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {developments.map(
@@ -45,12 +45,12 @@ const Home: NextPage<Props> = ({
             )
           )}
         </ul>
-      </Container>
-      <Container className="bg-slate-50">
+      </SectionContainer>
+      <SectionContainer bgColor="grey">
         <SectionHeader>Experience</SectionHeader>
         <TechnologyStack />
-      </Container>
-      <Container>
+      </SectionContainer>
+      <SectionContainer>
         <SectionHeader>Blog</SectionHeader>
         <ul className="max-w-4xl mx-auto flex flex-col gap-6">
           {blogPosts.map(
@@ -72,11 +72,11 @@ const Home: NextPage<Props> = ({
             }
           )}
         </ul>
-      </Container>
+      </SectionContainer>
       <hr />
-      <Container>
+      <SectionContainer>
         <Bio />
-      </Container>
+      </SectionContainer>
     </Layout>
   </>
 );

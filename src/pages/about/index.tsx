@@ -1,12 +1,12 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
-import { Container } from '@/components/layout/Container';
 import { SectionHeader } from '@/components/SectionHeader';
 import { Bio } from '@/components/Bio';
 import { MarkdownBody } from '@/components/MarkdownBody';
 import markdownToHtml from 'zenn-markdown-html';
 import { getAbout } from '@/lib/api';
+import { SectionContainer } from '@/components/Common/SectionContainer';
 
 const pageMeta = {
   title: 'About',
@@ -20,7 +20,7 @@ const About: NextPage<Props> = ({ about }) => (
   <>
     <SEO meta={pageMeta} />
     <Layout>
-      <Container>
+      <SectionContainer>
         <SectionHeader>自分のこと</SectionHeader>
         <Bio>
           趣味はゲームとアニメとパワースポット巡り。狭く深くのめり込むタイプ。
@@ -36,16 +36,16 @@ const About: NextPage<Props> = ({ about }) => (
             101のキーワード
           </a>
         </Bio>
-      </Container>
+      </SectionContainer>
       <hr />
-      <Container className="max-w-2xl mx-auto">
+      <SectionContainer maxWidth="sm">
         {about.map(({ title, html }) => (
           <>
             <SectionHeader>{title}</SectionHeader>
             <MarkdownBody html={html} />
           </>
         ))}
-      </Container>
+      </SectionContainer>
     </Layout>
   </>
 );

@@ -6,7 +6,6 @@ import {
 } from 'next';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
-import { Container } from '@/components/layout/Container';
 import { Bio } from '@/components/Bio';
 import { PostHeader } from '@/components/PostHeader';
 import { CategoryList } from '@/components/CategoryList';
@@ -16,6 +15,7 @@ import { useToggleMenu } from '@/hooks/useToggleMenu';
 import { getBlogPostSlug, getDataForBlogPost } from '@/lib/api';
 import { matchCategories, getCategoryIDs } from '@/lib/utils';
 import markdownToHtml from 'zenn-markdown-html';
+import { SectionContainer } from '@/components/Common/SectionContainer';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -38,7 +38,7 @@ const BlogPost: NextPage<Props> = ({
     <>
       <SEO meta={pageMeta} />
       <Layout>
-        <Container>
+        <SectionContainer>
           <div className="md:flex gap-10">
             <article className="grow min-w-0">
               <PostHeader
@@ -58,11 +58,11 @@ const BlogPost: NextPage<Props> = ({
               </aside>
             )}
           </div>
-        </Container>
+        </SectionContainer>
         <hr />
-        <Container>
+        <SectionContainer>
           <Bio />
-        </Container>
+        </SectionContainer>
         <MenuButton toggleMenu={toggleMenu} />
       </Layout>
     </>

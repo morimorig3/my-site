@@ -1,7 +1,6 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
-import { Container } from '@/components/layout/Container';
 import { CategoryHeader } from '@/components/CategoryHeader';
 import { BlogCard } from '@/components/BlogCard';
 import { MenuButton } from '@/components/layout/MenuButton';
@@ -9,6 +8,7 @@ import { CategoryList } from '@/components/CategoryList';
 import { useToggleMenu } from '@/hooks/useToggleMenu';
 import { getDataForBlogHome } from '@/lib/api';
 import { getCategoryIDs, matchCategories } from '@/lib/utils';
+import { SectionContainer } from '@/components/Common/SectionContainer';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -27,7 +27,7 @@ const Blog: NextPage<Props> = ({
     <>
       <SEO meta={pageMeta} />
       <Layout>
-        <Container>
+        <SectionContainer>
           <CategoryHeader className="mb-5 md:mb-10">ブログ</CategoryHeader>
           <div className="md:flex gap-10">
             <div className="grow py-5 mx-auto">
@@ -66,7 +66,7 @@ const Blog: NextPage<Props> = ({
               </aside>
             )}
           </div>
-        </Container>
+        </SectionContainer>
         <MenuButton toggleMenu={toggleMenu} />
       </Layout>
     </>

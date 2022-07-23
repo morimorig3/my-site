@@ -6,7 +6,6 @@ import {
 } from 'next';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
-import { Container } from '@/components/layout/Container';
 import { CategoryHeader } from '@/components/CategoryHeader';
 import { CategoryList } from '@/components/CategoryList';
 import { BlogCard } from '@/components/BlogCard';
@@ -14,6 +13,7 @@ import { MenuButton } from '@/components/layout/MenuButton';
 import { useToggleMenu } from '@/hooks/useToggleMenu';
 
 import { getBlogCategorySlug, getDataForCategory } from '@/lib/api';
+import { SectionContainer } from '@/components/Common/SectionContainer';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -35,7 +35,7 @@ const Category: NextPage<Props> = ({
     <>
       <SEO meta={pageMeta} />
       <Layout>
-        <Container>
+        <SectionContainer>
           <CategoryHeader className="mb-5 md:mb-10">
             {categoryName}
           </CategoryHeader>
@@ -69,7 +69,7 @@ const Category: NextPage<Props> = ({
               </aside>
             )}
           </div>
-        </Container>
+        </SectionContainer>
         <MenuButton toggleMenu={toggleMenu} />
       </Layout>
     </>

@@ -1,11 +1,11 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
-import { Container } from '@/components/layout/Container';
 import { SectionHeader } from '@/components/SectionHeader';
 import { MarkdownBody } from '@/components/MarkdownBody';
 import markdownToHtml from 'zenn-markdown-html';
 import { getPrivacy } from '@/lib/api';
+import { SectionContainer } from '@/components/Common/SectionContainer';
 
 const pageMeta = {
   title: 'プライバシーポリシー',
@@ -19,10 +19,10 @@ const Privacy: NextPage<Props> = ({ html }) => (
   <>
     <SEO meta={pageMeta} />
     <Layout>
-      <Container>
+      <SectionContainer>
         <SectionHeader>プライバシーポリシー・免責事項</SectionHeader>
         {html && <MarkdownBody html={html.join('')} />}
-      </Container>
+      </SectionContainer>
     </Layout>
   </>
 );
