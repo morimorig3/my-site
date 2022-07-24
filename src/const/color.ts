@@ -22,4 +22,5 @@ export const BACKGROUND_COLORS = {
   green: COLORS.TEAL_900,
   grey: COLORS.GREY_50,
   lightGreen: COLORS.LIGHT_GREEN_A400,
+  black: COLORS.GREY_900,
 };
