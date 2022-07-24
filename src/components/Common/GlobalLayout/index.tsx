@@ -16,6 +16,7 @@ export const GlobalLayout = ({ children }: Props) => (
   >
     <GlobalHeader />
     <Container
+      maxWidth={false}
       component="main"
       disableGutters
       sx={{
