@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
+import { GlobalLayout } from '@/components/layout/GlobalLayout';
 import { Card } from '@/components/Card';
 import { SectionHeader } from '@/components/SectionHeader';
 import { TechnologyStack } from '@/components/TechnologyStack';
@@ -28,7 +28,7 @@ const Home: NextPage<Props> = ({
   <>
     <SEO meta={pageMeta} />
     {!isProductionEnv() && <DevelopHeader />}
-    <Layout>
+    <GlobalLayout>
       <SectionContainer>
         <SectionHeader>Develop</SectionHeader>
         <ul className="max-w-4xl mx-auto grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
@@ -77,7 +77,7 @@ const Home: NextPage<Props> = ({
       <SectionContainer>
         <Bio />
       </SectionContainer>
-    </Layout>
+    </GlobalLayout>
   </>
 );
 

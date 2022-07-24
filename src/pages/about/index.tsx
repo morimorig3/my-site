@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
+import { GlobalLayout } from '@/components/layout/GlobalLayout';
 import { SectionHeader } from '@/components/SectionHeader';
 import { Bio } from '@/components/Bio';
 import { MarkdownBody } from '@/components/MarkdownBody';
@@ -19,7 +19,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 const About: NextPage<Props> = ({ about }) => (
   <>
     <SEO meta={pageMeta} />
-    <Layout>
+    <GlobalLayout>
       <SectionContainer>
         <SectionHeader>自分のこと</SectionHeader>
         <Bio>
@@ -46,7 +46,7 @@ const About: NextPage<Props> = ({ about }) => (
           </>
         ))}
       </SectionContainer>
-    </Layout>
+    </GlobalLayout>
   </>
 );
 

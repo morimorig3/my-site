@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
+import { GlobalLayout } from '@/components/layout/GlobalLayout';
 import { SectionHeader } from '@/components/SectionHeader';
 import { MarkdownBody } from '@/components/MarkdownBody';
 import markdownToHtml from 'zenn-markdown-html';
@@ -18,12 +18,12 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 const Privacy: NextPage<Props> = ({ html }) => (
   <>
     <SEO meta={pageMeta} />
-    <Layout>
+    <GlobalLayout>
       <SectionContainer>
         <SectionHeader>プライバシーポリシー・免責事項</SectionHeader>
         {html && <MarkdownBody html={html.join('')} />}
       </SectionContainer>
-    </Layout>
+    </GlobalLayout>
   </>
 );
 

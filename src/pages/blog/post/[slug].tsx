@@ -5,7 +5,7 @@ import {
   NextPage,
 } from 'next';
 import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
+import { GlobalLayout } from '@/components/layout/GlobalLayout';
 import { Bio } from '@/components/Bio';
 import { PostHeader } from '@/components/PostHeader';
 import { CategoryList } from '@/components/CategoryList';
@@ -37,7 +37,7 @@ const BlogPost: NextPage<Props> = ({
   return (
     <>
       <SEO meta={pageMeta} />
-      <Layout>
+      <GlobalLayout>
         <SectionContainer>
           <div className="md:flex gap-10">
             <article className="grow min-w-0">
@@ -64,7 +64,7 @@ const BlogPost: NextPage<Props> = ({
           <Bio />
         </SectionContainer>
         <MenuButton toggleMenu={toggleMenu} />
-      </Layout>
+      </GlobalLayout>
     </>
   );
 };

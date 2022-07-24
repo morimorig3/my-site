@@ -5,7 +5,7 @@ import {
   NextPage,
 } from 'next';
 import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
+import { GlobalLayout } from '@/components/layout/GlobalLayout';
 import { CategoryHeader } from '@/components/CategoryHeader';
 import { CategoryList } from '@/components/CategoryList';
 import { BlogCard } from '@/components/BlogCard';
@@ -34,7 +34,7 @@ const Category: NextPage<Props> = ({
   return (
     <>
       <SEO meta={pageMeta} />
-      <Layout>
+      <GlobalLayout>
         <SectionContainer>
           <CategoryHeader className="mb-5 md:mb-10">
             {categoryName}
@@ -71,7 +71,7 @@ const Category: NextPage<Props> = ({
           </div>
         </SectionContainer>
         <MenuButton toggleMenu={toggleMenu} />
-      </Layout>
+      </GlobalLayout>
     </>
   );
 };

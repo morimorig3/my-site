@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
+import { GlobalLayout } from '@/components/layout/GlobalLayout';
 import { CategoryHeader } from '@/components/CategoryHeader';
 import { BlogCard } from '@/components/BlogCard';
 import { MenuButton } from '@/components/layout/MenuButton';
@@ -26,7 +26,7 @@ const Blog: NextPage<Props> = ({
   return (
     <>
       <SEO meta={pageMeta} />
-      <Layout>
+      <GlobalLayout>
         <SectionContainer>
           <CategoryHeader className="mb-5 md:mb-10">ブログ</CategoryHeader>
           <div className="md:flex gap-10">
@@ -68,7 +68,7 @@ const Blog: NextPage<Props> = ({
           </div>
         </SectionContainer>
         <MenuButton toggleMenu={toggleMenu} />
-      </Layout>
+      </GlobalLayout>
     </>
   );
 };
