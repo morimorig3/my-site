@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { GlobalNavigationLink } from '@/components/layout/GlobalNavigationLink';
+import { GlobalNavigationLink } from '@/components/Common/GlobalNavigationLink';
 import { useRouter } from 'next/router';
 import { Stack } from '@mui/material';
 import { PAGE_NAMES } from '@/const';

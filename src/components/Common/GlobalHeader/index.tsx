@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { GlobalNavigation } from '@/components/layout/GlobalNavigation';
+import { GlobalNavigation } from '@/components/Common/GlobalNavigation';
 import { Container, Stack, Link as MuiLink } from '@mui/material';
 import { BACKGROUND_COLORS, TEXT_COLORS } from '@/const/color';
 import { SITE_TITLE } from '@/const';

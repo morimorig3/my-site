@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { GlobalHeader } from '@/components/layout/GlobalHeader';
-import { GlobalFooter } from '@/components/layout/GlobalFooter';
+import { GlobalHeader } from '@/components/Common/GlobalHeader';
+import { GlobalFooter } from '@/components/Common/GlobalFooter';
 import { Container, Stack } from '@mui/material';
 
 type Props = {

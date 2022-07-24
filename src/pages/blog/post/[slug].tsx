@@ -5,11 +5,11 @@ import {
   NextPage,
 } from 'next';
 import { SEO } from '@/components/Seo';
-import { GlobalLayout } from '@/components/layout/GlobalLayout';
+import { GlobalLayout } from '@/components/Common/GlobalLayout';
 import { Bio } from '@/components/Bio';
 import { PostHeader } from '@/components/PostHeader';
 import { CategoryList } from '@/components/CategoryList';
-import { MenuButton } from '@/components/layout/MenuButton';
+import { MenuButton } from '@/components/Common/MenuButton';
 import { MarkdownBody } from '@/components/MarkdownBody';
 import { useToggleMenu } from '@/hooks/useToggleMenu';
 import { getBlogPostSlug, getDataForBlogPost } from '@/lib/api';

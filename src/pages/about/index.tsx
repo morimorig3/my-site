@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
-import { GlobalLayout } from '@/components/layout/GlobalLayout';
+import { GlobalLayout } from '@/components/Common/GlobalLayout';
 import { SectionHeader } from '@/components/SectionHeader';
 import { Bio } from '@/components/Bio';
 import { MarkdownBody } from '@/components/MarkdownBody';

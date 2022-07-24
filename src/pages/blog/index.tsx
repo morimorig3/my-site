@@ -1,9 +1,9 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
-import { GlobalLayout } from '@/components/layout/GlobalLayout';
+import { GlobalLayout } from '@/components/Common/GlobalLayout';
 import { CategoryHeader } from '@/components/CategoryHeader';
 import { BlogCard } from '@/components/BlogCard';
-import { MenuButton } from '@/components/layout/MenuButton';
+import { MenuButton } from '@/components/Common/MenuButton';
 import { CategoryList } from '@/components/CategoryList';
 import { useToggleMenu } from '@/hooks/useToggleMenu';
 import { getDataForBlogHome } from '@/lib/api';
