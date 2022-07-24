@@ -1,39 +1,76 @@
-import { VFC, useState } from 'react';
+import { useState } from 'react';
 import {
   MdOutlineKeyboardArrowUp,
   MdOutlineKeyboardArrowDown,
 } from 'react-icons/md';
+import { Box, Stack } from '@mui/material';
+import { BACKGROUND_COLORS } from '@/const/color';
 
 type Props = {
   toggleMenu: () => void;
 };
 
-export const MenuButton: VFC<Props> = ({ toggleMenu }) => {
+export const MenuButton = ({ toggleMenu }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleButton = () => {
     setIsOpen(!isOpen);
     toggleMenu();
   };
   return (
-    <div
+    <Box
       onClick={toggleButton}
       role="button"
-      className="block md:hidden fixed bottom-14 right-5 w-16 h-16 rounded-full bg-slate-800 shadow-md shadow-gray-400 z-50"
+      sx={{
+        display: {
+          xs: 'block',
+          md: 'none',
+        },
+        position: 'fixed',
+        bottom: '56px',
+        right: '20px',
+        width: '64px',
+        height: '64px',
+        borderRadius: '100vh',
+        bgcolor: BACKGROUND_COLORS.black,
+        zIndex: 50,
+        boxShadow: '0 3px 10px 1px rgba(0,0,0,0.1)',
+      }}
     >
-      <div className="flex flex-col justify-center items-center h-full">
-        <MdOutlineKeyboardArrowUp
-          size="1.6em"
-          className={`text-gray-400 transition-transform ${
-            isOpen ? 'translate-y-4' : ''
-          }`}
-        />
-        <MdOutlineKeyboardArrowDown
-          size="1.6em"
-          className={`text-gray-400 transition-transform ${
-            isOpen ? '-translate-y-4' : ''
-          }`}
-        />
-      </div>
-    </div>
+      <Stack
+        direction="column"
+        sx={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
+        }}
+      >
+        <Box
+          sx={{
+            transitionProperty: 'transform',
+            transitionDuration: '150ms',
+            transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+            ...(isOpen && { transform: 'translateY(16px)' }),
+          }}
+        >
+          <MdOutlineKeyboardArrowUp
+            size="1.6em"
+            color={BACKGROUND_COLORS.grey}
+          />
+        </Box>
+        <Box
+          sx={{
+            transitionProperty: 'transform',
+            transitionDuration: '150ms',
+            transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+            ...(isOpen && { transform: 'translateY(-16px)' }),
+          }}
+        >
+          <MdOutlineKeyboardArrowDown
+            size="1.6em"
+            color={BACKGROUND_COLORS.grey}
+          />
+        </Box>
+      </Stack>
+    </Box>
   );
 };
