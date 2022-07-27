@@ -6,7 +6,7 @@ import {
 } from 'next';
 import { SEO } from '@/components/Seo';
 import { GlobalLayout } from '@/components/Common/GlobalLayout';
-import { Bio } from '@/components/Bio';
+import { Bio } from '@/components/Common/Bio';
 import { PostHeader } from '@/components/PostHeader';
 import { CategoryList } from '@/components/CategoryList';
 import { MenuButton } from '@/components/Common/MenuButton';

@@ -2,7 +2,7 @@ import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
 import { GlobalLayout } from '@/components/Common/GlobalLayout';
 import { SectionHeader } from '@/components/SectionHeader';
-import { Bio } from '@/components/Bio';
+import { Bio } from '@/components/Common/Bio';
 import { MarkdownBody } from '@/components/MarkdownBody';
 import markdownToHtml from 'zenn-markdown-html';
 import { getAbout } from '@/lib/api';
