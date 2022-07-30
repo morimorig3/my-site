@@ -1,7 +1,7 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
 import { GlobalLayout } from '@/components/Common/GlobalLayout';
-import { Card } from '@/components/Card';
+import { AppListCard } from '@/components/AppListCard';
 import { SectionHeader } from '@/components/SectionHeader';
 import { TechnologyStack } from '@/components/TechnologyStack';
 import { Bio } from '@/components/Common/Bio';
@@ -34,12 +34,13 @@ const Home: NextPage<Props> = ({
         <ul className="max-w-4xl mx-auto grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {developments.map(
             ({ title, summary, date, url, stacks, sys: { id } }) => (
-              <Card
+              <AppListCard
                 key={id}
                 title={title}
                 summary={summary}
                 date={date}
                 url={url}
+                // @ts-expect-errorts stacksがstring[]で推論されてしまうためignore
                 stacks={stacks}
               />
             )

@@ -6,6 +6,7 @@ export const COLORS = {
   TEAL_900: teal[900],
   GREY_900: grey[900],
   GREY_600: grey[600],
+  GREY_300: grey[300],
   GREY_50: grey[50],
   LIGHT_GREEN_A400: lightGreen['A400'],
 };
@@ -23,6 +24,10 @@ export const BACKGROUND_COLORS = {
   grey: COLORS.GREY_50,
   lightGreen: COLORS.LIGHT_GREEN_A400,
   black: COLORS.GREY_900,
+};
+
+export const BORDER_COLORS = {
+  grey: COLORS.GREY_300,
 };
 
 export const VENDOR_COLORS = {

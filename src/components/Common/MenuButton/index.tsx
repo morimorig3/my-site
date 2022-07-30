@@ -5,6 +5,7 @@ import {
 } from 'react-icons/md';
 import { Box, Stack } from '@mui/material';
 import { BACKGROUND_COLORS } from '@/const/color';
+import { BOX_SHADOW } from '@/const/style';
 
 type Props = {
   toggleMenu: () => void;
@@ -33,7 +34,7 @@ export const MenuButton = ({ toggleMenu }: Props) => {
         borderRadius: '100vh',
         bgcolor: BACKGROUND_COLORS.black,
         zIndex: 50,
-        boxShadow: '0 3px 10px 1px rgba(0,0,0,0.1)',
+        boxShadow: BOX_SHADOW,
       }}
     >
       <Stack
