@@ -2,8 +2,8 @@ import { formatDate } from '@/lib/utils';
 import { Box, Link, Stack, Typography } from '@mui/material';
 import { BORDER_COLORS, TEXT_COLORS } from '@/const/color';
 import { BOX_SHADOW } from '@/const/style';
-import { StackIconType } from './Common/CardIcons/types';
-import { CardIcons } from './Common/CardIcons';
+import { StackIconType } from '@/components/Common/CardIcons/types';
+import { CardIcons } from '@/components/Common/CardIcons';
 import { FONT_SIZE } from '@/const/size';
 
 type Props = {

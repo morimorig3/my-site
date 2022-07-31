@@ -1,7 +1,7 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
 import { SEO } from '@/components/Seo';
 import { GlobalLayout } from '@/components/Common/GlobalLayout';
-import { AppListCard } from '@/components/AppListCard';
+import { AppListCard } from '@/components/Common/AppListCard';
 import { SectionHeader } from '@/components/SectionHeader';
 import { TechnologyStack } from '@/components/TechnologyStack';
 import { Bio } from '@/components/Common/Bio';
