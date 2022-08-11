@@ -1,18 +1,18 @@
-import {
+import type {
   GetStaticPaths,
   InferGetStaticPropsType,
   GetStaticPropsContext,
   NextPage,
 } from 'next';
-import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
-import { Container } from '@/components/layout/Container';
+
+import { BlogCard } from '@/components/BlogCard';
 import { CategoryHeader } from '@/components/CategoryHeader';
 import { CategoryList } from '@/components/CategoryList';
-import { BlogCard } from '@/components/BlogCard';
+import { SEO } from '@/components/Seo';
+import { Container } from '@/components/layout/Container';
+import { Layout } from '@/components/layout/Layout';
 import { MenuButton } from '@/components/layout/MenuButton';
 import { useToggleMenu } from '@/hooks/useToggleMenu';
-
 import { getBlogCategorySlug, getDataForCategory } from '@/lib/api';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;

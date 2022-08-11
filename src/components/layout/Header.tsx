@@ -1,5 +1,7 @@
-import { VFC } from 'react';
+import type { VFC } from 'react';
+
 import Link from 'next/link';
+
 import { Navi } from '@/components/layout/Navi';
 
 export const Header: VFC = () => {

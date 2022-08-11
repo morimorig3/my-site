@@ -1,8 +1,10 @@
-import { VFC, ReactNode } from 'react';
+import type { VFC, ReactNode } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import profilePic from '../../public/images/profile.jpg';
 import { SiQiita, SiTwitter, SiGithub } from 'react-icons/si';
+
+import profilePic from '../../public/images/profile.jpg';
 
 const URL = {
   twitter: 'https://twitter.com/morimorig3',

@@ -1,7 +1,9 @@
-import { VFC } from 'react';
+import type { VFC } from 'react';
+
 import Link from 'next/link';
-import { NaviButton } from '@/components/layout/NaviButton';
 import { useRouter } from 'next/router';
+
+import { NaviButton } from '@/components/layout/NaviButton';
 
 export const Navi: VFC = () => {
   const { pathname } = useRouter();

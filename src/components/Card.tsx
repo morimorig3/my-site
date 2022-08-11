@@ -1,5 +1,5 @@
-import { VFC } from 'react';
-import { formatDate } from '@/lib/utils';
+import type { VFC } from 'react';
+
 import {
   SiReact,
   SiTypescript,
@@ -12,6 +12,8 @@ import {
   SiVite,
   SiCloudflare,
 } from 'react-icons/si';
+
+import { formatDate } from '@/lib/utils';
 
 const stackIconMap = {
   React: SiReact,

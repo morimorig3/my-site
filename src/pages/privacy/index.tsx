@@ -1,10 +1,12 @@
-import { InferGetStaticPropsType, NextPage } from 'next';
-import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
-import { Container } from '@/components/layout/Container';
-import { SectionHeader } from '@/components/SectionHeader';
-import { MarkdownBody } from '@/components/MarkdownBody';
 import markdownToHtml from 'zenn-markdown-html';
+
+import type { InferGetStaticPropsType, NextPage } from 'next';
+
+import { MarkdownBody } from '@/components/MarkdownBody';
+import { SectionHeader } from '@/components/SectionHeader';
+import { SEO } from '@/components/Seo';
+import { Container } from '@/components/layout/Container';
+import { Layout } from '@/components/layout/Layout';
 import { getPrivacy } from '@/lib/api';
 
 const pageMeta = {

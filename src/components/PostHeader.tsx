@@ -1,7 +1,9 @@
-import { VFC } from 'react';
+import type { VFC } from 'react';
+
 import Link from 'next/link';
-import { formatDate } from '@/lib/utils';
 import { FaListUl } from 'react-icons/fa';
+
+import { formatDate } from '@/lib/utils';
 
 type Props = {
   title: string;

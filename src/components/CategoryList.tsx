@@ -1,4 +1,5 @@
-import { VFC } from 'react';
+import type { VFC } from 'react';
+
 import Link from 'next/link';
 import { FaListUl } from 'react-icons/fa';
 

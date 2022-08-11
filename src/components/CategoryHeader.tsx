@@ -1,4 +1,5 @@
-import { VFC, ReactNode } from 'react';
+import type { VFC, ReactNode } from 'react';
+
 import { FaListUl } from 'react-icons/fa';
 
 type Props = {

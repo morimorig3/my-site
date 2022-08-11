@@ -1,16 +1,17 @@
-import { InferGetStaticPropsType, NextPage } from 'next';
-import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
-import { Card } from '@/components/Card';
-import { Container } from '@/components/layout/Container';
-import { SectionHeader } from '@/components/SectionHeader';
-import { TechnologyStack } from '@/components/TechnologyStack';
+import type { InferGetStaticPropsType, NextPage } from 'next';
+
 import { Bio } from '@/components/Bio';
 import { BlogCard } from '@/components/BlogCard';
-import { getCategoryIDs, matchCategories } from '@/lib/utils';
-import { getDataForHome } from '@/lib/api';
-import { isProductionEnv } from '@/functions/isProductionEnv';
+import { Card } from '@/components/Card';
 import { DevelopHeader } from '@/components/DevelopHeader';
+import { SectionHeader } from '@/components/SectionHeader';
+import { SEO } from '@/components/Seo';
+import { TechnologyStack } from '@/components/TechnologyStack';
+import { Container } from '@/components/layout/Container';
+import { Layout } from '@/components/layout/Layout';
+import { isProductionEnv } from '@/functions/isProductionEnv';
+import { getDataForHome } from '@/lib/api';
+import { getCategoryIDs, matchCategories } from '@/lib/utils';
 
 const pageMeta = {
   title: 'TOP',

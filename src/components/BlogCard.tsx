@@ -1,8 +1,10 @@
-import { VFC } from 'react';
-import Link from 'next/link';
+import type { VFC } from 'react';
+
 import Image from 'next/image';
-import { formatDate, getOgpUrl } from '@/lib/utils';
+import Link from 'next/link';
 import { FaListUl } from 'react-icons/fa';
+
+import { formatDate, getOgpUrl } from '@/lib/utils';
 
 type Props = {
   title: string;

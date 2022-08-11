@@ -1,4 +1,4 @@
-import { Query, BlogPost } from '../graphql/generated/type';
+import type { Query, BlogPost } from '../graphql/generated/type';
 
 const DEVELOP_GRAPHQL_FIELDS = `
 title
