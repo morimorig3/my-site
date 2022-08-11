@@ -1,4 +1,5 @@
-import { VFC } from 'react';
+import type { VFC } from 'react';
+
 import {
   SiJavascript,
   SiHtml5,
@@ -7,6 +8,7 @@ import {
   SiTypescript,
   SiReact,
 } from 'react-icons/si';
+
 import { expTimes } from '@/lib/utils';
 
 export const TechnologyStack: VFC = () => (

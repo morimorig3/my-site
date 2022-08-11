@@ -1,21 +1,23 @@
-import {
+import markdownToHtml from 'zenn-markdown-html';
+
+import type {
   GetStaticPaths,
-  InferGetStaticPropsType,
   GetStaticPropsContext,
+  InferGetStaticPropsType,
   NextPage,
 } from 'next';
-import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
-import { Container } from '@/components/layout/Container';
+
 import { Bio } from '@/components/Bio';
-import { PostHeader } from '@/components/PostHeader';
 import { CategoryList } from '@/components/CategoryList';
-import { MenuButton } from '@/components/layout/MenuButton';
 import { MarkdownBody } from '@/components/MarkdownBody';
+import { PostHeader } from '@/components/PostHeader';
+import { SEO } from '@/components/Seo';
+import { Container } from '@/components/layout/Container';
+import { Layout } from '@/components/layout/Layout';
+import { MenuButton } from '@/components/layout/MenuButton';
 import { useToggleMenu } from '@/hooks/useToggleMenu';
 import { getBlogPostSlug, getDataForBlogPost } from '@/lib/api';
-import { matchCategories, getCategoryIDs } from '@/lib/utils';
-import markdownToHtml from 'zenn-markdown-html';
+import { getCategoryIDs, matchCategories } from '@/lib/utils';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 

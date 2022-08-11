@@ -1,5 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+
 import { isProductionEnv } from './functions/isProductionEnv';
+
+import type { NextRequest} from 'next/server';
 
 export const config = {
   matcher: '/',

@@ -1,11 +1,12 @@
-import { InferGetStaticPropsType, NextPage } from 'next';
-import { SEO } from '@/components/Seo';
-import { Layout } from '@/components/layout/Layout';
-import { Container } from '@/components/layout/Container';
-import { CategoryHeader } from '@/components/CategoryHeader';
+import type { InferGetStaticPropsType, NextPage } from 'next';
+
 import { BlogCard } from '@/components/BlogCard';
-import { MenuButton } from '@/components/layout/MenuButton';
+import { CategoryHeader } from '@/components/CategoryHeader';
 import { CategoryList } from '@/components/CategoryList';
+import { SEO } from '@/components/Seo';
+import { Container } from '@/components/layout/Container';
+import { Layout } from '@/components/layout/Layout';
+import { MenuButton } from '@/components/layout/MenuButton';
 import { useToggleMenu } from '@/hooks/useToggleMenu';
 import { getDataForBlogHome } from '@/lib/api';
 import { getCategoryIDs, matchCategories } from '@/lib/utils';

@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+
 import { existsGaId, GA_ID } from '@/lib/gtag';
 
 class MyDocument extends Document {
