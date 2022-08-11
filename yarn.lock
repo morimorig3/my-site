@@ -4590,14 +4590,14 @@ yocto-queue@^0.1.0:
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
 zenn-content-css@^0.1.100:
-  version "0.1.115"
-  resolved "https://registry.yarnpkg.com/zenn-content-css/-/zenn-content-css-0.1.115.tgz#fcc89da8e6ec888438908abf008f9e2246567044"
-  integrity sha512-hYHZ698ANRhBEhAC97LdPDXM1b1QL4VH0eojam/RkfkBOIx1dRRKANFzuHflwyhd3/Glh+t4Kck0wYkjKPmhDg==
+  version "0.1.117"
+  resolved "https://registry.yarnpkg.com/zenn-content-css/-/zenn-content-css-0.1.117.tgz#7f10a3cdeab6c4b222ea1800de6202c3bd2c18ee"
+  integrity sha512-7Gjlf8iNnh0k/Tzs364tFsG0UdqXJ7TLaHBCD+6ueX4eQDtEX2Gxg4QBNbZ+AYe4XOjBQhIlWuNMzwIdJNf54Q==
 
 zenn-markdown-html@^0.1.101:
-  version "0.1.115"
-  resolved "https://registry.yarnpkg.com/zenn-markdown-html/-/zenn-markdown-html-0.1.115.tgz#3cd65de61988b31bc2eb5dd4ca6048a439d336f3"
-  integrity sha512-lQn1qRQJDb39ujxr0LjbSghd8iw1/6MbCSlkmySbK81abRxc3nDZrjqK+ncBWzvLWoQM+GOY0Moxn02V9XIa3g==
+  version "0.1.117"
+  resolved "https://registry.yarnpkg.com/zenn-markdown-html/-/zenn-markdown-html-0.1.117.tgz#1c685cf1fc0c051b28675c35773d94f4014f93d9"
+  integrity sha512-hrhP4F2CZ5MEyhbkdyGwbPKwzyenrM/FVUQbH0Ab2PpGDPHArguX/tCoeRcLaQfKS2FNrum4eIYGhE4RCUC2Hw==
   dependencies:
     "@steelydylan/markdown-it-imsize" "^1.0.2"
     markdown-it "^12.3.2"
