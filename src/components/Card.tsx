@@ -11,6 +11,7 @@ import {
   SiChakraui,
   SiVite,
   SiCloudflare,
+  SiSvelte,
 } from 'react-icons/si';
 
 const stackIconMap = {
@@ -24,6 +25,7 @@ const stackIconMap = {
   Chakra: SiChakraui,
   Vite: SiVite,
   Cloudflare: SiCloudflare,
+  Svelte: SiSvelte,
 } as const;
 
 // export type Stacks = keyof typeof stackIconMap;
