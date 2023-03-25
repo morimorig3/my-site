@@ -12,8 +12,8 @@ export const Navi: VFC = () => {
         {/* <Link href="/develop" passHref>
           <NaviButton isActive={/^\/develop/.test(pathname)}>制作物</NaviButton>
         </Link> */}
-        <Link href="/blog" passHref>
-          <NaviButton isActive={/^\/blog/.test(pathname)}>Blog</NaviButton>
+        <Link href="https://blog.morimorig3.com/">
+          <NaviButton isActive={false}>Blog</NaviButton>
         </Link>
         <Link href="/about" passHref>
           <NaviButton isActive={/^\/about/.test(pathname)}>About</NaviButton>

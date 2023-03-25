@@ -6,8 +6,6 @@ import { Container } from '@/components/layout/Container';
 import { SectionHeader } from '@/components/SectionHeader';
 import { TechnologyStack } from '@/components/TechnologyStack';
 import { Bio } from '@/components/Bio';
-import { BlogCard } from '@/components/BlogCard';
-import { getCategoryIDs, matchCategories } from '@/lib/utils';
 import { getDataForHome } from '@/lib/api';
 import { isProductionEnv } from '@/functions/isProductionEnv';
 import { DevelopHeader } from '@/components/DevelopHeader';
@@ -21,10 +19,7 @@ const pageMeta = {
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Home: NextPage<Props> = ({
-  preview,
-  allHomeData: { developments, blogPosts, categories },
-}) => (
+const Home: NextPage<Props> = ({ preview, allHomeData: { developments } }) => (
   <>
     <SEO meta={pageMeta} />
     {!isProductionEnv() && <DevelopHeader />}
@@ -49,29 +44,6 @@ const Home: NextPage<Props> = ({
       <Container className="bg-slate-50">
         <SectionHeader>Experience</SectionHeader>
         <TechnologyStack />
-      </Container>
-      <Container>
-        <SectionHeader>Blog</SectionHeader>
-        <ul className="max-w-4xl mx-auto flex flex-col gap-6">
-          {blogPosts.map(
-            ({ title, publishDate, slug, sys: { id }, ...post }) => {
-              const categoryIDs = getCategoryIDs(post);
-              const matchedCategories = matchCategories(
-                categoryIDs,
-                categories
-              );
-              return (
-                <BlogCard
-                  key={id}
-                  title={title}
-                  publishDate={publishDate}
-                  slug={slug}
-                  categories={matchedCategories}
-                />
-              );
-            }
-          )}
-        </ul>
       </Container>
       <hr />
       <Container>
